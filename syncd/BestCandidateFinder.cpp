@@ -8,16 +8,19 @@
 #include <inttypes.h>
 
 #include <algorithm>
+#include <random>
 
 using namespace syncd;
 
 BestCandidateFinder::BestCandidateFinder(
         _In_ const AsicView& currentView,
         _In_ const AsicView& temporaryView,
-        _In_ std::shared_ptr<const SaiSwitchInterface> sw):
+        _In_ std::shared_ptr<const SaiSwitchInterface> sw,
+        _In_ std::mt19937& randomEngine):
     m_currentView(currentView),
     m_temporaryView(temporaryView),
-    m_switch(sw)
+    m_switch(sw),
+    m_randomEngine(randomEngine)
 {
     SWSS_LOG_ENTER();
 
@@ -2030,7 +2033,8 @@ std::shared_ptr<SaiObj> BestCandidateFinder::selectRandomCandidate(
 
     SWSS_LOG_INFO("selecting random candidate from %zu objects", candidateCount);
 
-    size_t index = std::rand() % candidateCount;
+    std::uniform_int_distribution<size_t> distribution(0, candidateCount - 1);
+    size_t index = distribution(m_randomEngine);
 
     return candidateObjects.at(index).obj;
 }

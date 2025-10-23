@@ -254,5 +254,7 @@ namespace syncd
             std::shared_ptr<NotificationHandler> m_handler;
 
             std::shared_ptr<BreakConfig> m_breakConfig;
+
+            std::mt19937 m_randomEngine;
     };
 }

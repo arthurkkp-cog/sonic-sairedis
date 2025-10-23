@@ -25,7 +25,8 @@ namespace syncd
             BestCandidateFinder(
                     _In_ const AsicView &currentView,
                     _In_ const AsicView &temporaryView,
-                    _In_ std::shared_ptr<const SaiSwitchInterface> sw);
+                    _In_ std::shared_ptr<const SaiSwitchInterface> sw,
+                    _In_ std::mt19937& randomEngine);
 
 
             virtual ~BestCandidateFinder() = default;
@@ -196,5 +197,7 @@ namespace syncd
             std::shared_ptr<const SaiObj> m_temporaryObj;
 
             std::vector<sai_object_compare_info_t> m_candidateObjects;
+
+            std::mt19937& m_randomEngine;
     };
 }
