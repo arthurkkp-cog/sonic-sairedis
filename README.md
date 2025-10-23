@@ -16,6 +16,8 @@
 
 ## Description
 
+**Verification PR - Testing repository access and PR workflow**
+
 The SAI Redis provides a SAI redis service built on top of redis database. It contains two major components:
 
 1) `SAI library` that puts SAI objects into the redis database.
