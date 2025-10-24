@@ -1187,6 +1187,53 @@ TEST(FlexCounter, bulkCounter)
         counterVerifyFunc,
         false);
 }
+TEST(FlexCounter, bufferPoolBulkAdd)
+{
+    // This test validates the C++17 if constexpr change at line 874 in FlexCounter.cpp
+    // Buffer pool stats have HasStatsMode=true, which causes bulkAddObject to fall back
+    // to individual addObject calls instead of using true bulk operations.
+    
+    sai->mock_getStatsExt = [](sai_object_type_t, sai_object_id_t, uint32_t number_of_counters, const sai_stat_id_t *, sai_stats_mode_t, uint64_t *counters) {
+        for (uint32_t i = 0; i < number_of_counters; i++)
+        {
+            counters[i] = (i + 1) * 100;
+        }
+        return SAI_STATUS_SUCCESS;
+    };
+    
+    sai->mock_queryStatsCapability = [](sai_object_id_t switch_id, sai_object_type_t object_type, sai_stat_capability_list_t *stats_capability) {
+        return SAI_STATUS_FAILURE;
+    };
+
+    sai->mock_bulkGetStats = [](sai_object_id_t, sai_object_type_t, uint32_t, const sai_object_key_t *, uint32_t, const sai_stat_id_t *, sai_stats_mode_t, sai_status_t *, uint64_t *)
+    {
+        return SAI_STATUS_NOT_SUPPORTED;
+    };
+
+    auto counterVerifyFunc = [] (swss::Table &countersTable, const std::string& key, const std::vector<std::string>& counterIdNames, const std::vector<std::string>& expectedValues)
+    {
+        std::string value;
+        for (size_t i = 0; i < counterIdNames.size(); i++)
+        {
+            countersTable.hget(key, counterIdNames[i], value);
+            EXPECT_EQ(value, expectedValues[i]);
+        }
+    };
+
+    // Test with bulkAdd=true to exercise the bulkAddObject code path
+    testAddRemoveCounter(
+        2,
+        SAI_OBJECT_TYPE_BUFFER_POOL,
+        BUFFER_POOL_COUNTER_ID_LIST,
+        {"SAI_BUFFER_POOL_STAT_CURR_OCCUPANCY_BYTES", "SAI_BUFFER_POOL_STAT_WATERMARK_BYTES"},
+        {"100", "200"},
+        counterVerifyFunc,
+        false,
+        STATS_MODE_READ,
+        true);
+}
+
+
 
 TEST(FlexCounter, bulkChunksize)
 {
