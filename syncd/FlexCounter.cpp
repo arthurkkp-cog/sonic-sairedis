@@ -527,8 +527,7 @@ public:
         SWSS_LOG_ENTER();
         sai_stats_mode_t instance_stats_mode = SAI_STATS_MODE_READ_AND_CLEAR;
         sai_stats_mode_t effective_stats_mode;
-        // TODO: use if const expression when c++17 is supported
-        if (HasStatsMode<CounterIdsType>::value)
+        if constexpr (HasStatsMode<CounterIdsType>::value)
         {
             if (per_object_stats_mode == STATS_MODE_READ_AND_CLEAR)
             {
@@ -590,8 +589,7 @@ public:
         removeObject(vid, false);
 
         bool supportBulk;
-        // TODO: use if const expression when cpp17 is supported
-        if (HasStatsMode<CounterIdsType>::value)
+        if constexpr (HasStatsMode<CounterIdsType>::value)
         {
             supportBulk = false;
         }
@@ -603,8 +601,7 @@ public:
         if (!supportBulk)
         {
             auto counter_data = std::make_shared<CounterIds<StatType>>(rid, supportedIds);
-            // TODO: use if const expression when cpp17 is supported
-            if (HasStatsMode<CounterIdsType>::value)
+            if constexpr (HasStatsMode<CounterIdsType>::value)
             {
                 counter_data->setStatsMode(instance_stats_mode);
             }
@@ -874,8 +871,7 @@ public:
     {
         SWSS_LOG_ENTER();
         sai_stats_mode_t effective_stats_mode;
-        // TODO: use if const expression when c++17 is supported
-        if (HasStatsMode<CounterIdsType>::value)
+        if constexpr (HasStatsMode<CounterIdsType>::value)
         {
             // Bulk operation is not supported by the counter group.
             SWSS_LOG_INFO("Counter group %s %s does not support bulk. Fallback to single call", m_name.c_str(), m_instanceId.c_str());
