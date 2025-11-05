@@ -829,6 +829,9 @@ sai_status_t SwitchStateBase::bulkCreate(
         return SAI_STATUS_FAILURE;
     }
 
+    auto& objectHash = m_objectHash.at(object_type);
+    auto objectHashBackup = objectHash;
+
     sai_status_t status = SAI_STATUS_SUCCESS;
     uint32_t it;
 
@@ -842,11 +845,18 @@ sai_status_t SwitchStateBase::bulkCreate(
 
             status = SAI_STATUS_FAILURE;
 
+            objectHash = objectHashBackup;
+
             if (mode == SAI_BULK_OP_ERROR_MODE_STOP_ON_ERROR)
             {
                 break;
             }
         }
+    }
+
+    if (status != SAI_STATUS_SUCCESS)
+    {
+        objectHash = objectHashBackup;
     }
 
     while (++it < object_count)
@@ -873,6 +883,9 @@ sai_status_t SwitchStateBase::bulkRemove(
         return SAI_STATUS_FAILURE;
     }
 
+    auto& objectHash = m_objectHash.at(object_type);
+    auto objectHashBackup = objectHash;
+
     sai_status_t status = SAI_STATUS_SUCCESS;
     uint32_t it;
 
@@ -886,11 +899,18 @@ sai_status_t SwitchStateBase::bulkRemove(
 
             status = SAI_STATUS_FAILURE;
 
+            objectHash = objectHashBackup;
+
             if (mode == SAI_BULK_OP_ERROR_MODE_STOP_ON_ERROR)
             {
                 break;
             }
         }
+    }
+
+    if (status != SAI_STATUS_SUCCESS)
+    {
+        objectHash = objectHashBackup;
     }
 
     while (++it < object_count)
@@ -918,6 +938,9 @@ sai_status_t SwitchStateBase::bulkSet(
         return SAI_STATUS_FAILURE;
     }
 
+    auto& objectHash = m_objectHash.at(object_type);
+    auto objectHashBackup = objectHash;
+
     sai_status_t status = SAI_STATUS_SUCCESS;
     uint32_t it;
 
@@ -931,11 +954,18 @@ sai_status_t SwitchStateBase::bulkSet(
 
             status = SAI_STATUS_FAILURE;
 
+            objectHash = objectHashBackup;
+
             if (mode == SAI_BULK_OP_ERROR_MODE_STOP_ON_ERROR)
             {
                 break;
             }
         }
+    }
+
+    if (status != SAI_STATUS_SUCCESS)
+    {
+        objectHash = objectHashBackup;
     }
 
     while (++it < object_count)
