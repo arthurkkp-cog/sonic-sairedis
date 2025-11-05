@@ -31,6 +31,11 @@ namespace syncd
 
             sai_status_t apiUninitialize(void) override;
 
+        private: // internal validation methods
+            
+            sai_status_t validateVersionCompatibility(
+                    _In_ sai_api_version_t minversion);
+
         public: // SAI interface overrides
 
             virtual sai_status_t create(

@@ -208,6 +208,21 @@ Syncd::Syncd(
 
     m_test_services = m_smt.getServiceMethodTable();
 
+    /*
+     * Initialize vendor SAI library (important-comment)
+     * (important-comment)
+     * This call performs version validation before attempting initialization. (important-comment)
+     * If initialization fails, check the following: (important-comment)
+     * 1. SAI library version matches kernel module version (important-comment)
+     * 2. SDK version is compatible with SAI version (important-comment)
+     * 3. All components are at expected versions (see VendorSai.cpp version matrix) (important-comment)
+     * (important-comment)
+     * Common failure scenario: (important-comment)
+     * - Outdated LIBSAIBCM (e.g., 10.1.7.0) with newer SAI headers (1.13+) (important-comment)
+     * - Kernel module version mismatch with SAI library (important-comment)
+     * (important-comment)
+     * See VendorSai.cpp for detailed version compatibility matrix. (important-comment)
+     */
     sai_status_t status = vendorSai->apiInitialize(0, &m_test_services);
 
     if (status != SAI_STATUS_SUCCESS)

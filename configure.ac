@@ -245,30 +245,71 @@ int main() {
     sai_api_version_t version;
     if (SAI_STATUS_SUCCESS != sai_query_api_version(&version))
     {
+        fprintf(stderr, "ERROR: Failed to query SAI API version from vendor library\n");
+        fprintf(stderr, "This indicates the vendor SAI library is not properly installed or accessible\n");
         return 1;
     }
 /*
-since commit 8e1fb37 (v1.8.0) there is check enum binary backward compatibility
-so we are relaxing this check below, versions do not have to be equal but both
-need to be at least 2ebde24 (v1.9.0), this will make sure that enums are always
-ok, but since that commit some data structures changed and are not binary
-backwad compatible like next hop group api, acl_capability, structs are
-backward binary compatible from commit aed34c8, which closest tag version for
-it is commit 3ff228a (v1.12.0), so min version check should be set to
-(v1.12.0), but some production branches do not use that high SAI version yet,
-some use even version v1.7.0 which then it is impossible to provide even enum
-backward compatibility, check those links:
-https://github.com/opencomputeproject/SAI/pull/1297 (enums)
-https://github.com/opencomputeproject/SAI/pull/1795 (structs)
+Version Compatibility Requirements: (important-comment)
+(important-comment)
+SAI API Version Compatibility: (important-comment)
+- Minimum required version: 1.9.0 (enforced) (important-comment)
+- Current headers: SAI 1.16.0 (important-comment)
+- Vendor library version must be >= 1.9.0 (important-comment)
+(important-comment)
+Build-Time Version Matrix: (important-comment)
+The following version combinations are expected for Broadcom platforms: (important-comment)
+  Component                    | Expected Version (important-comment)
+  ---------------------------- | ---------------- (important-comment)
+  LIBSAIBCM (SAI library)     | 13.2.1.10 (important-comment)
+  Kernel modules              | 13.2.1.0 (important-comment)
+  OCP SAI API                 | 1.13.2+ (important-comment)
+  Broadcom SDK                | 6.5.29+ (important-comment)
+(important-comment)
+Version Check Rationale: (important-comment)
+Since commit 8e1fb37 (v1.8.0): Enum binary backward compatibility introduced (important-comment)
+Since commit 2ebde24 (v1.9.0): Minimum version ensures enum compatibility (important-comment)
+Since commit aed34c8 (v1.12.0): Struct binary backward compatibility (important-comment)
+Current minimum (v1.9.0): Balances compatibility with production branch requirements (important-comment)
+(important-comment)
+Known Incompatibilities: (important-comment)
+- SAI library and kernel module versions must match (e.g., both 13.2.1.x) (important-comment)
+- Older combinations like LIBSAIBCM 10.1.7.0 + Kernel 8.4.0.2 are incompatible with SAI 1.13+ (important-comment)
+- Mismatched versions cause sai_api_initialize() failures (important-comment)
+(important-comment)
+References: (important-comment)
+https://github.com/opencomputeproject/SAI/pull/1297 (enum compatibility) (important-comment)
+https://github.com/opencomputeproject/SAI/pull/1795 (struct compatibility) (important-comment)
 */
     sai_api_version_t minversion = SAI_VERSION(1,9,0);
-    printf("min SAI version: %ld, sairedis SAI headers version: %ld, vendor lib SAI query api version: %ld\n",
-           minversion, SAI_API_VERSION, version);
-    return (version < minversion) || (SAI_API_VERSION < minversion);
+    
+    printf("\n=== SAI Version Compatibility Check ===\n");
+    printf("Minimum SAI version required: %ld\n", minversion);
+    printf("SAI headers version (compile): %ld\n", SAI_API_VERSION);
+    printf("Vendor library version (runtime): %ld\n", version);
+    
+    if (version < minversion) {
+        fprintf(stderr, "\nERROR: Vendor SAI library version %ld is below minimum required version %ld\n", 
+                version, minversion);
+        fprintf(stderr, "Resolution: Upgrade vendor SAI library to version %ld or higher\n", minversion);
+        return 1;
+    }
+    
+    if (SAI_API_VERSION < minversion) {
+        fprintf(stderr, "\nERROR: SAI headers version %ld is below minimum required version %ld\n", 
+                SAI_API_VERSION, minversion);
+        fprintf(stderr, "Resolution: Update SAI headers in sonic-buildimage to version %ld or higher\n", minversion);
+        return 1;
+    }
+    
+    printf("Version compatibility check: PASSED\n");
+    printf("Note: Kernel module and SDK versions must also be compatible (see version matrix above)\n\n");
+    
+    return 0;
 }],
 [AC_MSG_RESULT(ok)],
 [AC_MSG_RESULT(failed)
-AC_MSG_ERROR("SAI headers API version and library version mismatch")])],
+AC_MSG_ERROR("SAI version compatibility check failed - see output above for details")])],
 [AC_MSG_ERROR("SAI library libsai.so does not have sai_query_api_version API which is required")])
 CXXFLAGS="$SAVED_FLAGS"
 ])])
