@@ -16,9 +16,6 @@ static const char* profile_get_value(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == nullptr)
-        return nullptr;
-
     return nullptr;
 }
 
@@ -47,8 +44,6 @@ static const char* client_profile_get_value(
         return "true";
     else
         return nullptr;
-
-    return nullptr;
 }
 
 static sai_service_method_table_t test_client_services = {
