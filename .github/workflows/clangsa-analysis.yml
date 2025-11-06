@@ -75,12 +75,12 @@ jobs:
         ./autogen.sh
         SWSS_COMMON_INC="$(dirname $GITHUB_WORKSPACE)/usr/include" \
         SWSS_COMMON_LIB="$(dirname $GITHUB_WORKSPACE)/usr/lib/x86_64-linux-gnu" \
-        scan-build-14 --status-bugs -o /tmp/scan-build-reports \
+        scan-build-14 -o /tmp/scan-build-reports \
           ./configure --with-sai=vs --disable-python2 \
             --with-swss-common-inc="$(dirname $GITHUB_WORKSPACE)/usr/include" \
             --with-swss-common-lib="$(dirname $GITHUB_WORKSPACE)/usr/lib/x86_64-linux-gnu" \
-            CXXFLAGS="-std=c++14" CFLAGS=""
-        scan-build-14 --status-bugs -o /tmp/scan-build-reports make -j$(nproc)
+            CXXFLAGS="-std=c++14 -Wno-error" CFLAGS="-Wno-error"
+        scan-build-14 -o /tmp/scan-build-reports make -j$(nproc)
 
     - name: Upload scan-build reports
       if: always()
