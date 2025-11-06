@@ -7,7 +7,7 @@
 
 #include <memory>
 
-#define SYNCD_NOTIFICATION_CHANNEL_RESTARTQUERY     "RESTARTQUERY"
+constexpr const char* SYNCD_NOTIFICATION_CHANNEL_RESTARTQUERY = "RESTARTQUERY";
 
 /**
  * @brief Notification channel 'restartQuery' per DB scope

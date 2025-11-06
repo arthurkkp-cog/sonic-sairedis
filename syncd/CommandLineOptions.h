@@ -6,15 +6,14 @@
 
 #include <string>
 
-#define STRING_SAI_START_TYPE_COLD_BOOT         "cold"
-#define STRING_SAI_START_TYPE_WARM_BOOT         "warm"
-#define STRING_SAI_START_TYPE_FAST_BOOT         "fast"
-#define STRING_SAI_START_TYPE_FASTFAST_BOOT     "fastfast"
-#define STRING_SAI_START_TYPE_EXPRESS_BOOT      "express"
-#define STRING_SAI_START_TYPE_UNKNOWN           "unknown"
-
 namespace syncd
 {
+    constexpr const char* STRING_SAI_START_TYPE_COLD_BOOT = "cold";
+    constexpr const char* STRING_SAI_START_TYPE_WARM_BOOT = "warm";
+    constexpr const char* STRING_SAI_START_TYPE_FAST_BOOT = "fast";
+    constexpr const char* STRING_SAI_START_TYPE_FASTFAST_BOOT = "fastfast";
+    constexpr const char* STRING_SAI_START_TYPE_EXPRESS_BOOT = "express";
+    constexpr const char* STRING_SAI_START_TYPE_UNKNOWN = "unknown";
     typedef enum _sai_start_type_t
     {
         SAI_START_TYPE_COLD_BOOT = 0,

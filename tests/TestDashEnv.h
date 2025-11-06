@@ -7,7 +7,7 @@ extern "C" {
 
 #include "gtest/gtest.h"
 
-#define ENV_CLIENT_MODE_OPT "TESTDASH_CLIENT_MODE"
+constexpr const char* ENV_CLIENT_MODE_OPT = "TESTDASH_CLIENT_MODE";
 
 class TestDashEnv : public ::testing::Environment
 {

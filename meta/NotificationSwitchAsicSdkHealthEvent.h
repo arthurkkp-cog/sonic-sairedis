@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationSwitchAsicSdkHealthEvent(
+            explicit NotificationSwitchAsicSdkHealthEvent(
                     _In_ const std::string& serializedNotification);
 
             virtual ~NotificationSwitchAsicSdkHealthEvent();

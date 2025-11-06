@@ -4,11 +4,11 @@ extern "C" {
 #include "sai.h"
 }
 
-#define SAI_KEY_VS_SWITCH_TYPE              "SAI_VS_SWITCH_TYPE"
-#define SAI_KEY_VS_SAI_SWITCH_TYPE          "SAI_VS_SAI_SWITCH_TYPE"
+constexpr const char* SAI_KEY_VS_SWITCH_TYPE = "SAI_VS_SWITCH_TYPE";
+constexpr const char* SAI_KEY_VS_SAI_SWITCH_TYPE = "SAI_VS_SAI_SWITCH_TYPE";
 
-#define SAI_VALUE_SAI_SWITCH_TYPE_NPU       "SAI_SWITCH_TYPE_NPU"
-#define SAI_VALUE_SAI_SWITCH_TYPE_PHY       "SAI_SWITCH_TYPE_PHY"
+constexpr const char* SAI_VALUE_SAI_SWITCH_TYPE_NPU = "SAI_SWITCH_TYPE_NPU";
+constexpr const char* SAI_VALUE_SAI_SWITCH_TYPE_PHY = "SAI_SWITCH_TYPE_PHY";
 
 /**
  * @def SAI_KEY_VS_INTERFACE_LANE_MAP_FILE
@@ -21,7 +21,7 @@ extern "C" {
  *
  * TODO must support hardware info for multiple switches
  */
-#define SAI_KEY_VS_INTERFACE_LANE_MAP_FILE  "SAI_VS_INTERFACE_LANE_MAP_FILE"
+constexpr const char* SAI_KEY_VS_INTERFACE_LANE_MAP_FILE = "SAI_VS_INTERFACE_LANE_MAP_FILE";
 
 /**
  * @def SAI_KEY_VS_RESOURCE_LIMITER_FILE
@@ -31,7 +31,7 @@ extern "C" {
  * Example:
  * SAI_OBJECT_TYPE_ACL_TABLE=3
  */
-#define SAI_KEY_VS_RESOURCE_LIMITER_FILE    "SAI_VS_RESOURCE_LIMITER_FILE"
+constexpr const char* SAI_KEY_VS_RESOURCE_LIMITER_FILE = "SAI_VS_RESOURCE_LIMITER_FILE";
 
 /**
  * @def SAI_KEY_VS_INTERFACE_FABRIC_LANE_MAP_FILE
@@ -43,7 +43,7 @@ extern "C" {
  * fabric1:2
  *
  */
-#define SAI_KEY_VS_INTERFACE_FABRIC_LANE_MAP_FILE  "SAI_VS_INTERFACE_FABRIC_LANE_MAP_FILE"
+constexpr const char* SAI_KEY_VS_INTERFACE_FABRIC_LANE_MAP_FILE = "SAI_VS_INTERFACE_FABRIC_LANE_MAP_FILE";
 
 /**
  * @def SAI_KEY_VS_HOSTIF_USE_TAP_DEVICE
@@ -54,7 +54,7 @@ extern "C" {
  *
  * By default this flag is set to false.
  */
-#define SAI_KEY_VS_HOSTIF_USE_TAP_DEVICE      "SAI_VS_HOSTIF_USE_TAP_DEVICE"
+constexpr const char* SAI_KEY_VS_HOSTIF_USE_TAP_DEVICE = "SAI_VS_HOSTIF_USE_TAP_DEVICE";
 
 /**
  * @def SAI_KEY_VS_BFD_OFFLOAD_SUPPORTED
@@ -67,7 +67,7 @@ extern "C" {
  *
  * By default this flag is set to true.
  */
- #define SAI_KEY_VS_BFD_OFFLOAD_SUPPORTED     "SAI_VS_BFD_OFFLOAD_SUPPORTED"
+constexpr const char* SAI_KEY_VS_BFD_OFFLOAD_SUPPORTED = "SAI_VS_BFD_OFFLOAD_SUPPORTED";
 
 /**
  * @def SAI_KEY_VS_USE_CONFIGURED_SPEED_AS_OPER_SPEED
@@ -77,7 +77,7 @@ extern "C" {
  *
  * By default this flag is set to false.
  */
-#define SAI_KEY_VS_USE_CONFIGURED_SPEED_AS_OPER_SPEED "SAI_VS_USE_CONFIGURED_SPEED_AS_OPER_SPEED"
+constexpr const char* SAI_KEY_VS_USE_CONFIGURED_SPEED_AS_OPER_SPEED = "SAI_VS_USE_CONFIGURED_SPEED_AS_OPER_SPEED";
 
 /**
  * @def SAI_KEY_VS_CORE_PORT_INDEX_MAP_FILE
@@ -90,7 +90,7 @@ extern "C" {
  * eth17:1,1
  *
  */
-#define SAI_KEY_VS_CORE_PORT_INDEX_MAP_FILE  "SAI_VS_CORE_PORT_INDEX_MAP_FILE"
+constexpr const char* SAI_KEY_VS_CORE_PORT_INDEX_MAP_FILE = "SAI_VS_CORE_PORT_INDEX_MAP_FILE";
 
 /**
  * @brief Context config.
@@ -99,7 +99,7 @@ extern "C" {
  * contexts (syncd) we have in the system globally and each context how many
  * switches it manages. Only one of this contexts will be used in VS.
  */
-#define SAI_KEY_VS_CONTEXT_CONFIG             "SAI_VS_CONTEXT_CONFIG"
+constexpr const char* SAI_KEY_VS_CONTEXT_CONFIG = "SAI_VS_CONTEXT_CONFIG";
 
 /**
  * @brief Global context.
@@ -107,51 +107,51 @@ extern "C" {
  * Optional. Should point to GUID value which is provided in context_config.json
  * by SAI_KEY_VS_CONTEXT_CONFIG. Default is 0.
  */
-#define SAI_KEY_VS_GLOBAL_CONTEXT                  "SAI_VS_GLOBAL_CONTEXT"
+constexpr const char* SAI_KEY_VS_GLOBAL_CONTEXT = "SAI_VS_GLOBAL_CONTEXT";
 
-#define SAI_VALUE_VS_SWITCH_TYPE_BCM56850          "SAI_VS_SWITCH_TYPE_BCM56850"
-#define SAI_VALUE_VS_SWITCH_TYPE_BCM56971B0        "SAI_VS_SWITCH_TYPE_BCM56971B0"
-#define SAI_VALUE_VS_SWITCH_TYPE_BCM81724          "SAI_VS_SWITCH_TYPE_BCM81724"
-#define SAI_VALUE_VS_SWITCH_TYPE_MLNX2700          "SAI_VS_SWITCH_TYPE_MLNX2700"
-#define SAI_VALUE_VS_SWITCH_TYPE_NVDA_MBF2H536C    "SAI_VS_SWITCH_TYPE_NVDA_MBF2H536C"
-#define SAI_VALUE_VS_SWITCH_TYPE_DPU_SIMU_2P       "SAI_VS_SWITCH_TYPE_DPU_SIMU_2P"
-#define SAI_VALUE_VS_SWITCH_TYPE_VPP               "SAI_VS_SWITCH_TYPE_VPP"
+constexpr const char* SAI_VALUE_VS_SWITCH_TYPE_BCM56850 = "SAI_VS_SWITCH_TYPE_BCM56850";
+constexpr const char* SAI_VALUE_VS_SWITCH_TYPE_BCM56971B0 = "SAI_VS_SWITCH_TYPE_BCM56971B0";
+constexpr const char* SAI_VALUE_VS_SWITCH_TYPE_BCM81724 = "SAI_VS_SWITCH_TYPE_BCM81724";
+constexpr const char* SAI_VALUE_VS_SWITCH_TYPE_MLNX2700 = "SAI_VS_SWITCH_TYPE_MLNX2700";
+constexpr const char* SAI_VALUE_VS_SWITCH_TYPE_NVDA_MBF2H536C = "SAI_VS_SWITCH_TYPE_NVDA_MBF2H536C";
+constexpr const char* SAI_VALUE_VS_SWITCH_TYPE_DPU_SIMU_2P = "SAI_VS_SWITCH_TYPE_DPU_SIMU_2P";
+constexpr const char* SAI_VALUE_VS_SWITCH_TYPE_VPP = "SAI_VS_SWITCH_TYPE_VPP";
 
 /*
  * Values for SAI_KEY_BOOT_TYPE (defined in saiswitch.h)
  */
 
-#define SAI_VALUE_VS_BOOT_TYPE_COLD "0"
-#define SAI_VALUE_VS_BOOT_TYPE_WARM "1"
-#define SAI_VALUE_VS_BOOT_TYPE_FAST "2"
+constexpr const char* SAI_VALUE_VS_BOOT_TYPE_COLD = "0";
+constexpr const char* SAI_VALUE_VS_BOOT_TYPE_WARM = "1";
+constexpr const char* SAI_VALUE_VS_BOOT_TYPE_FAST = "2";
 
 /**
  * @def SAI_VS_UNITTEST_CHANNEL
  *
  * Notification channel for redis database.
  */
-#define SAI_VS_UNITTEST_CHANNEL     "SAI_VS_UNITTEST_CHANNEL"
+constexpr const char* SAI_VS_UNITTEST_CHANNEL = "SAI_VS_UNITTEST_CHANNEL";
 
 /**
  * @def SAI_VS_UNITTEST_SET_RO_OP
  *
  * Notification operation for "SET" READ_ONLY attribute.
  */
-#define SAI_VS_UNITTEST_SET_RO_OP   "set_ro"
+constexpr const char* SAI_VS_UNITTEST_SET_RO_OP = "set_ro";
 
 /**
  * @def SAI_VS_UNITTEST_SET_STATS
  *
  * Notification operation for "SET" stats on specific object.
  */
-#define SAI_VS_UNITTEST_SET_STATS_OP      "set_stats"
+constexpr const char* SAI_VS_UNITTEST_SET_STATS_OP = "set_stats";
 
 /**
  * @def SAI_VS_UNITTEST_ENABLE
  *
  * Notification operation for enabling unittests.
  */
-#define SAI_VS_UNITTEST_ENABLE_UNITTESTS  "enable_unittests"
+constexpr const char* SAI_VS_UNITTEST_ENABLE_UNITTESTS = "enable_unittests";
 
 typedef enum _sai_vs_switch_attr_t
 {

@@ -12,7 +12,7 @@ namespace saimeta
     {
         public:
 
-            SaiObject(
+            explicit SaiObject(
                     _In_ const sai_object_meta_key_t& metaKey);
 
             virtual ~SaiObject() = default;
