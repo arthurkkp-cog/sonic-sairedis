@@ -651,7 +651,7 @@ sai_status_t SwitchVpp::get_sorted_aces(
     }
 
     std::list<sai_object_id_t> &acl_entries = it->second;
-    acl_tbl_entries_t          *p_ace = NULL;
+    acl_tbl_entries_t          *p_ace = nullptr;
     aces = (acl_tbl_entries_t *) calloc(n_total_entries, sizeof(acl_tbl_entries_t));
     if (!aces) {
         SWSS_LOG_ERROR("Failed to allocate memory for aces.");
