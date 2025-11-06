@@ -2627,7 +2627,7 @@ bool ComparisonLogic::checkAsicVsDatabaseConsistency(
 
                 if (meta->attrvaluetype == SAI_ATTR_VALUE_TYPE_POINTER)
                 {
-                    if (attr.value.ptr == NULL && saiAttr->getSaiAttr()->value.ptr == NULL)
+                    if (attr.value.ptr == nullptr && saiAttr->getSaiAttr()->value.ptr == nullptr)
                         continue;
 
                     if (attr.value.ptr != NULL && saiAttr->getSaiAttr()->value.ptr != NULL)
@@ -3412,7 +3412,7 @@ void ComparisonLogic::asic_translate_vid_to_rid_list(
 
         // this should not happen we should get list right away from SaiAttr
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(object_type).c_str(),

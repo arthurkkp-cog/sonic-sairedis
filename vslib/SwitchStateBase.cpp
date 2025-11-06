@@ -717,7 +717,7 @@ sai_status_t SwitchStateBase::get(
 
         auto meta = sai_metadata_get_attr_metadata(objectType, id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_ERROR("failed to find attribute %d for %s:%s", id,
                     sai_serialize_object_type(objectType).c_str(),

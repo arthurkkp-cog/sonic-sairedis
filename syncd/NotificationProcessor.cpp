@@ -179,7 +179,7 @@ void NotificationProcessor::redisPutFdbEntryToAsicView(
 
         auto meta = sai_metadata_get_attr_metadata(objectType, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(objectType).c_str(),
@@ -265,7 +265,7 @@ bool NotificationProcessor::check_fdb_event_notification_data(
 
         auto meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_FDB_ENTRY, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_ERROR("unable to get metadata for fdb_entry attr.id = %d", attr.id);
             continue;

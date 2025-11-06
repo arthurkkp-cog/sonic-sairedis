@@ -96,7 +96,7 @@ static sai_status_t transfer_list(
         return SAI_STATUS_SUCCESS;
     }
 
-    if (dst_element.list == NULL)
+    if (dst_element.list == nullptr)
     {
         SWSS_LOG_ERROR("destination list is null, unable to transfer elements");
 
@@ -105,7 +105,7 @@ static sai_status_t transfer_list(
 
     if (dst_element.count >= src_element.count)
     {
-        if (src_element.list == NULL && src_element.count > 0)
+        if (src_element.list == nullptr && src_element.count > 0)
         {
             SWSS_LOG_THROW("source list is NULL when count is %u, wrong db insert?", src_element.count);
         }
@@ -546,7 +546,7 @@ sai_status_t transfer_attributes(
             SWSS_LOG_THROW("src (%d) vs dst (%d) attr id don't match GET mismatch", src_attr.id, dst_attr.id);
         }
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(object_type).c_str(),
@@ -615,7 +615,7 @@ static void sai_populate_ip_mask(
 {
     SWSS_LOG_ENTER();
 
-    if (mask == NULL)
+    if (mask == nullptr)
     {
         SWSS_LOG_THROW("mask pointer is null");
     }
@@ -729,7 +729,7 @@ std::string sai_serialize_enum(
 {
     SWSS_LOG_ENTER();
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         return sai_serialize_number(value);
     }
@@ -1268,7 +1268,7 @@ std::string sai_serialize_ipv4(
 
     memcpy(&sa.sin_addr, &ip, 4);
 
-    if (inet_ntop(AF_INET, &(sa.sin_addr), buf, INET_ADDRSTRLEN) == NULL)
+    if (inet_ntop(AF_INET, &(sa.sin_addr), buf, INET_ADDRSTRLEN) == nullptr)
     {
         SWSS_LOG_THROW("FATAL: failed to convert IPv4 address, errno: %s", strerror(errno));
     }
@@ -1295,7 +1295,7 @@ std::string sai_serialize_ipv6(
 
     memcpy(&sa6.sin6_addr, ip, 16);
 
-    if (inet_ntop(AF_INET6, &(sa6.sin6_addr), buf, INET6_ADDRSTRLEN) == NULL)
+    if (inet_ntop(AF_INET6, &(sa6.sin6_addr), buf, INET6_ADDRSTRLEN) == nullptr)
     {
         SWSS_LOG_THROW("FATAL: failed to convert IPv6 address, errno: %s", strerror(errno));
     }
@@ -1351,7 +1351,7 @@ std::string sai_serialize_list(
         return s;
     }
 
-    if (list.list == NULL || list.count == 0)
+    if (list.list == nullptr || list.count == 0)
     {
         return s + ":null";
     }
@@ -1476,7 +1476,7 @@ std::string sai_serialize_qos_map_list(
 
     j["count"] = qosmap.count;
 
-    if (qosmap.list == NULL || countOnly)
+    if (qosmap.list == nullptr || countOnly)
     {
         j["list"] = nullptr;
 
@@ -1520,7 +1520,7 @@ std::string sai_serialize_map_list(
 
     j["count"] = maplist.count;
 
-    if (maplist.list == NULL || countOnly)
+    if (maplist.list == nullptr || countOnly)
     {
         j["list"] = nullptr;
 
@@ -1565,7 +1565,7 @@ std::string sai_serialize_acl_resource_list(
 
     j["count"] = aclresource.count;
 
-    if (aclresource.list == NULL || countOnly)
+    if (aclresource.list == nullptr || countOnly)
     {
         j["list"] = nullptr;
 
@@ -1619,7 +1619,7 @@ std::string sai_serialize_port_lane_latch_status_list(
 
     j["count"] = status_list.count;
 
-    if (status_list.list == NULL || countOnly)
+    if (status_list.list == nullptr || countOnly)
     {
         j["list"] = nullptr;
 
@@ -1801,7 +1801,7 @@ std::string sai_serialize_hex_binary(
 
     std::string s;
 
-    if (buffer == NULL || length == 0)
+    if (buffer == nullptr || length == 0)
     {
         return s;
     }
@@ -2016,7 +2016,7 @@ std::string sai_serialize_system_port_config_list(
 
     j["count"] = sysportconfiglist.count;
 
-    if (sysportconfiglist.list == NULL || countOnly)
+    if (sysportconfiglist.list == nullptr || countOnly)
     {
         j["list"] = nullptr;
 
@@ -2050,7 +2050,7 @@ std::string sai_serialize_segment_list(
         return s;
     }
 
-    if (segmentlist.list == NULL || segmentlist.count == 0)
+    if (segmentlist.list == nullptr || segmentlist.count == 0)
     {
         return s + ":null";
     }
@@ -2336,7 +2336,7 @@ static json sai_serialize_json_fdb_event_notification_data(
     {
         auto meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_FDB_ENTRY, fdb_event.attr[i].id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(SAI_OBJECT_TYPE_FDB_ENTRY).c_str(),
@@ -2479,7 +2479,7 @@ std::string sai_serialize_fdb_event_ntf(
 {
     SWSS_LOG_ENTER();
 
-    if (fdb_event == NULL)
+    if (fdb_event == nullptr)
     {
         SWSS_LOG_THROW("fdb_event pointer is null");
     }
@@ -2503,7 +2503,7 @@ std::string sai_serialize_nat_event_ntf(
 {
     SWSS_LOG_ENTER();
 
-    if (nat_event == NULL)
+    if (nat_event == nullptr)
     {
         SWSS_LOG_THROW("nat_event pointer is null");
     }
@@ -2527,7 +2527,7 @@ std::string sai_serialize_port_oper_status_ntf(
 {
     SWSS_LOG_ENTER();
 
-    if (port_oper_status == NULL)
+    if (port_oper_status == nullptr)
     {
         SWSS_LOG_THROW("port_oper_status pointer is null");
     }
@@ -2574,7 +2574,7 @@ std::string sai_serialize_queue_deadlock_ntf(
 {
     SWSS_LOG_ENTER();
 
-    if (deadlock_data == NULL)
+    if (deadlock_data == nullptr)
     {
         SWSS_LOG_THROW("deadlock_data pointer is null");
     }
@@ -2601,7 +2601,7 @@ std::string sai_serialize_bfd_session_state_ntf(
 {
     SWSS_LOG_ENTER();
 
-    if (bfd_session_state == NULL)
+    if (bfd_session_state == nullptr)
     {
         SWSS_LOG_THROW("bfd_session_state pointer is null");
     }
@@ -2628,7 +2628,7 @@ std::string sai_serialize_icmp_echo_session_state_ntf(
 {
     SWSS_LOG_ENTER();
 
-    if (icmp_echo_session_state == NULL)
+    if (icmp_echo_session_state == nullptr)
     {
         SWSS_LOG_THROW("icmp_echo_session _state pointer is null");
     }
@@ -2653,7 +2653,7 @@ std::string sai_serialize_ha_set_event_ntf(
 {
     SWSS_LOG_ENTER();
 
-    if (ha_set_event == NULL)
+    if (ha_set_event == nullptr)
     {
         SWSS_LOG_THROW("ha_set_event pointer is null");
     }
@@ -2679,7 +2679,7 @@ std::string sai_serialize_ha_scope_event_ntf(
 {
     SWSS_LOG_ENTER();
 
-    if (ha_scope_event == NULL)
+    if (ha_scope_event == nullptr)
     {
         SWSS_LOG_THROW("ha_scope_event pointer is null");
     }
@@ -2708,7 +2708,7 @@ std::string sai_serialize_twamp_session_event_ntf(
 {
     SWSS_LOG_ENTER();
 
-    if (twamp_session_event == NULL)
+    if (twamp_session_event == nullptr)
     {
         SWSS_LOG_THROW("twamp_session_state pointer is null");
     }
@@ -3094,7 +3094,7 @@ std::string sai_serialize_stats_capability_list(
 
     j["count"] = stat_capability_list.count;
 
-    if (stat_capability_list.list == NULL || countOnly)
+    if (stat_capability_list.list == nullptr || countOnly)
     {
         j["list"] = nullptr;
 
@@ -3138,7 +3138,7 @@ std::string sai_serialize_stats_st_capability_list(
 
     j["count"] = stat_capability_list.count;
 
-    if (stat_capability_list.list == NULL || countOnly)
+    if (stat_capability_list.list == nullptr || countOnly)
     {
         j["list"] = nullptr;
 
@@ -3368,7 +3368,7 @@ void sai_deserialize_enum(
 {
     SWSS_LOG_ENTER();
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         return sai_deserialize_number(s, value);
     }
@@ -5279,20 +5279,20 @@ void sai_deserialize_attr_id(
 {
     SWSS_LOG_ENTER();
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_THROW("meta pointer is null");
     }
 
     auto m = sai_metadata_get_attr_metadata_by_attr_id_name(s.c_str());
 
-    if (m == NULL)
+    if (m == nullptr)
     {
         // check ignored attributes names for backward compatibility
         m = sai_metadata_get_ignored_attr_metadata_by_attr_id_name(s.c_str());
     }
 
-    if (m == NULL)
+    if (m == nullptr)
     {
         SWSS_LOG_THROW("invalid attr id: %s", s.c_str());
     }
@@ -5952,7 +5952,7 @@ void sai_deserialize_free_fdb_event(
     {
         auto meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_FDB_ENTRY, fdb_event.attr[i].id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(SAI_OBJECT_TYPE_FDB_ENTRY).c_str(),
@@ -6243,7 +6243,7 @@ void sai_deserialize_stats_capability_list(
 {
     SWSS_LOG_ENTER();
 
-    if (stats_capability == NULL)
+    if (stats_capability == nullptr)
     {
         SWSS_LOG_THROW("Stats capability pointer in deserialize is NULL");
     }
@@ -6322,7 +6322,7 @@ void sai_deserialize_stats_st_capability_list(
 {
     SWSS_LOG_ENTER();
 
-    if (stats_capability == NULL)
+    if (stats_capability == nullptr)
     {
         SWSS_LOG_THROW("Stats capability pointer in deserialize is NULL");
     }
