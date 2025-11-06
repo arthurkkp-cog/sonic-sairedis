@@ -15,8 +15,6 @@
 
 constexpr const char* SAI_VS_FDB_INFO = "SAI_VS_FDB_INFO";
 
-constexpr uint32_t DEFAULT_VLAN_NUMBER = 1;
-
 constexpr uint32_t MAX_OBJLIST_LEN = 128;
 
 constexpr const char* VS_SAI_FIPS_POST_CONFIG_FILE = "/tmp/vs_fips_post_config";
