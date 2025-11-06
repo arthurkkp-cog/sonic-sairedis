@@ -17,7 +17,7 @@ static const char *profile_get_value (
     auto it = g_profileMap.find(variable);
 
     if (it == g_profileMap.end())
-        return NULL;
+        return nullptr;
     return it->second.c_str();
 }
 
@@ -28,9 +28,8 @@ static int profile_get_next_value (
 {
     SWSS_LOG_ENTER();
 
-    if (value == NULL)
+    if (value == nullptr)
     {
-        // Restarts enumeration
         g_profileMapIterator = g_profileMap.begin();
     }
     else if (g_profileMapIterator == g_profileMap.end())
@@ -67,7 +66,7 @@ sai_status_t sai_api_initialize(
 
 sai_mac_t* sai_mac_t_from_string(const std::string& s)
 {
-    sai_mac_t *mac = (sai_mac_t*)calloc(1, sizeof(sai_mac_t));
+    sai_mac_t *mac = reinterpret_cast<sai_mac_t*>(new uint8_t[6]());
 
     sai_deserialize_mac(s, *mac);
 
@@ -76,7 +75,7 @@ sai_mac_t* sai_mac_t_from_string(const std::string& s)
 
 sai_ip_address_t* sai_ip_address_t_from_string(const std::string& s)
 {
-    sai_ip_address_t* ip = (sai_ip_address_t*)calloc(1, sizeof(sai_ip_address_t));
+    sai_ip_address_t* ip = new sai_ip_address_t();
 
     sai_deserialize_ip_address(s, *ip);
     return ip;
@@ -84,7 +83,7 @@ sai_ip_address_t* sai_ip_address_t_from_string(const std::string& s)
 
 sai_ip_prefix_t* sai_ip_prefix_t_from_string(const std::string& s)
 {
-    sai_ip_prefix_t* ip = (sai_ip_prefix_t*)calloc(1, sizeof(sai_ip_prefix_t));
+    sai_ip_prefix_t* ip = new sai_ip_prefix_t();
 
     sai_deserialize_ip_prefix(s, *ip);
 
@@ -101,22 +100,22 @@ PyObject *py_convert_sai_ha_scope_event_data_t_to_PyObject(const sai_ha_scope_ev
 PyObject *py_convert_sai_port_oper_status_notification_t_to_PyObject(const sai_port_oper_status_notification_t*ntf);
 PyObject *py_convert_sai_queue_deadlock_notification_data_t_to_PyObject(const sai_queue_deadlock_notification_data_t*ntf);
 
-static PyObject * py_fdb_event_notification = NULL;
-static PyObject * py_port_state_change_notification = NULL;
-static PyObject * py_queue_pfc_deadlock_notification = NULL;
-static PyObject * py_switch_shutdown_request_notification = NULL;
-static PyObject * py_switch_state_change_notification = NULL;
-static PyObject * py_bfd_session_state_change_notification = NULL;
-static PyObject * py_icmp_echo_session_state_change_notification = NULL;
-static PyObject * py_ha_set_event_notification = NULL;
-static PyObject * py_ha_scope_event_notification = NULL;
-static PyObject * py_tam_tel_type_config_change_notification = NULL;
+static PyObject * py_fdb_event_notification = nullptr;
+static PyObject * py_port_state_change_notification = nullptr;
+static PyObject * py_queue_pfc_deadlock_notification = nullptr;
+static PyObject * py_switch_shutdown_request_notification = nullptr;
+static PyObject * py_switch_state_change_notification = nullptr;
+static PyObject * py_bfd_session_state_change_notification = nullptr;
+static PyObject * py_icmp_echo_session_state_change_notification = nullptr;
+static PyObject * py_ha_set_event_notification = nullptr;
+static PyObject * py_ha_scope_event_notification = nullptr;
+static PyObject * py_tam_tel_type_config_change_notification = nullptr;
 
 void call_python(PyObject* callObject, PyObject* arglist)
 {
     PyObject* result = PyObject_CallObject(callObject, arglist);
 
-    if (result == NULL)
+    if (result == nullptr)
     {
         PyObject* pPyErr = PyErr_Occurred();
 

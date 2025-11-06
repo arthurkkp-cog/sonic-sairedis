@@ -33,7 +33,7 @@
 }
 #define VALIDATION_STATS_LIST(cnt,lst)                                                          \
 {                                                                                               \
-    if ((cnt > MAX_LIST_COUNT) || ((cnt == 0) && (lst != NULL)) || ((cnt > 0) && (lst == NULL)))\
+    if ((cnt > MAX_LIST_COUNT) || ((cnt == 0) && (lst != nullptr)) || ((cnt > 0) && (lst == nullptr)))\
     {                                                                                           \
         SWSS_LOG_ERROR("Invalid list and list-count");                                          \
         return SAI_STATUS_INVALID_PARAMETER;                                                    \
@@ -4630,7 +4630,7 @@ sai_status_t Meta::meta_generic_validation_get(
             case SAI_ATTR_VALUE_TYPE_VLAN_LIST:
 
                 {
-                    if (value.vlanlist.count == 0 && value.vlanlist.list != NULL)
+                    if (value.vlanlist.count == 0 && value.vlanlist.list != nullptr)
                     {
                         META_LOG_ERROR(md, "vlan list count is zero, but list not NULL");
 
@@ -5228,7 +5228,7 @@ sai_status_t Meta::meta_genetic_validation_list(
         return SAI_STATUS_INVALID_PARAMETER;
     }
 
-    if (count == 0 && list != NULL)
+    if (count == 0 && list != nullptr)
     {
         META_LOG_ERROR(md, "when count is zero, list must be NULL");
 
@@ -5404,7 +5404,7 @@ std::vector<const sai_attr_metadata_t*> Meta::get_attributes_metadata(
 
     std::vector<const sai_attr_metadata_t*> attrs;
 
-    for (size_t index = 0; meta[index] != NULL; ++index)
+    for (size_t index = 0; meta[index] != nullptr; ++index)
     {
         attrs.push_back(meta[index]);
     }
@@ -6009,7 +6009,7 @@ void Meta::meta_generic_validation_post_set(
             {
                 auto prev = get_object_previous_attr(meta_key, md);
 
-                if (prev != NULL)
+                if (prev != nullptr)
                 {
                     // decrease previous if it was set
                     m_oids.objectReferenceDecrement(prev->getSaiAttr()->value.oid);
@@ -6025,7 +6025,7 @@ void Meta::meta_generic_validation_post_set(
             {
                 auto prev = get_object_previous_attr(meta_key, md);
 
-                if (prev != NULL)
+                if (prev != nullptr)
                 {
                     // decrease previous if it was set
                     m_oids.objectReferenceDecrement(prev->getSaiAttr()->value.objlist);
@@ -6306,7 +6306,7 @@ void Meta::meta_sai_on_fdb_flush_event_consolidated(
 
         // only consider bridge port id if it's defined and value is not NULL
         // since vendor can add this attribute to fdb_entry with NULL value
-        if (bpid != NULL && bpid->value.oid != SAI_NULL_OBJECT_ID)
+        if (bpid != nullptr && bpid->value.oid != SAI_NULL_OBJECT_ID)
         {
             auto bpidAttr = fdb->getAttr(SAI_FDB_ENTRY_ATTR_BRIDGE_PORT_ID);
 

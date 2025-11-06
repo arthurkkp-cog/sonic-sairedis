@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationBfdSessionStateChange(
+            explicit NotificationBfdSessionStateChange(
                     _In_ const std::string& serializedNotification);
 
             virtual ~NotificationBfdSessionStateChange();

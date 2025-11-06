@@ -434,7 +434,7 @@ void SwitchVpp::send_bfd_state_change_notification(
         return;
     }
 
-    if (attr.value.ptr == NULL)
+    if (attr.value.ptr == nullptr)
     {
         SWSS_LOG_INFO("SAI_SWITCH_ATTR_BFD_SESSION_STATE_CHANGE_NOTIFY callback is NULL");
         return;

@@ -112,7 +112,7 @@ std::vector<swss::FieldValueTuple> SaiAttributeList::serialize_attr_list(
 
         auto meta = sai_metadata_get_attr_metadata(objectType, attr->id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("FATAL: failed to find metadata for object type %d and attr id %d", objectType, attr->id);
         }

@@ -499,7 +499,7 @@ sai_object_id_t SaiSwitch::helperGetSwitchAttrOid(
 
     auto meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_SWITCH, attr_id);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_THROW("can't get switch attribute %d metadata", attr_id);
     }
@@ -541,7 +541,7 @@ sai_object_id_t SaiSwitch::helperGetSwitchAttrOid(
 
     auto ptr_redis_rid_str = m_client->getSwitchHiddenAttribute(m_switch_vid, meta->attridname);
 
-    if (ptr_redis_rid_str == NULL)
+    if (ptr_redis_rid_str == nullptr)
     {
         /*
          * Redis value of this attribute is not present yet, save it!

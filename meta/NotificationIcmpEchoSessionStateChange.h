@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationIcmpEchoSessionStateChange(
+            explicit NotificationIcmpEchoSessionStateChange(
                     _In_ const std::string& serializedNotification);
 
             virtual ~NotificationIcmpEchoSessionStateChange();

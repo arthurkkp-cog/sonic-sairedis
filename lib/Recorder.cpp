@@ -60,7 +60,7 @@ bool Recorder::setRecordingOutputDirectory(
         return true;
     }
 
-    if (attr.value.s8list.list == NULL)
+    if (attr.value.s8list.list == nullptr)
     {
         SWSS_LOG_ERROR("list pointer is NULL");
 
@@ -112,7 +112,7 @@ bool Recorder::setRecordingFilename(
         return true;
     }
 
-    if (attr.value.s8list.list == NULL)
+    if (attr.value.s8list.list == nullptr)
     {
         SWSS_LOG_ERROR("list pointer is NULL");
 

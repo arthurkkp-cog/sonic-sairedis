@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationSwitchMacsecPostStatus(
+            explicit NotificationSwitchMacsecPostStatus(
                     _In_ const std::string & serializedNotification);
 
             virtual ~NotificationSwitchMacsecPostStatus();

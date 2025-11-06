@@ -651,8 +651,8 @@ sai_status_t SwitchVpp::get_sorted_aces(
     }
 
     std::list<sai_object_id_t> &acl_entries = it->second;
-    acl_tbl_entries_t          *p_ace = NULL;
-    aces = (acl_tbl_entries_t *) calloc(n_total_entries, sizeof(acl_tbl_entries_t));
+    acl_tbl_entries_t          *p_ace = nullptr;
+    aces = new acl_tbl_entries_t[n_total_entries]();
     if (!aces) {
         SWSS_LOG_ERROR("Failed to allocate memory for aces.");
         return SAI_STATUS_FAILURE;
@@ -805,10 +805,10 @@ sai_status_t SwitchVpp::fill_acl_rules(
     vpp_acl_rule_t     *rule = NULL;
     vpp_tunterm_acl_rule_t *tunterm_rule = NULL;
 
-    if(acl != NULL) {
+    if(acl != nullptr) {
         rule = &acl->rules[0];
     }
-    if(tunterm_acl != NULL) {
+    if(tunterm_acl != nullptr) {
         tunterm_rule = &tunterm_acl->rules[0];
     }
 
@@ -820,7 +820,7 @@ sai_status_t SwitchVpp::fill_acl_rules(
             attr = &p_ace->attrs[i];
             auto meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_ACL_ENTRY, attr->id);
 
-            if (meta != NULL) {
+            if (meta != nullptr) {
                 SWSS_LOG_INFO("Type %s attrib id %s",
                     sai_serialize_object_type(SAI_OBJECT_TYPE_ACL_ENTRY).c_str(),
                     meta->attridname);
@@ -859,15 +859,15 @@ void SwitchVpp::cleanup_acl_tbl_config(
 {
     SWSS_LOG_ENTER();
 
-    if(aces != NULL) {
+    if(aces != nullptr) {
         free(aces);
         aces = NULL;
     }
-    if(acl != NULL) {
+    if(acl != nullptr) {
         free(acl);
         acl = NULL;
     }
-    if(tunterm_acl != NULL) {
+    if(tunterm_acl != nullptr) {
         free(tunterm_acl);
         tunterm_acl = NULL;
     }
@@ -960,7 +960,7 @@ sai_status_t SwitchVpp::tunterm_acl_add_replace(vpp_tunterm_acl_t *acl, sai_obje
     auto         tbl_sid = sai_serialize_object_id(tbl_oid);
 
     auto tunterm_idx_it = m_tunterm_acl_swindex_map.find(tbl_oid);
-    if ((tunterm_idx_it == m_tunterm_acl_swindex_map.end()) && (acl != NULL)) {
+    if ((tunterm_idx_it == m_tunterm_acl_swindex_map.end()) && (acl != nullptr)) {
         // ADD new tunterm acl
         tunterm_acl_swindex = ~tunterm_acl_swindex;
         do_port_bind = true;

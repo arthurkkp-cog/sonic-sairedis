@@ -2663,16 +2663,16 @@ int BestCandidateFinder::findAllChildsInDependencyTreeCount(
 
     const auto &info = obj->m_info;
 
-    if (info->revgraphmembers == NULL)
+    if (info->revgraphmembers == nullptr)
     {
         return count;
     }
 
-    for (int idx = 0; info->revgraphmembers[idx] != NULL; ++idx)
+    for (int idx = 0; info->revgraphmembers[idx] != nullptr; ++idx)
     {
         auto &member = info->revgraphmembers[idx];
 
-        if (member->attrmetadata == NULL)
+        if (member->attrmetadata == nullptr)
         {
             /*
              * Skip struct members for now but we need support.
@@ -3426,7 +3426,7 @@ bool BestCandidateFinder::hasEqualQosMapList(
     if (c.count != t.count)
         return false;
 
-    if (c.list == NULL || t.list == NULL)
+    if (c.list == nullptr || t.list == nullptr)
         return false;
 
     std::vector<std::string> citems;
