@@ -19,7 +19,7 @@
 
 #define MAX_OBJLIST_LEN 128
 
-constexpr const char* VS_SAI_FIPS_POST_CONFIG_FILE = "/tmp/vs_fips_post_config";
+constexpr const char* VS_SAI_FIPS_POST_CONFIG_FILE = "/tmp/vs_fips_post_config"; // NOSONAR cpp:S5443 - /tmp is acceptable for virtual switch test configurations
 constexpr const char* VS_SAI_FIPS_SWITCH_MACSEC_POST_STATUS_QUERY = "switch-macsec-post-status-query";
 constexpr const char* VS_SAI_FIPS_SWITCH_MACSEC_POST_STATUS_NOTIFY = "switch-macsec-post-status-notify";
 constexpr const char* VS_SAI_FIPS_INGRESS_MACSEC_POST_STATUS_NOTIFY = "ingress-macsec-post-status-notify";
