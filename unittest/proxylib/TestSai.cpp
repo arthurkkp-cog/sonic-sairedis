@@ -55,9 +55,6 @@ static const char* profile_get_value(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == nullptr)
-        return nullptr;
-
     return nullptr;
 }
 
