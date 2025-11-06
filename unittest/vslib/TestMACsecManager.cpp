@@ -51,6 +51,36 @@ TEST(MACsecManager, create_macsec_egress_sa)
     manager.create_macsec_egress_sa(attr);
 }
 
+TEST(MACsecManager, create_macsec_egress_sc_with_send_sci_enabled)
+{
+    MACsecManager manager;
+
+    MACsecAttr attr;
+    attr.m_vethName = "eth0";
+    attr.m_macsecName = "macsec_eth1";
+    attr.m_sci = "226b54b065000001";
+    attr.m_encryptionEnable = true;
+    attr.m_cipher = "GCM-AES-128";
+    attr.m_sendSci = true;
+
+    manager.create_macsec_egress_sc(attr);
+}
+
+TEST(MACsecManager, create_macsec_egress_sc_with_send_sci_disabled)
+{
+    MACsecManager manager;
+
+    MACsecAttr attr;
+    attr.m_vethName = "eth0";
+    attr.m_macsecName = "macsec_eth2";
+    attr.m_sci = "226b54b065000001";
+    attr.m_encryptionEnable = true;
+    attr.m_cipher = "GCM-AES-128";
+    attr.m_sendSci = false;
+
+    manager.create_macsec_egress_sc(attr);
+}
+
 TEST(MACsecManager, update_macsec_sa_pn)
 {
     // This is a system call that may not be valid in the test environment,
