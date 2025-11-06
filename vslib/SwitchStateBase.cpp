@@ -3007,70 +3007,6 @@ std::vector<sai_object_id_t> SwitchStateBase::getPortDependencies(
     return dep;
 }
 
-bool SwitchStateBase::check_port_reference_count(
-        _In_ sai_object_id_t port_id)
-{
-    SWSS_LOG_ENTER();
-
-    // TODO make generic
-
-    // TODO currently when switch is initialized, there is no metadata yet
-    // and objects are created without reference count, this needs to be
-    // addressed in refactoring metadata and meta_create_oid to correct
-    // count references, but now we need to check if port is used in any
-    // bridge port (and bridge port in any vlan member), after metadata
-    // refactor this function can be removed.
-
-    // check if port is used on any bridge port object (only switch init one
-    // matters, user created bridge ports will have correct reference count
-
-    auto& bridgePorts = m_objectHash.at(SAI_OBJECT_TYPE_BRIDGE_PORT);
-
-    auto* meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_BRIDGE_PORT, SAI_BRIDGE_PORT_ATTR_PORT_ID);
-
-    for (auto& bp: bridgePorts)
-    {
-        for (auto&attr: bp.second)
-        {
-            if (attr.first != meta->attridname)
-                continue; // not this attribute
-
-            if (attr.second->getAttr()->value.oid == port_id)
-            {
-                SWSS_LOG_ERROR("port id %s is in use on bridge port %s",
-                        sai_serialize_object_id(port_id).c_str(),
-                        bp.first.c_str());
-
-                return false;
-            }
-        }
-    }
-
-    auto& serdeses = m_objectHash.at(SAI_OBJECT_TYPE_PORT_SERDES);
-
-    meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_PORT_SERDES, SAI_PORT_SERDES_ATTR_PORT_ID);
-
-    for (auto& ps: serdeses)
-    {
-        for (auto&attr: ps.second)
-        {
-            if (attr.first != meta->attridname)
-                continue; // not this attribute
-
-            if (attr.second->getAttr()->value.oid == port_id)
-            {
-                SWSS_LOG_ERROR("port id %s is in use on port serdes %s",
-                        sai_serialize_object_id(port_id).c_str(),
-                        ps.first.c_str());
-
-                return false;
-            }
-        }
-    }
-
-    return true;
-}
-
 sai_status_t SwitchStateBase::check_port_dependencies(
         _In_ sai_object_id_t port_id,
         _Out_ std::vector<sai_object_id_t>& dep)
@@ -3121,7 +3057,9 @@ sai_status_t SwitchStateBase::check_port_dependencies(
 
     // check port reference count on bridge port
 
-    if (!check_port_reference_count(port_id))
+    auto mmeta = m_meta.lock();
+
+    if (mmeta && mmeta->getObjectReferenceCount(port_id) > 0)
     {
         SWSS_LOG_ERROR("port %s reference count IS NOT ZERO, can't remove, remove dependencies first",
                 sai_serialize_object_id(port_id).c_str());
