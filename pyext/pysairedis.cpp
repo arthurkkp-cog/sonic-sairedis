@@ -66,7 +66,7 @@ sai_status_t sai_api_initialize(
 
 sai_mac_t* sai_mac_t_from_string(const std::string& s)
 {
-    sai_mac_t *mac = new sai_mac_t();
+    sai_mac_t *mac = reinterpret_cast<sai_mac_t*>(new uint8_t[6]());
 
     sai_deserialize_mac(s, *mac);
 
