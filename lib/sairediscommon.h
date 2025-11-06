@@ -10,8 +10,8 @@ constexpr const char* SYNCD_APPLY_VIEW = "APPLY_VIEW";
 constexpr const char* SYNCD_INSPECT_ASIC = "SYNCD_INSPECT_ASIC";
 constexpr const char* SYNCD_INVOKE_DUMP = "SYNCD_INVOKE_DUMP";
 
-constexpr const char* ASIC_STATE_TABLE = "ASIC_STATE";
-constexpr const char* TEMP_PREFIX = "TEMP_";
+#define ASIC_STATE_TABLE    "ASIC_STATE"
+#define TEMP_PREFIX         "TEMP_"
 
 constexpr const char* REDIS_COMMUNICATION_MODE_REDIS_ASYNC_STRING = "redis_async";
 constexpr const char* REDIS_COMMUNICATION_MODE_REDIS_SYNC_STRING = "redis_sync";
