@@ -85,6 +85,35 @@ If you do not have libsai, you can build a debian package using:
     ./autogen.sh
     fakeroot debian/rules binary-syncd-vs
 
+## Static Analysis
+
+### Clang Static Analyzer
+
+The repository includes Clang Static Analyzer (ClangSA) for detecting bugs through static code analysis.
+
+#### Running ClangSA Locally
+
+Prerequisites:
+```bash
+sudo apt-get install clang-tools-14
+```
+
+To run the analysis:
+```bash
+make clangsa-analyze
+```
+
+The HTML reports will be saved to `/tmp/scan-build-reports/`. Open the `index.html` file in a browser to view the results.
+
+To clean up reports:
+```bash
+make clangsa-clean
+```
+
+#### CI Integration
+
+ClangSA runs automatically on all pull requests and pushes to master/release branches via GitHub Actions. The analysis results are available as workflow artifacts that can be downloaded for review.
+
 ## Need Help?
 
 For general questions, setup help, or troubleshooting:
