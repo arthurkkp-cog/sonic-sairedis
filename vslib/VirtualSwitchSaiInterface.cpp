@@ -706,10 +706,10 @@ sai_status_t VirtualSwitchSaiInterface::create(
             return SAI_STATUS_FAILURE;
         }
 
+        update_local_metadata(switchId);
+
         if (warmBootState != nullptr)
         {
-            update_local_metadata(switchId);
-
             if (config->m_useTapDevice)
             {
                 ss->vs_recreate_hostif_tap_interfaces();
