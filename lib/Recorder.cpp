@@ -442,8 +442,7 @@ void Recorder::recordGenericCreateResponse(
 {
     SWSS_LOG_ENTER();
 
-    // TODO currently empty since used in async mode, but we should log this in
-    // synchronous mode, and we could use "G" from GET api as response
+    recordLine("G|" + sai_serialize_status(status));
 }
 
 void Recorder::recordGenericCreateResponse(
@@ -452,8 +451,7 @@ void Recorder::recordGenericCreateResponse(
 {
     SWSS_LOG_ENTER();
 
-    // TODO currently empty since used in async mode, but we should log this in
-    // synchronous mode, and we could use "G" from GET api as response
+    recordLine("G|" + sai_serialize_status(status) + "|oid:" + sai_serialize_object_id(objectId));
 }
 
 void Recorder::recordBulkGenericCreate(
