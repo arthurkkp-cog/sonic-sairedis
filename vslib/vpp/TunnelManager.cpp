@@ -267,9 +267,9 @@ TunnelManager::create_vpp_vxlan_encap(
     tunnel_data.sw_if_index = sw_if_index;
     /* the neighbour is to build inner ether. use no_fib_entry to avoid creating the nh in the fib, which will mess up underlay forwarding*/
     if (req.dst_address.sa_family == AF_INET6) {
-        ip6_nbr_add_del(NULL, sw_if_index, &req.dst_address.addr.ip6, false, true/*no_fib_entry*/, bvi_mac, 1);
+        ip6_nbr_add_del(nullptr, sw_if_index, &req.dst_address.addr.ip6, false, true/*no_fib_entry*/, bvi_mac, 1);
     } else {
-        ip4_nbr_add_del(NULL, sw_if_index, &req.dst_address.addr.ip4, false, true/*no_fib_entry*/, bvi_mac, 1);
+        ip4_nbr_add_del(nullptr, sw_if_index, &req.dst_address.addr.ip4, false, true/*no_fib_entry*/, bvi_mac, 1);
     }
     SWSS_LOG_INFO("successfully created encap for vxlan tunnel %d", sw_if_index);
     return SAI_STATUS_SUCCESS;
@@ -290,9 +290,9 @@ TunnelManager::remove_vpp_vxlan_encap(
     auto                        bvi_mac = router_mac.data();
 
     if (req.dst_address.sa_family == AF_INET6) {
-        ip6_nbr_add_del(NULL, tunnel_data.sw_if_index, &req.dst_address.addr.ip6, false, true/*no_fib_entry*/, bvi_mac, 0);
+        ip6_nbr_add_del(nullptr, tunnel_data.sw_if_index, &req.dst_address.addr.ip6, false, true/*no_fib_entry*/, bvi_mac, 0);
     } else {
-        ip4_nbr_add_del(NULL, tunnel_data.sw_if_index, &req.dst_address.addr.ip4, false, true/*no_fib_entry*/, bvi_mac, 0);
+        ip4_nbr_add_del(nullptr, tunnel_data.sw_if_index, &req.dst_address.addr.ip4, false, true/*no_fib_entry*/, bvi_mac, 0);
     }
 
     vpp_status = vpp_vxlan_tunnel_add_del(&req, 0, &sw_if_index);
