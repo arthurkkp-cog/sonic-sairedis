@@ -134,7 +134,7 @@ void MACsecForwarder::forward()
         msg.msg_control = control;
         msg.msg_controllen = sizeof(control);
 
-        swss::Selectable *sel = NULL;
+        swss::Selectable *sel = nullptr;
         int result = s.select(&sel);
 
         if (result != swss::Select::OBJECT)

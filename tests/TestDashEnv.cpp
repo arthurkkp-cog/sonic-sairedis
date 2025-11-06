@@ -26,7 +26,7 @@ static const char* profileGetValue(
         return "true";
     }
 
-    return NULL;
+    return nullptr;
 }
 
 TestDashEnv* TestDashEnv::instance()

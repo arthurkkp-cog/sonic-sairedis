@@ -102,7 +102,7 @@ static const char* profile_get_value(
 {
     SWSS_LOG_ENTER();
 
-    return NULL;
+    return nullptr;
 }
 
 static int profile_get_next_value(
@@ -112,14 +112,14 @@ static int profile_get_next_value(
 {
     SWSS_LOG_ENTER();
 
-    if (value == NULL)
+    if (value == nullptr)
     {
         SWSS_LOG_INFO("resetting profile map iterator");
 
         return 0;
     }
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
         return -1;
@@ -169,7 +169,7 @@ void test_enable_recording()
     attr.id = SAI_REDIS_SWITCH_ATTR_RECORD;
     attr.value.booldata = true;
 
-    sai_switch_api_t *sai_switch_api = NULL;
+    sai_switch_api_t *sai_switch_api = nullptr;
 
     sai_api_query(SAI_API_SWITCH, (void**)&sai_switch_api);
 
@@ -247,12 +247,12 @@ void test_bulk_next_hop_group_member_create()
 
     sai_status_t    status;
 
-    sai_next_hop_api_t  *sai_next_hop_api = NULL;
-    sai_next_hop_group_api_t  *sai_next_hop_group_api = NULL;
-    sai_switch_api_t *sai_switch_api = NULL;
-    sai_lag_api_t *sai_lag_api = NULL;
-    sai_router_interface_api_t *sai_rif_api = NULL;
-    sai_virtual_router_api_t * sai_virtual_router_api = NULL;
+    sai_next_hop_api_t  *sai_next_hop_api = nullptr;
+    sai_next_hop_group_api_t  *sai_next_hop_group_api = nullptr;
+    sai_switch_api_t *sai_switch_api = nullptr;
+    sai_lag_api_t *sai_lag_api = nullptr;
+    sai_router_interface_api_t *sai_rif_api = nullptr;
+    sai_virtual_router_api_t * sai_virtual_router_api = nullptr;
 
     sai_api_query(SAI_API_NEXT_HOP, (void**)&sai_next_hop_api);
     sai_api_query(SAI_API_NEXT_HOP_GROUP, (void**)&sai_next_hop_group_api);
@@ -292,13 +292,13 @@ void test_bulk_next_hop_group_member_create()
     // virtual router
     sai_object_id_t vr;
 
-    status = sai_virtual_router_api->create_virtual_router(&vr, switch_id, 0, NULL);
+    status = sai_virtual_router_api->create_virtual_router(&vr, switch_id, 0, nullptr);
 
     ASSERT_SUCCESS("failed to create virtual router");
 
     // create lag
     sai_object_id_t lag;
-    status = sai_lag_api->create_lag(&lag, switch_id, 0, NULL);
+    status = sai_lag_api->create_lag(&lag, switch_id, 0, nullptr);
 
     // create router interface
     sai_object_id_t rif;
@@ -384,11 +384,11 @@ void test_bulk_next_hop_create()
 
     sai_status_t    status;
 
-    sai_next_hop_api_t  *sai_next_hop_api = NULL;
-    sai_switch_api_t *sai_switch_api = NULL;
-    sai_lag_api_t *sai_lag_api = NULL;
-    sai_router_interface_api_t *sai_rif_api = NULL;
-    sai_virtual_router_api_t * sai_virtual_router_api = NULL;
+    sai_next_hop_api_t  *sai_next_hop_api = nullptr;
+    sai_switch_api_t *sai_switch_api = nullptr;
+    sai_lag_api_t *sai_lag_api = nullptr;
+    sai_router_interface_api_t *sai_rif_api = nullptr;
+    sai_virtual_router_api_t * sai_virtual_router_api = nullptr;
 
     sai_api_query(SAI_API_NEXT_HOP, (void**)&sai_next_hop_api);
     sai_api_query(SAI_API_SWITCH, (void**)&sai_switch_api);
@@ -413,13 +413,13 @@ void test_bulk_next_hop_create()
     // virtual router
     sai_object_id_t vr;
 
-    status = sai_virtual_router_api->create_virtual_router(&vr, switch_id, 0, NULL);
+    status = sai_virtual_router_api->create_virtual_router(&vr, switch_id, 0, nullptr);
 
     ASSERT_SUCCESS("failed to create virtual router");
 
     // create lag
     sai_object_id_t lag;
-    status = sai_lag_api->create_lag(&lag, switch_id, 0, NULL);
+    status = sai_lag_api->create_lag(&lag, switch_id, 0, nullptr);
 
     // create router interface
     sai_object_id_t rif;
@@ -492,11 +492,11 @@ void test_bulk_fdb_create()
 
     sai_status_t    status;
 
-    sai_switch_api_t *sai_switch_api = NULL;
-    sai_lag_api_t *sai_lag_api = NULL;
-    sai_fdb_api_t *sai_fdb_api = NULL;
-    sai_bridge_api_t *sai_bridge_api = NULL;
-    sai_virtual_router_api_t * sai_virtual_router_api = NULL;
+    sai_switch_api_t *sai_switch_api = nullptr;
+    sai_lag_api_t *sai_lag_api = nullptr;
+    sai_fdb_api_t *sai_fdb_api = nullptr;
+    sai_bridge_api_t *sai_bridge_api = nullptr;
+    sai_virtual_router_api_t * sai_virtual_router_api = nullptr;
 
     sai_api_query(SAI_API_BRIDGE, (void**)&sai_bridge_api);
     sai_api_query(SAI_API_FDB, (void**)&sai_fdb_api);
@@ -621,12 +621,12 @@ void test_bulk_route_set()
 
     sai_status_t    status;
 
-    sai_route_api_t  *sai_route_api = NULL;
-    sai_switch_api_t *sai_switch_api = NULL;
-    sai_virtual_router_api_t * sai_virtual_router_api = NULL;
-    sai_next_hop_api_t  *sai_next_hop_api = NULL;
-    sai_lag_api_t *sai_lag_api = NULL;
-    sai_router_interface_api_t *sai_rif_api = NULL;
+    sai_route_api_t  *sai_route_api = nullptr;
+    sai_switch_api_t *sai_switch_api = nullptr;
+    sai_virtual_router_api_t * sai_virtual_router_api = nullptr;
+    sai_next_hop_api_t  *sai_next_hop_api = nullptr;
+    sai_lag_api_t *sai_lag_api = nullptr;
+    sai_router_interface_api_t *sai_rif_api = nullptr;
 
     sai_api_query(SAI_API_ROUTE, (void**)&sai_route_api);
     sai_api_query(SAI_API_SWITCH, (void**)&sai_switch_api);
@@ -790,11 +790,11 @@ void test_bulk_neighbor_set()
 
     sai_status_t    status;
 
-    sai_neighbor_api_t  *sai_neighbor_api = NULL;
-    sai_switch_api_t *sai_switch_api = NULL;
-    sai_virtual_router_api_t * sai_virtual_router_api = NULL;
-    sai_lag_api_t *sai_lag_api = NULL;
-    sai_router_interface_api_t *sai_rif_api = NULL;
+    sai_neighbor_api_t  *sai_neighbor_api = nullptr;
+    sai_switch_api_t *sai_switch_api = nullptr;
+    sai_virtual_router_api_t * sai_virtual_router_api = nullptr;
+    sai_lag_api_t *sai_lag_api = nullptr;
+    sai_router_interface_api_t *sai_rif_api = nullptr;
 
     sai_api_query(SAI_API_NEIGHBOR, (void**)&sai_neighbor_api);
     sai_api_query(SAI_API_SWITCH, (void**)&sai_switch_api);
@@ -984,7 +984,7 @@ void test_watchdog_timer_clock_rollback()
 
     // take note of current time
     struct timeval currentTime;
-    gettimeofday(&currentTime, NULL);
+    gettimeofday(&currentTime, nullptr);
 
     // start watchdog timer
     TimerWatchdog twd(WARN_TIMESPAN_USEC);
@@ -992,7 +992,7 @@ void test_watchdog_timer_clock_rollback()
 
     // roll back time by ROLLBACK_TIME_SEC
     currentTime.tv_sec -= ROLLBACK_TIME_SEC;
-    assert(settimeofday(&currentTime, NULL) == 0);
+    assert(settimeofday(&currentTime, nullptr) == 0);
 
     // Simulate long running API
     sleep(LONG_RUNNING_API_TIME_SEC);

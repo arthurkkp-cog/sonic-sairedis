@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationQueuePfcDeadlock(
+            explicit NotificationQueuePfcDeadlock(
                     _In_ const std::string& serializedNotification);
 
             virtual ~NotificationQueuePfcDeadlock();

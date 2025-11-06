@@ -55,9 +55,6 @@ static const char* profile_get_value(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == NULL)
-        return NULL;
-
     return nullptr;
 }
 
@@ -110,7 +107,7 @@ TEST(Sai, apiInitialize)
     EXPECT_EQ(sai.apiInitialize(1, &test_services), SAI_STATUS_INVALID_PARAMETER);
 
     // table null
-    EXPECT_EQ(sai.apiInitialize(0, NULL), SAI_STATUS_INVALID_PARAMETER);
+    EXPECT_EQ(sai.apiInitialize(0, nullptr), SAI_STATUS_INVALID_PARAMETER);
 
     // correct one
     EXPECT_EQ(sai.apiInitialize(0, &test_services), SAI_STATUS_SUCCESS);
@@ -459,7 +456,7 @@ TEST(Sai, queryApiVersion)
 
     auto thread = std::make_shared<std::thread>(fun,proxy);
 
-    EXPECT_EQ(sai.queryApiVersion(NULL), SAI_STATUS_INVALID_PARAMETER);
+    EXPECT_EQ(sai.queryApiVersion(nullptr), SAI_STATUS_INVALID_PARAMETER);
 
     auto status = sai.queryApiVersion(&version);
 

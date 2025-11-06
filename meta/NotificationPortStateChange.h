@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationPortStateChange(
+            explicit NotificationPortStateChange(
                     _In_ const std::string& serializedNotification);
 
             virtual ~NotificationPortStateChange();

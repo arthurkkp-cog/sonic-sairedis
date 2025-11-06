@@ -28,7 +28,7 @@ std::string Globals::getHardwareInfo(
             attrCount,
             attrList);
 
-    if (attr == NULL)
+    if (attr == nullptr)
     {
         return "";
     }
@@ -40,7 +40,7 @@ std::string Globals::getHardwareInfo(
         return "";
     }
 
-    if (s8list.list == NULL)
+    if (s8list.list == nullptr)
     {
         SWSS_LOG_WARN("SAI_SWITCH_ATTR_SWITCH_HARDWARE_INFO s8list.list is NULL! but count is %u", s8list.count);
 

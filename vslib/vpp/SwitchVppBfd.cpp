@@ -167,7 +167,7 @@ sai_status_t SwitchVpp::vpp_bfd_session_add(
         multihop = attr->value.booldata;
     }
 
-    const char *hwif_name = NULL;
+    const char *hwif_name = nullptr;
     if (!multihop) {
         /* Attribute#7 */
         std::string ifname = "";
@@ -279,7 +279,7 @@ sai_status_t SwitchVpp::vpp_bfd_session_del(
         multihop = attr.value.booldata;
     }
 
-    const char *hwif_name = NULL;
+    const char *hwif_name = nullptr;
     if (!multihop) {
         /* Attribute#4 */
         attr.id = SAI_BFD_SESSION_ATTR_PORT;
@@ -434,7 +434,7 @@ void SwitchVpp::send_bfd_state_change_notification(
         return;
     }
 
-    if (attr.value.ptr == NULL)
+    if (attr.value.ptr == nullptr)
     {
         SWSS_LOG_INFO("SAI_SWITCH_ATTR_BFD_SESSION_STATE_CHANGE_NOTIFY callback is NULL");
         return;

@@ -1122,7 +1122,7 @@ sai_status_t SwitchStateBase::set_switch_default_attributes()
     sai_attribute_t attr;
 
     attr.id = SAI_SWITCH_ATTR_PORT_STATE_CHANGE_NOTIFY;
-    attr.value.ptr = NULL;
+    attr.value.ptr = nullptr;
 
     CHECK_STATUS(set(SAI_OBJECT_TYPE_SWITCH, m_switch_id, &attr));
 
@@ -1420,7 +1420,7 @@ sai_status_t SwitchStateBase::create_ports()
 
         sai_object_id_t port_id;
 
-        CHECK_STATUS(create(SAI_OBJECT_TYPE_PORT, &port_id, m_switch_id, 0, NULL));
+        CHECK_STATUS(create(SAI_OBJECT_TYPE_PORT, &port_id, m_switch_id, 0, nullptr));
         m_port_list.push_back(port_id);
 
         sai_attribute_t attr;
@@ -1526,7 +1526,7 @@ sai_status_t SwitchStateBase::create_default_virtual_router()
 
     sai_object_id_t virtual_router_id;
 
-    CHECK_STATUS(create(SAI_OBJECT_TYPE_VIRTUAL_ROUTER, &virtual_router_id, m_switch_id, 0, NULL));
+    CHECK_STATUS(create(SAI_OBJECT_TYPE_VIRTUAL_ROUTER, &virtual_router_id, m_switch_id, 0, nullptr));
 
     sai_attribute_t attr;
 
@@ -1544,7 +1544,7 @@ sai_status_t SwitchStateBase::create_default_stp_instance()
 
     sai_object_id_t stp_instance_id;
 
-    CHECK_STATUS(create(SAI_OBJECT_TYPE_STP, &stp_instance_id, m_switch_id, 0, NULL));
+    CHECK_STATUS(create(SAI_OBJECT_TYPE_STP, &stp_instance_id, m_switch_id, 0, nullptr));
 
     sai_attribute_t attr;
 
@@ -1562,7 +1562,7 @@ sai_status_t SwitchStateBase::create_default_trap_group()
 
     sai_object_id_t trap_group_id;
 
-    CHECK_STATUS(create(SAI_OBJECT_TYPE_HOSTIF_TRAP_GROUP, &trap_group_id, m_switch_id, 0, NULL));
+    CHECK_STATUS(create(SAI_OBJECT_TYPE_HOSTIF_TRAP_GROUP, &trap_group_id, m_switch_id, 0, nullptr));
 
     sai_attribute_t attr;
 
@@ -2940,7 +2940,7 @@ void SwitchStateBase::processFdbEntriesForAging()
 
     SWSS_LOG_DEBUG("fdb infos to process: %zu", m_fdb_info_set.size());
 
-    uint32_t current = (uint32_t)time(NULL);
+    uint32_t current = (uint32_t)time(nullptr);
 
     sai_attribute_t attr;
 
@@ -3538,7 +3538,7 @@ sai_status_t SwitchStateBase::initialize_voq_switch_objects(
     int32_t voq_switch_id = -1;
     uint32_t voq_max_cores = 0;
     uint32_t sys_port_count = 0;
-    sai_system_port_config_t *sys_port_cfg_list = NULL;
+    sai_system_port_config_t *sys_port_cfg_list = nullptr;
 
     for (uint32_t i = 0; i < attr_count; i++)
     {
@@ -3693,7 +3693,7 @@ sai_status_t SwitchStateBase::create_voq_per_sysport(
     {
         sai_object_id_t voq_id;
 
-        CHECK_STATUS(create(SAI_OBJECT_TYPE_QUEUE, &voq_id, m_switch_id, 0, NULL));
+        CHECK_STATUS(create(SAI_OBJECT_TYPE_QUEUE, &voq_id, m_switch_id, 0, nullptr));
         voqs.push_back(voq_id);
 
         attr.id = SAI_QUEUE_ATTR_TYPE;
@@ -3755,7 +3755,7 @@ sai_status_t SwitchStateBase::create_system_ports(
 
         sai_object_id_t system_port_id;
 
-        CHECK_STATUS(create(SAI_OBJECT_TYPE_SYSTEM_PORT, &system_port_id, m_switch_id, 0, NULL));
+        CHECK_STATUS(create(SAI_OBJECT_TYPE_SYSTEM_PORT, &system_port_id, m_switch_id, 0, nullptr));
 
         m_system_port_list.push_back(system_port_id);
 
@@ -3889,7 +3889,7 @@ sai_status_t SwitchStateBase::create_fabric_ports()
 
         sai_object_id_t fabric_port_id;
 
-        CHECK_STATUS(create(SAI_OBJECT_TYPE_PORT, &fabric_port_id, m_switch_id, 0, NULL));
+        CHECK_STATUS(create(SAI_OBJECT_TYPE_PORT, &fabric_port_id, m_switch_id, 0, nullptr));
         m_fabric_port_list.push_back(fabric_port_id);
 
         sai_attribute_t attr;

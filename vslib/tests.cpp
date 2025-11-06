@@ -30,7 +30,7 @@ const char* profile_get_value(
         return SAI_VALUE_VS_SWITCH_TYPE_MLNX2700;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 int profile_get_next_value(
@@ -40,14 +40,14 @@ int profile_get_next_value(
 {
     SWSS_LOG_ENTER();
 
-    if (value == NULL)
+    if (value == nullptr)
     {
         SWSS_LOG_INFO("resetting profile map iterator");
 
         return 0;
     }
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
         return -1;
@@ -396,7 +396,7 @@ sai_fdb_entry_t create_fdb_entry(
 }
 
 #define CREATE_ENTRIES()\
-        SUCCESS(sai_metadata_sai_fdb_api->flush_fdb_entries(switch_id, 0, NULL));\
+        SUCCESS(sai_metadata_sai_fdb_api->flush_fdb_entries(switch_id, 0, nullptr));\
         auto v2bp1d = create_fdb_entry(switch_id, vlan2_id, bp1, SAI_FDB_ENTRY_TYPE_DYNAMIC, 1);\
         auto v2bp1s = create_fdb_entry(switch_id, vlan2_id, bp1, SAI_FDB_ENTRY_TYPE_STATIC,  2);\
         auto v2bp2d = create_fdb_entry(switch_id, vlan2_id, bp2, SAI_FDB_ENTRY_TYPE_DYNAMIC, 3);\
@@ -478,7 +478,7 @@ void test_fdb_flush()
     {
         CREATE_ENTRIES();
 
-        SUCCESS(sai_metadata_sai_fdb_api->flush_fdb_entries(switch_id, 0, NULL));
+        SUCCESS(sai_metadata_sai_fdb_api->flush_fdb_entries(switch_id, 0, nullptr));
 
         ASSERT_FDB_NOT_EXISTS(v2bp1d);
         ASSERT_FDB_NOT_EXISTS(v2bp1s);

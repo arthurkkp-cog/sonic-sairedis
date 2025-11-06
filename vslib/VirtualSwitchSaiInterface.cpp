@@ -115,7 +115,7 @@ bool VirtualSwitchSaiInterface::validate_switch_warm_boot_attributes(
     {
         auto meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_SWITCH, attr_list[i].id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("failed to find metadata for switch attribute %d", attr_list[i].id);
         }
@@ -173,7 +173,7 @@ void VirtualSwitchSaiInterface::update_local_metadata(
     mk.objecttype = SAI_OBJECT_TYPE_SWITCH;
     mk.objectkey.key.object_id = switch_id;
 
-    mmeta->meta_generic_validation_post_create(mk, switch_id, 0, NULL);
+    mmeta->meta_generic_validation_post_create(mk, switch_id, 0, nullptr);
 
     /*
      * Create every non object id except switch. Switch object was already
@@ -194,7 +194,7 @@ void VirtualSwitchSaiInterface::update_local_metadata(
 
         auto info = sai_metadata_get_object_type_info(ot);
 
-        if (info == NULL)
+        if (info == nullptr)
             SWSS_LOG_THROW("failed to get object type info for object type %d", ot);
 
         if (info->isnonobjectid)
@@ -206,7 +206,7 @@ void VirtualSwitchSaiInterface::update_local_metadata(
         {
             sai_deserialize_object_id(obj.first, mk.objectkey.key.object_id);
 
-            mmeta->meta_generic_validation_post_create(mk, switch_id, 0, NULL);
+            mmeta->meta_generic_validation_post_create(mk, switch_id, 0, nullptr);
         }
     }
 
@@ -224,7 +224,7 @@ void VirtualSwitchSaiInterface::update_local_metadata(
 
         auto info = sai_metadata_get_object_type_info(ot);
 
-        if (info == NULL)
+        if (info == nullptr)
             SWSS_LOG_THROW("failed to get object type info for object type %d", ot);
 
         if (info->isobjectid)
@@ -236,7 +236,7 @@ void VirtualSwitchSaiInterface::update_local_metadata(
 
             sai_deserialize_object_meta_key(key, mk);
 
-            mmeta->meta_generic_validation_post_create(mk, switch_id, 0, NULL);
+            mmeta->meta_generic_validation_post_create(mk, switch_id, 0, nullptr);
         }
     }
 
@@ -254,7 +254,7 @@ void VirtualSwitchSaiInterface::update_local_metadata(
 
         auto info = sai_metadata_get_object_type_info(ot);
 
-        if (info == NULL)
+        if (info == nullptr)
             SWSS_LOG_THROW("failed to get object type info for object type %d", ot);
 
         for (auto obj: kvp.second)
@@ -967,7 +967,7 @@ sai_status_t VirtualSwitchSaiInterface::queryAttributeEnumValuesCapability(
     {
         auto meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_HOSTIF_TRAP, SAI_HOSTIF_TRAP_ATTR_TRAP_TYPE);
 
-        if (meta == NULL || !meta->isenum)
+        if (meta == nullptr || !meta->isenum)
         {
             SWSS_LOG_THROW("failed to find metadata for SAI_HOSTIF_TRAP_ATTR_TRAP_TYPE attribute");
         }
@@ -1435,9 +1435,9 @@ bool VirtualSwitchSaiInterface::readWarmBootFile(
 {
     SWSS_LOG_ENTER();
 
-    if (warmBootFile == NULL)
+    if (warmBootFile == nullptr)
     {
-        SWSS_LOG_ERROR("warm boot read file is NULL");
+        SWSS_LOG_ERROR("warm boot read file is nullptr");
 
         return false;
     }

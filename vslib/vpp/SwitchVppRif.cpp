@@ -387,7 +387,7 @@ void SwitchVpp::vppProcessEvents ()
     int ret;
 
     while(m_run_vpp_events_thread) {
-        nanosleep(&req, NULL);
+        nanosleep(&req, nullptr);
         ret = vpp_sync_for_events();
         SWSS_LOG_NOTICE("Checking for any VS events status %d", ret);
         while ((evp = vpp_ev_dequeue())) {
@@ -574,7 +574,7 @@ sai_status_t SwitchVpp::UpdatePort(
 
     auto attr_type = sai_metadata_get_attr_by_id(SAI_PORT_ATTR_INGRESS_ACL, attr_count, attr_list);
 
-    if (attr_type != NULL)
+    if (attr_type != nullptr)
     {
         if (attr_type->value.oid == SAI_NULL_OBJECT_ID) {
             sai_attribute_t attr;
@@ -590,7 +590,7 @@ sai_status_t SwitchVpp::UpdatePort(
 
     attr_type = sai_metadata_get_attr_by_id(SAI_PORT_ATTR_EGRESS_ACL, attr_count, attr_list);
 
-    if (attr_type != NULL)
+    if (attr_type != nullptr)
     {
         if (attr_type->value.oid == SAI_NULL_OBJECT_ID) {
             sai_attribute_t attr;
@@ -610,14 +610,14 @@ sai_status_t SwitchVpp::UpdatePort(
 
     attr_type = sai_metadata_get_attr_by_id(SAI_PORT_ATTR_ADMIN_STATE, attr_count, attr_list);
 
-    if (attr_type != NULL)
+    if (attr_type != nullptr)
     {
         vpp_set_interface_state(object_id, 0, attr_type->value.booldata);
     }
 
     attr_type = sai_metadata_get_attr_by_id(SAI_PORT_ATTR_MTU, attr_count, attr_list);
 
-    if (attr_type != NULL)
+    if (attr_type != nullptr)
     {
         vpp_set_port_mtu(object_id, 0, attr_type->value.u32);
     }
@@ -1487,7 +1487,7 @@ sai_status_t SwitchVpp::vpp_create_router_interface(
 
     auto attr_type = sai_metadata_get_attr_by_id(SAI_ROUTER_INTERFACE_ATTR_TYPE, attr_count, attr_list);
 
-    if (attr_type == NULL)
+    if (attr_type == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_ROUTER_INTERFACE_ATTR_TYPE was not passed");
 
@@ -1508,7 +1508,7 @@ sai_status_t SwitchVpp::vpp_create_router_interface(
 
     auto attr_obj_id = sai_metadata_get_attr_by_id(SAI_ROUTER_INTERFACE_ATTR_PORT_ID, attr_count, attr_list);
 
-    if (attr_obj_id == NULL)
+    if (attr_obj_id == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_ROUTER_INTERFACE_ATTR_PORT_ID was not passed");
 
@@ -1536,7 +1536,7 @@ sai_status_t SwitchVpp::vpp_create_router_interface(
     auto attr_vlan_id = sai_metadata_get_attr_by_id(SAI_ROUTER_INTERFACE_ATTR_OUTER_VLAN_ID, attr_count, attr_list);
 
     uint16_t vlan_id = 0;
-    if (attr_vlan_id == NULL) {
+    if (attr_vlan_id == nullptr) {
         if (attr_type->value.s32 == SAI_ROUTER_INTERFACE_TYPE_SUB_PORT)
         {
             SWSS_LOG_ERROR("attr SAI_ROUTER_INTERFACE_ATTR_OUTER_VLAN_ID was not passed");
@@ -1587,7 +1587,7 @@ sai_status_t SwitchVpp::vpp_create_router_interface(
 
     auto attr_vrf_id = sai_metadata_get_attr_by_id(SAI_ROUTER_INTERFACE_ATTR_VIRTUAL_ROUTER_ID, attr_count, attr_list);
 
-    if (attr_vrf_id == NULL)
+    if (attr_vrf_id == nullptr)
     {
         SWSS_LOG_NOTICE("attr SAI_ROUTER_INTERFACE_ATTR_VIRTUAL_ROUTER_ID was not passed");
     } else {

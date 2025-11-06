@@ -31,7 +31,7 @@ static const char* profile_get_value(
         _In_ const char* variable)
 {
     SWSS_LOG_ENTER();
-    return NULL;
+    return nullptr;
 }
 
 static int profile_get_next_value(

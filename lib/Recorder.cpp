@@ -60,7 +60,7 @@ bool Recorder::setRecordingOutputDirectory(
         return true;
     }
 
-    if (attr.value.s8list.list == NULL)
+    if (attr.value.s8list.list == nullptr)
     {
         SWSS_LOG_ERROR("list pointer is NULL");
 
@@ -112,7 +112,7 @@ bool Recorder::setRecordingFilename(
         return true;
     }
 
-    if (attr.value.s8list.list == NULL)
+    if (attr.value.s8list.list == nullptr)
     {
         SWSS_LOG_ERROR("list pointer is NULL");
 
@@ -262,7 +262,7 @@ std::string Recorder::getTimestamp()
     char buffer[64];
     struct timeval tv;
 
-    gettimeofday(&tv, NULL);
+    gettimeofday(&tv, nullptr);
 
     struct tm now;
     localtime_r(&tv.tv_sec, &now);
@@ -1038,7 +1038,7 @@ void Recorder::recordQueryAttributeCapability(
 
     auto meta = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find attribute metadata: object type %s, attr id %d",
                 sai_serialize_object_type(objectType).c_str(), attrId);
@@ -1073,7 +1073,7 @@ void Recorder::recordQueryAttributeCapabilityResponse(
 
     auto meta = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find attribute metadata: object type %s, attr id %d",
                 sai_serialize_object_type(objectType).c_str(), attrId);
@@ -1109,7 +1109,7 @@ void Recorder::recordQueryAttributeEnumValuesCapability(
 
     auto meta = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find attribute metadata: object type %s, attr id %d",
                 sai_serialize_object_type(objectType).c_str(), attrId);
@@ -1210,7 +1210,7 @@ void Recorder::recordQueryStatsCapabilityResponse(
 
     auto meta = sai_metadata_get_object_type_info(objectType);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find object metadata: object type %s",
                 sai_serialize_object_type(objectType).c_str());
@@ -1218,7 +1218,7 @@ void Recorder::recordQueryStatsCapabilityResponse(
         return;
     }
 
-    if (meta->statenum == NULL)
+    if (meta->statenum == nullptr)
     {
         SWSS_LOG_ERROR("%s does not support stats", meta->objecttypename);
 

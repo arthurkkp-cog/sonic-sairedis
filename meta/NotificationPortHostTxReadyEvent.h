@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationPortHostTxReady(
+            explicit NotificationPortHostTxReady(
                 _In_ const std::string& serializedNotification);
 
             virtual ~NotificationPortHostTxReady();

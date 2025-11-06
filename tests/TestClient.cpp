@@ -23,10 +23,10 @@ const char* TestClient::profileGetValue(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
-        return NULL;
+        return nullptr;
     }
 
     auto it = m_profileMap.find(variable);
@@ -34,7 +34,7 @@ const char* TestClient::profileGetValue(
     if (it == m_profileMap.end())
     {
         SWSS_LOG_NOTICE("%s: NULL", variable);
-        return NULL;
+        return nullptr;
     }
 
     SWSS_LOG_NOTICE("%s: %s", variable, it->second.c_str());
@@ -49,7 +49,7 @@ int TestClient::profileGetNextValue(
 {
     SWSS_LOG_ENTER();
 
-    if (value == NULL)
+    if (value == nullptr)
     {
         SWSS_LOG_INFO("resetting profile map iterator");
 
@@ -57,7 +57,7 @@ int TestClient::profileGetNextValue(
         return 0;
     }
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
         return -1;
@@ -359,7 +359,7 @@ void TestClient::test_query_api()
                 m_switch_id,
                 SAI_OBJECT_TYPE_DEBUG_COUNTER,
                 0,
-                NULL,
+                nullptr,
                 &count));
 
     /* Test queue stats capability get */
@@ -437,7 +437,7 @@ void TestClient::test_fdb_flush()
 
     ASSERT_SUCCESS(sai_api_query(SAI_API_FDB, (void**)&fdb_api));
 
-    ASSERT_SUCCESS(fdb_api->flush_fdb_entries(m_switch_id, 0, NULL));
+    ASSERT_SUCCESS(fdb_api->flush_fdb_entries(m_switch_id, 0, nullptr));
 
     teardown();
 }

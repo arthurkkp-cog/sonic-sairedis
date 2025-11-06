@@ -33,7 +33,7 @@
 }
 #define VALIDATION_STATS_LIST(cnt,lst)                                                          \
 {                                                                                               \
-    if ((cnt > MAX_LIST_COUNT) || ((cnt == 0) && (lst != NULL)) || ((cnt > 0) && (lst == NULL)))\
+    if ((cnt > MAX_LIST_COUNT) || ((cnt == 0) && (lst != nullptr)) || ((cnt > 0) && (lst == nullptr)))\
     {                                                                                           \
         SWSS_LOG_ERROR("Invalid list and list-count");                                          \
         return SAI_STATUS_INVALID_PARAMETER;                                                    \
@@ -405,7 +405,7 @@ sai_status_t Meta::flushFdbEntries(
         return SAI_STATUS_INVALID_PARAMETER;
     }
 
-    if (attr_count != 0 && attr_list == NULL)
+    if (attr_count != 0 && attr_list == nullptr)
     {
         SWSS_LOG_ERROR("attribute list is NULL");
 
@@ -447,7 +447,7 @@ sai_status_t Meta::flushFdbEntries(
 
         auto mdp = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_FDB_FLUSH, attr->id);
 
-        if (mdp == NULL)
+        if (mdp == nullptr)
         {
             SWSS_LOG_ERROR("unable to find attribute metadata SAI_OBJECT_TYPE_FDB_FLUSH:%d", attr->id);
 

@@ -183,7 +183,7 @@ sai_status_t SwitchVpp::removeIpNbr(
 
     if (is_ip_nbr_active() == true) {
         SWSS_LOG_NOTICE("Remove neighbor in VS %s", serializedObjectId.c_str());
-        addRemoveIpNbr(serializedObjectId, 0, NULL, false);
+        addRemoveIpNbr(serializedObjectId, 0, nullptr, false);
     }
 
     CHECK_STATUS(remove_internal(SAI_OBJECT_TYPE_NEIGHBOR_ENTRY, serializedObjectId));
