@@ -61,9 +61,9 @@ sai_status_t Sai::apiInitialize(
         return SAI_STATUS_INVALID_PARAMETER;
     }
 
-    if ((service_method_table == NULL) ||
-            (service_method_table->profile_get_next_value == NULL) ||
-            (service_method_table->profile_get_value == NULL))
+    if ((service_method_table == nullptr) ||
+            (service_method_table->profile_get_next_value == nullptr) ||
+            (service_method_table->profile_get_value == nullptr))
     {
         SWSS_LOG_ERROR("invalid service_method_table handle passed to SAI API initialize");
 
@@ -399,7 +399,7 @@ sai_status_t Sai::getStats(
 
     auto oi = sai_metadata_get_object_type_info(object_type);
 
-    if (oi == NULL)
+    if (oi == nullptr)
     {
         SWSS_LOG_ERROR("invalid object type: %s", sai_serialize_object_type(object_type).c_str());
 
@@ -456,7 +456,7 @@ sai_status_t Sai::getStatsExt(
 
     auto oi = sai_metadata_get_object_type_info(object_type);
 
-    if (oi == NULL)
+    if (oi == nullptr)
     {
         SWSS_LOG_ERROR("invalid object type: %s", sai_serialize_object_type(object_type).c_str());
 
@@ -513,7 +513,7 @@ sai_status_t Sai::clearStats(
 
     auto oi = sai_metadata_get_object_type_info(object_type);
 
-    if (oi == NULL)
+    if (oi == nullptr)
     {
         SWSS_LOG_ERROR("invalid object type: %s", sai_serialize_object_type(object_type).c_str());
 
@@ -841,7 +841,7 @@ sai_status_t Sai::queryAttributeCapability(
 
     auto meta = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find attribute metadata: object type %s, attr id %d", strObjectType.c_str(), attrId);
 
@@ -905,7 +905,7 @@ sai_status_t Sai::queryAttributeEnumValuesCapability(
 
     auto meta = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find attribute metadata: object type %s, attr id %d", strObjectType.c_str(), attrId);
 
@@ -1097,9 +1097,9 @@ sai_status_t Sai::queryApiVersion(
 
     SWSS_LOG_NOTICE("compiled proxy headers SAI API version: %d", SAI_API_VERSION);
 
-    if (version == NULL)
+    if (version == nullptr)
     {
-        SWSS_LOG_ERROR("version parameter is NULL");
+        SWSS_LOG_ERROR("version parameter is nullptr");
 
         return SAI_STATUS_INVALID_PARAMETER;
     }

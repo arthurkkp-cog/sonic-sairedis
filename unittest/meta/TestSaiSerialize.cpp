@@ -935,7 +935,7 @@ TEST(SaiSerialize, serialize_uint32_list)
     uint32_t list[] = {1,2,3,4,5,6,7};
 
     attr.value.u32list.count = 7;
-    attr.value.u32list.list = NULL;
+    attr.value.u32list.list = nullptr;
 
     meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_PORT, attr.id);
 
@@ -961,7 +961,7 @@ TEST(SaiSerialize, serialize_uint32_list)
     EXPECT_EQ(s, "0:null");
 
     attr.value.u32list.count = 0;
-    attr.value.u32list.list = NULL;
+    attr.value.u32list.list = nullptr;
 
     meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_PORT, attr.id);
 
@@ -996,7 +996,7 @@ TEST(SaiSerialize, serialize_enum_list)
     };
 
     attr.value.s32list.count = 4;
-    attr.value.s32list.list = NULL;
+    attr.value.s32list.list = nullptr;
 
     meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_HASH, attr.id);
 
@@ -1024,7 +1024,7 @@ TEST(SaiSerialize, serialize_enum_list)
     EXPECT_EQ(s, "0:null");
 
     attr.value.s32list.count = 0;
-    attr.value.s32list.list = NULL;
+    attr.value.s32list.list = nullptr;
 
     meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_HASH, attr.id);
 
@@ -1071,7 +1071,7 @@ TEST(SaiSerialize, serialize_oid_list)
     };
 
     attr.value.objlist.count = 3;
-    attr.value.objlist.list = NULL;
+    attr.value.objlist.list = nullptr;
 
     meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_SWITCH, attr.id);
 
@@ -1099,7 +1099,7 @@ TEST(SaiSerialize, serialize_oid_list)
     EXPECT_EQ(s, "0:null");
 
     attr.value.objlist.count = 0;
-    attr.value.objlist.list = NULL;
+    attr.value.objlist.list = nullptr;
 
     meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_SWITCH, attr.id);
 
@@ -1275,7 +1275,7 @@ static void deserialize_number(
 
     errno = 0;
 
-    char *endptr = NULL;
+    char *endptr = nullptr;
 
     number = (T)strtoull(s.c_str(), &endptr, hex ? 16 : 10);
 

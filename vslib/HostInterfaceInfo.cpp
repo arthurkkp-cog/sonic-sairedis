@@ -169,7 +169,7 @@ void HostInterfaceInfo::veth2tap_fun()
         msg.msg_control = control;
         msg.msg_controllen = sizeof(control);
 
-        swss::Selectable *sel = NULL;
+        swss::Selectable *sel = nullptr;
 
         int result = s.select(&sel);
 
@@ -243,7 +243,7 @@ void HostInterfaceInfo::tap2veth_fun()
 
     while (m_run_thread)
     {
-        swss::Selectable *sel = NULL;
+        swss::Selectable *sel = nullptr;
 
         int result = s.select(&sel);
 

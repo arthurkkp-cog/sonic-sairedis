@@ -95,7 +95,7 @@ sai_status_t VendorSai::apiInitialize(
         return SAI_STATUS_FAILURE;
     }
 
-    if ((service_method_table == NULL))
+    if ((service_method_table == nullptr))
     {
         SWSS_LOG_ERROR("invalid service_method_table handle passed to SAI API initialize");
 

@@ -47,7 +47,7 @@ TEST(AttrVersionChecker, reset)
         .brief                         = "List of bridge ports associated to this bridge.",\
         .attrvaluetype                 = SAI_ATTR_VALUE_TYPE_OBJECT_LIST,\
         .flags                         = (sai_attr_flags_t)(SAI_ATTR_FLAGS_READ_ONLY),\
-        .allowedobjecttypes            = NULL,\
+        .allowedobjecttypes            = nullptr,\
         .allowedobjecttypeslength      = 0,\
         .allowrepetitiononlist         = false,\
         .allowmixedobjecttypes         = false,\
@@ -55,19 +55,19 @@ TEST(AttrVersionChecker, reset)
         .allownullobjectid             = false,\
         .isoidattribute                = (1 > 0),\
         .defaultvaluetype              = SAI_DEFAULT_VALUE_TYPE_NONE,\
-        .defaultvalue                  = NULL,\
+        .defaultvalue                  = nullptr,\
         .defaultvalueobjecttype        = SAI_OBJECT_TYPE_NULL,\
         .defaultvalueattrid            = SAI_INVALID_ATTRIBUTE_ID,\
         .storedefaultvalue             = false,\
         .isenum                        = false,\
         .isenumlist                    = false,\
-        .enummetadata                  = NULL,\
+        .enummetadata                  = nullptr,\
         .conditiontype                 = SAI_ATTR_CONDITION_TYPE_NONE,\
-        .conditions                    = NULL,\
+        .conditions                    = nullptr,\
         .conditionslength              = 0,\
         .isconditional                 = (0 != 0),\
         .validonlytype                 = SAI_ATTR_CONDITION_TYPE_NONE,\
-        .validonly                     = NULL,\
+        .validonly                     = nullptr,\
         .validonlylength               = 0,\
         .isvalidonly                   = (0 != 0),\
         .getsave                       = false,\
@@ -84,7 +84,7 @@ TEST(AttrVersionChecker, reset)
         .notificationtype              = -1,\
         .iscallback                    = false,\
         .pointertype                   = -1,\
-        .capability                    = NULL,\
+        .capability                    = nullptr,\
         .capabilitylength              = 0,\
         .isextensionattr               = false,\
         .isresourcetype                = false,\

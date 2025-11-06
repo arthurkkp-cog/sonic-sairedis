@@ -179,7 +179,7 @@ void NotificationProcessor::redisPutFdbEntryToAsicView(
 
         auto meta = sai_metadata_get_attr_metadata(objectType, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(objectType).c_str(),
@@ -265,7 +265,7 @@ bool NotificationProcessor::check_fdb_event_notification_data(
 
         auto meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_FDB_ENTRY, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_ERROR("unable to get metadata for fdb_entry attr.id = %d", attr.id);
             continue;
@@ -697,7 +697,7 @@ void NotificationProcessor::handle_fdb_event(
     SWSS_LOG_ENTER();
 
     uint32_t count;
-    sai_fdb_event_notification_data_t *fdbevent = NULL;
+    sai_fdb_event_notification_data_t *fdbevent = nullptr;
 
     sai_deserialize_fdb_event_ntf(data, count, &fdbevent);
 
@@ -717,7 +717,7 @@ void NotificationProcessor::handle_nat_event(
     SWSS_LOG_ENTER();
 
     uint32_t count;
-    sai_nat_event_notification_data_t *natevent = NULL;
+    sai_nat_event_notification_data_t *natevent = nullptr;
 
     sai_deserialize_nat_event_ntf(data, count, &natevent);
 
@@ -732,7 +732,7 @@ void NotificationProcessor::handle_queue_deadlock(
     SWSS_LOG_ENTER();
 
     uint32_t count;
-    sai_queue_deadlock_notification_data_t *qdeadlockevent = NULL;
+    sai_queue_deadlock_notification_data_t *qdeadlockevent = nullptr;
 
     sai_deserialize_queue_deadlock_ntf(data, count, &qdeadlockevent);
 
@@ -747,7 +747,7 @@ void NotificationProcessor::handle_port_state_change(
     SWSS_LOG_ENTER();
 
     uint32_t count;
-    sai_port_oper_status_notification_t *portoperstatus = NULL;
+    sai_port_oper_status_notification_t *portoperstatus = nullptr;
 
     sai_deserialize_port_oper_status_ntf(data, count, &portoperstatus);
 
@@ -776,7 +776,7 @@ void NotificationProcessor::handle_bfd_session_state_change(
     SWSS_LOG_ENTER();
 
     uint32_t count;
-    sai_bfd_session_state_notification_t *bfdsessionstate = NULL;
+    sai_bfd_session_state_notification_t *bfdsessionstate = nullptr;
 
     sai_deserialize_bfd_session_state_ntf(data, count, &bfdsessionstate);
 
@@ -791,7 +791,7 @@ void NotificationProcessor::handle_icmp_echo_session_state_change(
     SWSS_LOG_ENTER();
 
     uint32_t count;
-    sai_icmp_echo_session_state_notification_t *icmp_echo_session_state = NULL;
+    sai_icmp_echo_session_state_notification_t *icmp_echo_session_state = nullptr;
 
     sai_deserialize_icmp_echo_session_state_ntf(data, count, &icmp_echo_session_state);
 
@@ -806,7 +806,7 @@ void NotificationProcessor::handle_ha_set_event(
     SWSS_LOG_ENTER();
 
     uint32_t count;
-    sai_ha_set_event_data_t *ha_set_event = NULL;
+    sai_ha_set_event_data_t *ha_set_event = nullptr;
 
     sai_deserialize_ha_set_event_ntf(data, count, &ha_set_event);
 
@@ -821,7 +821,7 @@ void NotificationProcessor::handle_ha_scope_event(
     SWSS_LOG_ENTER();
 
     uint32_t count;
-    sai_ha_scope_event_data_t *ha_scope_event = NULL;
+    sai_ha_scope_event_data_t *ha_scope_event = nullptr;
 
     sai_deserialize_ha_scope_event_ntf(data, count, &ha_scope_event);
 
@@ -877,7 +877,7 @@ void NotificationProcessor::handle_twamp_session_event(
     SWSS_LOG_ENTER();
 
     uint32_t count;
-    sai_twamp_session_event_notification_data_t *twampsessionevent = NULL;
+    sai_twamp_session_event_notification_data_t *twampsessionevent = nullptr;
 
     sai_deserialize_twamp_session_event_ntf(data, count, &twampsessionevent);
 

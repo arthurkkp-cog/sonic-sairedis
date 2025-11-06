@@ -50,7 +50,7 @@ bool SkipRecordAttrContainer::add(
 
     auto md = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (md == NULL)
+    if (md == nullptr)
     {
         SWSS_LOG_WARN("failed to get metadata for %d:%d", objectType, attrId);
 

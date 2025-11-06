@@ -35,7 +35,7 @@ void Utils::clearOidValues(
 
         auto meta = sai_metadata_get_attr_metadata(objectType, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(objectType).c_str(),

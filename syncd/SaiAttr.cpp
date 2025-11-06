@@ -10,7 +10,7 @@ SaiAttr::SaiAttr(
         _In_ const std::string &str_attr_value):
     m_str_attr_id(str_attr_id),
     m_str_attr_value(str_attr_value),
-    m_meta(NULL)
+    m_meta(nullptr)
 {
     SWSS_LOG_ENTER();
 
@@ -128,7 +128,7 @@ std::vector<sai_object_id_t> SaiAttr::getOidListFromAttribute() const
 
     uint32_t count = 0;
 
-    const sai_object_id_t *objectIdList = NULL;
+    const sai_object_id_t *objectIdList = nullptr;
 
     /*
      * For ACL fields and actions we need to use enable flag as

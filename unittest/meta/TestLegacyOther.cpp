@@ -932,7 +932,7 @@ TEST(Legacy, null_list)
     status = g_meta->create(SAI_OBJECT_TYPE_HASH, &hash, switch_id, 1, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
-    attr.value.s32list.list = NULL;
+    attr.value.s32list.list = nullptr;
 
     SWSS_LOG_NOTICE("0 count, null list");
     status = g_meta->create(SAI_OBJECT_TYPE_HASH, &hash, switch_id, 1, &attr);

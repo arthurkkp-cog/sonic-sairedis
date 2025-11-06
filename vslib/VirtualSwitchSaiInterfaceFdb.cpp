@@ -268,7 +268,7 @@ sai_status_t VirtualSwitchSaiInterface::flushFdbEntries(
 
     auto bpid = sai_metadata_get_attr_by_id(SAI_FDB_FLUSH_ATTR_BRIDGE_PORT_ID, attr_count, attr_list);
 
-    if (bpid != NULL)
+    if (bpid != nullptr)
     {
         data.attr_count = 2;
 
@@ -278,7 +278,7 @@ sai_status_t VirtualSwitchSaiInterface::flushFdbEntries(
 
     auto vlanid = sai_metadata_get_attr_by_id(SAI_FDB_FLUSH_ATTR_BV_ID, attr_count, attr_list);
 
-    if (vlanid != NULL)
+    if (vlanid != nullptr)
     {
         data.fdb_entry.bv_id = vlanid->value.oid;
     }

@@ -169,10 +169,10 @@ const char* Proxy::profileGetValue(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
-        return NULL;
+        return nullptr;
     }
 
     auto it = m_profileMap.find(variable);
@@ -180,7 +180,7 @@ const char* Proxy::profileGetValue(
     if (it == m_profileMap.end())
     {
         SWSS_LOG_NOTICE("%s: NULL", variable);
-        return NULL;
+        return nullptr;
     }
 
     SWSS_LOG_NOTICE("%s: %s", variable, it->second.c_str());
@@ -195,7 +195,7 @@ int Proxy::profileGetNextValue(
 {
     SWSS_LOG_ENTER();
 
-    if (value == NULL)
+    if (value == nullptr)
     {
         SWSS_LOG_INFO("resetting profile map iterator");
 
@@ -203,7 +203,7 @@ int Proxy::profileGetNextValue(
         return 0;
     }
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
         return -1;
@@ -248,7 +248,7 @@ void Proxy::run()
 
     while (true)
     {
-        swss::Selectable *sel = NULL;
+        swss::Selectable *sel = nullptr;
 
         int result = s->select(&sel);
 

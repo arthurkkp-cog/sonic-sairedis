@@ -124,7 +124,7 @@ void SaiDiscovery::discover(
 
     sai_object_meta_key_t mk = { .objecttype = ot, .objectkey = { .key = { .object_id = rid } } };
 
-    for (int idx = 0; info->attrmetadata[idx] != NULL; ++idx)
+    for (int idx = 0; info->attrmetadata[idx] != nullptr; ++idx)
     {
         const sai_attr_metadata_t *md = info->attrmetadata[idx];
 

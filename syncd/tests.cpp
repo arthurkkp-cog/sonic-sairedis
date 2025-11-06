@@ -102,7 +102,7 @@ static const char* profile_get_value(
 {
     SWSS_LOG_ENTER();
 
-    return NULL;
+    return nullptr;
 }
 
 static int profile_get_next_value(
@@ -112,14 +112,14 @@ static int profile_get_next_value(
 {
     SWSS_LOG_ENTER();
 
-    if (value == NULL)
+    if (value == nullptr)
     {
         SWSS_LOG_INFO("resetting profile map iterator");
 
         return 0;
     }
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
         return -1;
@@ -169,7 +169,7 @@ void test_enable_recording()
     attr.id = SAI_REDIS_SWITCH_ATTR_RECORD;
     attr.value.booldata = true;
 
-    sai_switch_api_t *sai_switch_api = NULL;
+    sai_switch_api_t *sai_switch_api = nullptr;
 
     sai_api_query(SAI_API_SWITCH, (void**)&sai_switch_api);
 
@@ -247,12 +247,12 @@ void test_bulk_next_hop_group_member_create()
 
     sai_status_t    status;
 
-    sai_next_hop_api_t  *sai_next_hop_api = NULL;
-    sai_next_hop_group_api_t  *sai_next_hop_group_api = NULL;
-    sai_switch_api_t *sai_switch_api = NULL;
-    sai_lag_api_t *sai_lag_api = NULL;
-    sai_router_interface_api_t *sai_rif_api = NULL;
-    sai_virtual_router_api_t * sai_virtual_router_api = NULL;
+    sai_next_hop_api_t  *sai_next_hop_api = nullptr;
+    sai_next_hop_group_api_t  *sai_next_hop_group_api = nullptr;
+    sai_switch_api_t *sai_switch_api = nullptr;
+    sai_lag_api_t *sai_lag_api = nullptr;
+    sai_router_interface_api_t *sai_rif_api = nullptr;
+    sai_virtual_router_api_t * sai_virtual_router_api = nullptr;
 
     sai_api_query(SAI_API_NEXT_HOP, (void**)&sai_next_hop_api);
     sai_api_query(SAI_API_NEXT_HOP_GROUP, (void**)&sai_next_hop_group_api);
@@ -384,11 +384,11 @@ void test_bulk_next_hop_create()
 
     sai_status_t    status;
 
-    sai_next_hop_api_t  *sai_next_hop_api = NULL;
-    sai_switch_api_t *sai_switch_api = NULL;
-    sai_lag_api_t *sai_lag_api = NULL;
-    sai_router_interface_api_t *sai_rif_api = NULL;
-    sai_virtual_router_api_t * sai_virtual_router_api = NULL;
+    sai_next_hop_api_t  *sai_next_hop_api = nullptr;
+    sai_switch_api_t *sai_switch_api = nullptr;
+    sai_lag_api_t *sai_lag_api = nullptr;
+    sai_router_interface_api_t *sai_rif_api = nullptr;
+    sai_virtual_router_api_t * sai_virtual_router_api = nullptr;
 
     sai_api_query(SAI_API_NEXT_HOP, (void**)&sai_next_hop_api);
     sai_api_query(SAI_API_SWITCH, (void**)&sai_switch_api);
@@ -492,11 +492,11 @@ void test_bulk_fdb_create()
 
     sai_status_t    status;
 
-    sai_switch_api_t *sai_switch_api = NULL;
-    sai_lag_api_t *sai_lag_api = NULL;
-    sai_fdb_api_t *sai_fdb_api = NULL;
-    sai_bridge_api_t *sai_bridge_api = NULL;
-    sai_virtual_router_api_t * sai_virtual_router_api = NULL;
+    sai_switch_api_t *sai_switch_api = nullptr;
+    sai_lag_api_t *sai_lag_api = nullptr;
+    sai_fdb_api_t *sai_fdb_api = nullptr;
+    sai_bridge_api_t *sai_bridge_api = nullptr;
+    sai_virtual_router_api_t * sai_virtual_router_api = nullptr;
 
     sai_api_query(SAI_API_BRIDGE, (void**)&sai_bridge_api);
     sai_api_query(SAI_API_FDB, (void**)&sai_fdb_api);

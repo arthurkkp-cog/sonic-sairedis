@@ -72,7 +72,7 @@ TEST(ZeroMQSelectableChannel, readData)
 
     ss.addSelectable(&c);
 
-    swss::Selectable *sel = NULL;
+    swss::Selectable *sel = nullptr;
 
     std::vector<swss::FieldValueTuple> values;
 

@@ -123,7 +123,7 @@ TEST_F(VirtualSwitchSaiInterfaceTest, queryApiVersion)
 {
     sai_api_version_t version;
 
-    EXPECT_EQ(m_vssai->queryApiVersion(NULL), SAI_STATUS_INVALID_PARAMETER);
+    EXPECT_EQ(m_vssai->queryApiVersion(nullptr), SAI_STATUS_INVALID_PARAMETER);
     EXPECT_EQ(m_vssai->queryApiVersion(&version), SAI_STATUS_SUCCESS);
 }
 
@@ -297,7 +297,7 @@ TEST_F(VirtualSwitchSaiInterfaceTest, switchHostifTrapCapabilityGet)
 
     const auto* meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_HOSTIF_TRAP,
         SAI_HOSTIF_TRAP_ATTR_TRAP_TYPE);
-    assert(meta != NULL && meta->isenum);
+    assert(meta != nullptr && meta->isenum);
 
     size_t expected_enum_count = meta->enummetadata->valuescount;
 

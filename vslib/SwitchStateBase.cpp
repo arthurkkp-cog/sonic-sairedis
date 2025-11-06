@@ -717,7 +717,7 @@ sai_status_t SwitchStateBase::get(
 
         auto meta = sai_metadata_get_attr_metadata(objectType, id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_ERROR("failed to find attribute %d for %s:%s", id,
                     sai_serialize_object_type(objectType).c_str(),
@@ -1122,7 +1122,7 @@ sai_status_t SwitchStateBase::set_switch_default_attributes()
     sai_attribute_t attr;
 
     attr.id = SAI_SWITCH_ATTR_PORT_STATE_CHANGE_NOTIFY;
-    attr.value.ptr = NULL;
+    attr.value.ptr = nullptr;
 
     CHECK_STATUS(set(SAI_OBJECT_TYPE_SWITCH, m_switch_id, &attr));
 
@@ -3538,7 +3538,7 @@ sai_status_t SwitchStateBase::initialize_voq_switch_objects(
     int32_t voq_switch_id = -1;
     uint32_t voq_max_cores = 0;
     uint32_t sys_port_count = 0;
-    sai_system_port_config_t *sys_port_cfg_list = NULL;
+    sai_system_port_config_t *sys_port_cfg_list = nullptr;
 
     for (uint32_t i = 0; i < attr_count; i++)
     {
