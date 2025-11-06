@@ -37,7 +37,7 @@ SaiAttrWrap::SaiAttrWrap(
 
     m_meta = sai_metadata_get_attr_metadata_by_attr_id_name(attrId.c_str());
 
-    if (m_meta == NULL)
+    if (m_meta == nullptr)
     {
         SWSS_LOG_THROW("failed to find metadata for %s", attrId.c_str());
     }

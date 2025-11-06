@@ -66,9 +66,9 @@ sai_status_t ServerSai::apiInitialize(
         return SAI_STATUS_INVALID_PARAMETER;
     }
 
-    if ((service_method_table == NULL) ||
-            (service_method_table->profile_get_next_value == NULL) ||
-            (service_method_table->profile_get_value == NULL))
+    if ((service_method_table == nullptr) ||
+            (service_method_table->profile_get_next_value == nullptr) ||
+            (service_method_table->profile_get_value == nullptr))
     {
         SWSS_LOG_ERROR("invalid service_method_table handle passed to SAI API initialize");
 

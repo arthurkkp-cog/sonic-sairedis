@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationSwitchStateChange(
+            explicit NotificationSwitchStateChange(
                     _In_ const std::string& serializedNotification);
 
             virtual ~NotificationSwitchStateChange() = default;

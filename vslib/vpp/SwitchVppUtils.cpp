@@ -17,17 +17,17 @@ sai_status_t saivs::find_attrib_in_list(
 
     uint32_t ii;
 
-    if ((attr_count) && (NULL == attr_list)) {
+    if ((attr_count) && (nullptr == attr_list)) {
         SWSS_LOG_ERROR("NULL value attr list\n");
         return SAI_STATUS_INVALID_PARAMETER;
     }
 
-    if (NULL == attr_value) {
+    if (nullptr == attr_value) {
         SWSS_LOG_ERROR("NULL value attr value\n");
         return SAI_STATUS_INVALID_PARAMETER;
     }
 
-    if (NULL == index) {
+    if (nullptr == index) {
         SWSS_LOG_ERROR("NULL value index\n");
         return SAI_STATUS_INVALID_PARAMETER;
     }
@@ -40,7 +40,7 @@ sai_status_t saivs::find_attrib_in_list(
         }
     }
 
-    *attr_value = NULL;
+    *attr_value = nullptr;
 
     return SAI_STATUS_ITEM_NOT_FOUND;
 }

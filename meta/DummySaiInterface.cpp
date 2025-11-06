@@ -49,7 +49,7 @@ sai_status_t DummySaiInterface::apiInitialize(
 
     if (smt && smt->profile_get_value)
     {
-        SWSS_LOG_NOTICE("Dummy: profile_get_value(NULL): %s", smt->profile_get_value(0, NULL));
+        SWSS_LOG_NOTICE("Dummy: profile_get_value(NULL): %s", smt->profile_get_value(0, nullptr));
         SWSS_LOG_NOTICE("Dummy: profile_get_value(FOO): %s", smt->profile_get_value(0, "FOO"));
         SWSS_LOG_NOTICE("Dummy: profile_get_value(CAR): %s", smt->profile_get_value(0, "CAR"));
     }
@@ -57,12 +57,12 @@ sai_status_t DummySaiInterface::apiInitialize(
     if (smt && smt->profile_get_next_value)
     {
 
-        const char *var = NULL;
-        const char *val = NULL;
+        const char *var = nullptr;
+        const char *val = nullptr;
 
-        SWSS_LOG_NOTICE("Dummy: profile_get_next_value: %d", smt->profile_get_next_value(0, NULL, NULL));
-        SWSS_LOG_NOTICE("Dummy: profile_get_next_value: %d", smt->profile_get_next_value(0, NULL, &val));
-        SWSS_LOG_NOTICE("Dummy: profile_get_next_value: %d", smt->profile_get_next_value(0, &var, NULL));
+        SWSS_LOG_NOTICE("Dummy: profile_get_next_value: %d", smt->profile_get_next_value(0, nullptr, nullptr));
+        SWSS_LOG_NOTICE("Dummy: profile_get_next_value: %d", smt->profile_get_next_value(0, nullptr, &val));
+        SWSS_LOG_NOTICE("Dummy: profile_get_next_value: %d", smt->profile_get_next_value(0, &var, nullptr));
         SWSS_LOG_NOTICE("Dummy: profile_get_next_value: %d", smt->profile_get_next_value(0, &var, &val));
         SWSS_LOG_NOTICE("Dummy: profile_get_next_value: %d", smt->profile_get_next_value(0, &var, &val));
     }
@@ -799,7 +799,7 @@ void DummySaiInterface::sendNotification(
 
                 sai_u8_list_t desc;
                 desc.count = 0;
-                desc.list = NULL;
+                desc.list = nullptr;
 
                 sn.on_switch_asic_sdk_health_event(
                         0x1,

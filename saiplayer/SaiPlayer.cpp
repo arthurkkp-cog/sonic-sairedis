@@ -313,7 +313,7 @@ void SaiPlayer::translate_local_to_redis(
 
         auto meta = sai_metadata_get_attr_metadata(object_type, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(object_type).c_str(),
@@ -425,7 +425,7 @@ void SaiPlayer::match_list_lengths(
 
         auto meta = sai_metadata_get_attr_metadata(object_type, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(object_type).c_str(),
@@ -552,7 +552,7 @@ void SaiPlayer::match_redis_with_rec(
 
         auto meta = sai_metadata_get_attr_metadata(object_type, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(object_type).c_str(),
@@ -1386,7 +1386,7 @@ void SaiPlayer::performFdbFlush(
     auto switch_id = translate_local_to_redis(local_switch_id);
 
     // TODO currently we support only flush fdb entries with no attributes
-    sai_status_t status = m_sai->flushFdbEntries(switch_id, 0, NULL);
+    sai_status_t status = m_sai->flushFdbEntries(switch_id, 0, nullptr);
 
     // check status
     sai_status_t expected_status;
@@ -3194,10 +3194,10 @@ const char* SaiPlayer::profileGetValue(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
-        return NULL;
+        return nullptr;
     }
 
     auto it = m_profileMap.find(variable);
@@ -3205,7 +3205,7 @@ const char* SaiPlayer::profileGetValue(
     if (it == m_profileMap.end())
     {
         SWSS_LOG_NOTICE("%s: NULL", variable);
-        return NULL;
+        return nullptr;
     }
 
     SWSS_LOG_NOTICE("%s: %s", variable, it->second.c_str());
@@ -3220,7 +3220,7 @@ int SaiPlayer::profileGetNextValue(
 {
     SWSS_LOG_ENTER();
 
-    if (value == NULL)
+    if (value == nullptr)
     {
         SWSS_LOG_INFO("resetting profile map iterator");
 
@@ -3228,7 +3228,7 @@ int SaiPlayer::profileGetNextValue(
         return 0;
     }
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
         return -1;

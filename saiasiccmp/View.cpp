@@ -309,7 +309,7 @@ void View::translateAttrVids(
     SWSS_LOG_ENTER();
 
     uint32_t count = 0;
-    sai_object_id_t *objectIdList = NULL;
+    sai_object_id_t *objectIdList = nullptr;
 
     switch (meta->attrvaluetype)
     {

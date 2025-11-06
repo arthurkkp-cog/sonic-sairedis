@@ -350,7 +350,7 @@ SaiObject::get_attr_name(_In_ sai_attr_id_t attr_id) const
     SWSS_LOG_ENTER();
 
     auto meta = sai_metadata_get_attr_metadata(m_type, attr_id);
-    if (meta == NULL) {
+    if (meta == nullptr) {
         return "unknown";
     } else {
         return meta->attridname;

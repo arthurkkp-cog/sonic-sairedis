@@ -96,7 +96,7 @@ void SaiDump::handleCmdLine(int argc, char **argv)
                     exit(EXIT_SUCCESS);
                 }
 
-                result = strtoull(optarg, NULL, 0);
+                result = strtoull(optarg, nullptr, 0);
 
                 if((errno == ERANGE && result == ULLONG_MAX) || result == 0 || result >= INT_MAX)
                 {
@@ -282,7 +282,7 @@ void SaiDump::dumpGraphFun(const TableDump& td)
 
             sai_deserialize_attr_value(field.second, *meta, attr, false);
 
-            sai_object_list_t list = { 0, NULL };
+            sai_object_list_t list = { 0, nullptr };
 
             switch (meta->attrvaluetype)
             {
