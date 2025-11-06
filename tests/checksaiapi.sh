@@ -38,7 +38,7 @@ find -name "*.cpp" -o -name "*.c" |
 xargs grep -P "$REGEX" |
 grep -vP "/unittest/|/tests/|/SAI/|/pyext/|tests.cpp|sai_vs.cpp|sai_proxy.cpp|sai_redis.cpp|saisdkdump|SWSS_LOG|.cpp:\s+\*|.cpp:\s+//|sai_status_t\s+sai_|VendorSai.cpp:.+=\s*&sai_"
 
-if [ $? == 0 ]; then
+if [[ $? == 0 ]]; then
     echo not allowed files are using global sai_xxx API, please correct your code, only VendorSai.cpp and saisdkdump are allowed to use global SAI apis
     exit 1
 fi

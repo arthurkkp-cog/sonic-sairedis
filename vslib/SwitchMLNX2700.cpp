@@ -207,7 +207,7 @@ sai_status_t SwitchMLNX2700::create_scheduler_group_tree(
 
         attr.id = SAI_SCHEDULER_GROUP_ATTR_CHILD_LIST;
         attr.value.objlist.count = 0;
-        attr.value.objlist.list = NULL;
+        attr.value.objlist.list = nullptr;
 
         CHECK_STATUS(set(SAI_OBJECT_TYPE_SCHEDULER_GROUP, sg, &attr));
     }

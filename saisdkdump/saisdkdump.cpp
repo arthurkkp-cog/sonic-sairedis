@@ -36,7 +36,7 @@ __attribute__((__noreturn__)) void exit_with_sai_failure(const char *msg, sai_st
         std::cerr << msg << " rc=" << status << std::endl;
     }
 
-    SWSS_LOG_ERROR("saisdkdump exited with SAI rc: 0x%x, msg: %s .", status, (msg != NULL ? msg : ""));
+    SWSS_LOG_ERROR("saisdkdump exited with SAI rc: 0x%x, msg: %s .", status, (msg != nullptr ? msg : ""));
     exit(EXIT_FAILURE);
 }
 
@@ -86,14 +86,14 @@ int main(int argc, char **argv)
         switch (c)
         {
             case 'f':
-                if (optarg != NULL)
+                if (optarg != nullptr)
                 {
                     fileName = std::string(optarg);
                     fileSpecified = true;
                 }
                 break;
             case 'p':
-                if (optarg != NULL)
+                if (optarg != nullptr)
                 {
                     sai_profile = std::string(optarg);
                 }

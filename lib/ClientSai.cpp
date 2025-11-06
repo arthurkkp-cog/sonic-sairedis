@@ -64,9 +64,9 @@ sai_status_t ClientSai::apiInitialize(
         return SAI_STATUS_FAILURE;
     }
 
-    if ((service_method_table == NULL) ||
-            (service_method_table->profile_get_next_value == NULL) ||
-            (service_method_table->profile_get_value == NULL))
+    if ((service_method_table == nullptr) ||
+            (service_method_table->profile_get_next_value == nullptr) ||
+            (service_method_table->profile_get_value == nullptr))
     {
         SWSS_LOG_ERROR("invalid service_method_table handle passed to SAI API initialize");
 
@@ -145,7 +145,7 @@ sai_status_t ClientSai::create(
             {
                 auto meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_SWITCH, attr_list[i].id);
 
-                if (meta == NULL)
+                if (meta == nullptr)
                 {
                     SWSS_LOG_THROW("failed to find metadata for switch attribute %d", attr_list[i].id);
                 }
@@ -768,7 +768,7 @@ sai_status_t ClientSai::queryAttributeCapability(
 
     auto meta = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find attribute metadata: object type %s, attr id %d", objectTypeStr.c_str(), attrId);
         return SAI_STATUS_INVALID_PARAMETER;
@@ -856,7 +856,7 @@ sai_status_t ClientSai::queryAttributeEnumValuesCapability(
 
     auto meta = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find attribute metadata: object type %s, attr id %d", object_type_str.c_str(), attrId);
         return SAI_STATUS_INVALID_PARAMETER;
@@ -1021,7 +1021,7 @@ sai_status_t ClientSai::queryStatsCapability(
     auto switchIdStr = sai_serialize_object_id(switchId);
     auto objectTypeStr = sai_serialize_object_type(objectType);
 
-    if (stats_capability == NULL)
+    if (stats_capability == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find stats-capability: switch %s object type %s", switchIdStr.c_str(), objectTypeStr.c_str());
         return SAI_STATUS_INVALID_PARAMETER;
@@ -1124,7 +1124,7 @@ sai_status_t ClientSai::queryStatsStCapability(
     auto switchIdStr = sai_serialize_object_id(switchId);
     auto objectTypeStr = sai_serialize_object_type(objectType);
 
-    if (stats_capability == NULL)
+    if (stats_capability == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find stats-capability: switch %s object type %s", switchIdStr.c_str(), objectTypeStr.c_str());
         return SAI_STATUS_INVALID_PARAMETER;

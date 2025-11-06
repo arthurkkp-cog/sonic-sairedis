@@ -16,7 +16,7 @@ namespace sairedis
     {
         public:
 
-            ZeroMQSelectableChannel(
+            explicit ZeroMQSelectableChannel(
                     _In_ const std::string& endpoint);
 
             virtual ~ZeroMQSelectableChannel();

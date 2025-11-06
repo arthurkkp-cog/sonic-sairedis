@@ -13,8 +13,8 @@ static const char* profile_get_value(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == NULL)
-        return NULL;
+    if (variable == nullptr)
+        return nullptr;
 
     if (strcmp(variable, SAI_KEY_VS_SWITCH_TYPE) == 0)
         return SAI_VALUE_VS_SWITCH_TYPE_BCM56850;

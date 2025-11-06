@@ -9,11 +9,11 @@ SAI_MAX_FAILURE_DUMPS=10
 
 DUMPDIR=/var/log/sai_failure_dump
 
-if [ -f /usr/bin/platform_syncd_dump.sh ]; then
+if [[ -f /usr/bin/platform_syncd_dump.sh ]]; then
     . ./usr/bin/platform_syncd_dump.sh
 fi
 
-if [ -z "$(ls -A $DUMPDIR/)" ]; then
+if [[ -z "$(ls -A $DUMPDIR/)" ]]; then
     exit 0
 fi
 

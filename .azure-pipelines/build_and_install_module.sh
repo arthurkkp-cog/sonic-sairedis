@@ -62,9 +62,9 @@ function build_and_install_kmodule()
 
     # Build the Linux kernel module drivers/net/team and vrf
     cd ${KERNEL_PACKAGE_SOURCE}-*
-    if [ -e debian/debian.env ]; then
+    if [[ -e debian/debian.env ]]; then
         source debian/debian.env
-        if [ -n "${DEBIAN}" -a -e ${DEBIAN}/reconstruct ]; then
+        if [[ -n "${DEBIAN}" && -e ${DEBIAN}/reconstruct ]]; then
             bash ${DEBIAN}/reconstruct
         fi
     fi

@@ -121,7 +121,7 @@ void Sai::channelOpSetReadOnlyAttribute(
 
     auto meta = sai_metadata_get_attr_metadata_by_attr_id_name(str_attr_id.c_str());
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("failed to find attr %s", str_attr_id.c_str());
         return;
@@ -200,7 +200,7 @@ void Sai::channelOpSetStats(
 
     auto statenum = sai_metadata_get_object_type_info(ot)->statenum;
 
-    if (statenum == NULL)
+    if (statenum == nullptr)
     {
         SWSS_LOG_ERROR("object %s does not support statistics",
                 sai_serialize_object_type(ot).c_str());

@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationTwampSessionEvent(
+            explicit NotificationTwampSessionEvent(
                     _In_ const std::string& serializedNotification);
 
             virtual ~NotificationTwampSessionEvent();

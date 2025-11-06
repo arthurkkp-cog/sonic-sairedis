@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationSwitchShutdownRequest(
+            explicit NotificationSwitchShutdownRequest(
                     _In_ const std::string& serializedNotification);
 
             virtual ~NotificationSwitchShutdownRequest() = default;

@@ -25,7 +25,7 @@ using namespace saivs;
 #define SAI_METADATA_GET_ATTR_BY_ID(attr, attrId, attrCount, attrList) \
 { \
     attr = sai_metadata_get_attr_by_id(attrId, attrCount, attrList); \
-    if (attr == NULL) \
+    if (attr == nullptr) \
     { \
         SWSS_LOG_ERROR("attr " #attrId " was not passed"); \
         return SAI_STATUS_FAILURE; \

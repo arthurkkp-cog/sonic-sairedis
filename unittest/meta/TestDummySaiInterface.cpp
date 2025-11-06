@@ -65,7 +65,7 @@ TEST(DummySaiInterface, updateNotificationPointers)
         sai_attribute_t attr;
 
         attr.id = sai_metadata_switch_notify_attr[idx]->attrid;
-        attr.value.ptr = NULL;
+        attr.value.ptr = nullptr;
 
         auto status = sai.set(SAI_OBJECT_TYPE_SWITCH, 0x0, &attr);
 

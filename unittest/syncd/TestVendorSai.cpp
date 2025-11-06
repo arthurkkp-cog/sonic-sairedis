@@ -22,9 +22,6 @@ static const char* profile_get_value(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == NULL)
-        return NULL;
-
     return nullptr;
 }
 

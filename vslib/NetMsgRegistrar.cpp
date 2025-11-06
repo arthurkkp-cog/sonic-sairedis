@@ -120,7 +120,7 @@ void NetMsgRegistrar::run()
 
             while (m_run)
             {
-                swss::Selectable *sel = NULL;
+                swss::Selectable *sel = nullptr;
 
                 int result = s.select(&sel);
 

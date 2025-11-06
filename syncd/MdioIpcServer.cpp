@@ -379,7 +379,7 @@ int MdioIpcServer::syncd_ipc_task_main()
             while (argc < COUNTOF(argv))
             {
                 argv[argc] = strtok_r(NULL, " \t\r\n", &save);
-                if (argv[argc] == NULL)
+                if (argv[argc] == nullptr)
                     break;
                 ++argc;
             }
@@ -387,7 +387,7 @@ int MdioIpcServer::syncd_ipc_task_main()
             /* command dispatch */
             resp[0] = 0;
             rc = SAI_STATUS_NOT_SUPPORTED;
-            if (argv[0] == NULL)
+            if (argv[0] == nullptr)
             {
                 rc = SAI_STATUS_NOT_SUPPORTED;
             }

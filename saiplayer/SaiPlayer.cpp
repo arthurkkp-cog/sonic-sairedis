@@ -313,7 +313,7 @@ void SaiPlayer::translate_local_to_redis(
 
         auto meta = sai_metadata_get_attr_metadata(object_type, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(object_type).c_str(),
@@ -425,7 +425,7 @@ void SaiPlayer::match_list_lengths(
 
         auto meta = sai_metadata_get_attr_metadata(object_type, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(object_type).c_str(),
@@ -552,7 +552,7 @@ void SaiPlayer::match_redis_with_rec(
 
         auto meta = sai_metadata_get_attr_metadata(object_type, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(object_type).c_str(),

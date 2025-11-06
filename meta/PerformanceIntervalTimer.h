@@ -15,7 +15,7 @@ namespace sairediscommon
 
         public:
 
-            PerformanceIntervalTimer(
+            explicit PerformanceIntervalTimer(
                     _In_ const char* msg,
                     _In_ uint64_t limit = DEFAULT_LIMIT);
 

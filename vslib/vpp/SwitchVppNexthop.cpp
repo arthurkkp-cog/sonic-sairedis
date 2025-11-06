@@ -97,7 +97,7 @@ sai_status_t SwitchVpp::IpRouteNexthopGroupEntry(
     size_t grp_size = sizeof(nexthop_grp_config_t) + (nh_member_map.size() * sizeof(nexthop_grp_member_t));
 
     nxthop_grp_cfg = (nexthop_grp_config_t *) calloc(1, grp_size);
-    if (nxthop_grp_cfg == NULL) {
+    if (nxthop_grp_cfg == nullptr) {
         SWSS_LOG_ERROR("Failed to allocate memory for nxthop_grp_cfg. member size %zu", nh_member_map.size());
         return SAI_STATUS_FAILURE;
     }

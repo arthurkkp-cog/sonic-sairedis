@@ -32,7 +32,7 @@ bool SwitchConfig::parseSaiSwitchType(
 {
     SWSS_LOG_ENTER();
 
-    std::string st = (saiSwitchTypeStr == NULL) ? "unknown" : saiSwitchTypeStr;
+    std::string st = (saiSwitchTypeStr == nullptr) ? "unknown" : saiSwitchTypeStr;
 
     if (st == SAI_VALUE_SAI_SWITCH_TYPE_NPU)
     {
@@ -61,7 +61,7 @@ bool SwitchConfig::parseSwitchType(
 {
     SWSS_LOG_ENTER();
 
-    std::string st = (switchTypeStr == NULL) ? "unknown" : switchTypeStr;
+    std::string st = (switchTypeStr == nullptr) ? "unknown" : switchTypeStr;
 
     if (st == SAI_VALUE_VS_SWITCH_TYPE_BCM56850)
     {
@@ -104,7 +104,7 @@ bool SwitchConfig::parseSwitchType(
                 SAI_VALUE_VS_SWITCH_TYPE_BCM56971B0,
                 SAI_VALUE_VS_SWITCH_TYPE_MLNX2700,
                 SAI_VALUE_VS_SWITCH_TYPE_NVDA_MBF2H536C,
-                SAI_VALUE_VS_SWITCH_TYPE_DPU_SIMU_2P
+                SAI_VALUE_VS_SWITCH_TYPE_DPU_SIMU_2P,
                 SAI_VALUE_VS_SWITCH_TYPE_VPP,
         };
 
@@ -124,7 +124,7 @@ bool SwitchConfig::parseBootType(
 {
     SWSS_LOG_ENTER();
 
-    std::string bt = (bootTypeStr == NULL) ? "cold" : bootTypeStr;
+    std::string bt = (bootTypeStr == nullptr) ? "cold" : bootTypeStr;
 
     if (bt == "cold" || bt == SAI_VALUE_VS_BOOT_TYPE_COLD)
     {
