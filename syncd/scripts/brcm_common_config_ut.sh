@@ -10,13 +10,13 @@ PLATFORM_DIR=/usr/share/sonic/platform
 PLT_CONFIG_BCM=""
 PLT_CONFIG_YML=""
 
-if [ ${readline: -3} == "bcm" ]; then
+if [[ ${readline: -3} == "bcm" ]]; then
     PLT_CONFIG_BCM=${readline#*=}
-elif [ ${readline: -3} == "yml" ]; then
+elif [[ ${readline: -3} == "yml" ]]; then
     PLT_CONFIG_YML=${readline#*=}
 fi
 
-if [ ! -z "$PLT_CONFIG_BCM" ] && [ -f $PLATFORM_DIR/common_config_support ] ; then
+if [[ ! -z "$PLT_CONFIG_BCM" ]] && [[ -f $PLATFORM_DIR/common_config_support ]] ; then
     CONFIG_BCM=$(find /tmp -name '*.bcm')
 
     #Get first three characters of chip id
@@ -31,13 +31,13 @@ if [ ! -z "$PLT_CONFIG_BCM" ] && [ -f $PLATFORM_DIR/common_config_support ] ; th
     while read line
     do
         line=$( echo $line | xargs )
-        if [ ! -z "$line" ];then
-            if [ "${line::1}" == '#' ];then
+        if [[ ! -z "$line" ]];then
+            if [[ "${line::1}" == '#' ]];then
                 echo "Skip checking line starting with #"
-            elif [ "$line" == "[High Inheritance Precedence]" ];then
+            elif [[ "$line" == "[High Inheritance Precedence]" ]];then
                 echo "Checking High Inheritance property..."
                 check_override=true
-            elif [ "$line" == "[Low Inheritance Precedence]" ];then
+            elif [[ "$line" == "[Low Inheritance Precedence]" ]];then
                 echo "Checking Low Inheritance property..."
                 check_override=false
             else
@@ -65,7 +65,7 @@ if [ ! -z "$PLT_CONFIG_BCM" ] && [ -f $PLATFORM_DIR/common_config_support ] ; th
     fi
 fi
 
-if [ ! -z "$PLT_CONFIG_YML" ] && [ -f $PLATFORM_DIR/common_config_support ]; then
+if [[ ! -z "$PLT_CONFIG_YML" ]] && [[ -f $PLATFORM_DIR/common_config_support ]]; then
     CONFIG_YML=$(find /tmp -name '*.yml')
 
     #Get first three characters of chip id
@@ -80,13 +80,13 @@ if [ ! -z "$PLT_CONFIG_YML" ] && [ -f $PLATFORM_DIR/common_config_support ]; the
     while read line
     do
         line=$( echo $line | xargs )
-        if [ ! -z "$line" ];then
-            if [ "${line::1}" == '#' ];then
+        if [[ ! -z "$line" ]];then
+            if [[ "${line::1}" == '#' ]];then
                 echo "Skip checking line starting with #"
-            elif [ "$line" == "[High Inheritance Precedence]" ];then
+            elif [[ "$line" == "[High Inheritance Precedence]" ]];then
                 echo "Checking High Inheritance property..."
                 check_override=true
-            elif [ "$line" == "[Low Inheritance Precedence]" ];then
+            elif [[ "$line" == "[Low Inheritance Precedence]" ]];then
                 echo "Checking Low Inheritance property..."
                 check_override=false
             else

@@ -47,16 +47,16 @@ if [[ -f /usr/share/sonic/virtual_chassis/default_config.json ]]; then
     mv /tmp/init_cfg.json /etc/sonic/init_cfg.json
 fi
 
-if [ -f /etc/sonic/config_db.json ]; then
+if [[ -f /etc/sonic/config_db.json ]]; then
     sonic-cfggen -j /etc/sonic/init_cfg.json -j /etc/sonic/config_db.json --print-data > /tmp/config_db.json
     mv /tmp/config_db.json /etc/sonic/config_db.json
 else
     # generate and merge buffers configuration into config file
-    if [ -f /usr/share/sonic/hwsku/buffers.json.j2 ]; then
+    if [[ -f /usr/share/sonic/hwsku/buffers.json.j2 ]]; then
         sonic-cfggen -k $HWSKU -p /usr/share/sonic/device/$PLATFORM/$PLATFORM_CONF -t /usr/share/sonic/hwsku/buffers.json.j2 > /tmp/buffers.json
         buffers_cmd="-j /tmp/buffers.json"
     fi
-    if [ -f /usr/share/sonic/hwsku/qos.json.j2 ]; then
+    if [[ -f /usr/share/sonic/hwsku/qos.json.j2 ]]; then
         sonic-cfggen -j /etc/sonic/init_cfg.json -t /usr/share/sonic/hwsku/qos.json.j2 > /tmp/qos.json
         qos_cmd="-j /tmp/qos.json"
     fi
@@ -69,13 +69,13 @@ fi
 
 sonic-cfggen -t /usr/share/sonic/templates/copp_cfg.j2 > /etc/sonic/copp_cfg.json
 
-if [ "$HWSKU" == "Mellanox-SN2700" ]; then
+if [[ "$HWSKU" == "Mellanox-SN2700" ]]; then
     cp /usr/share/sonic/hwsku/sai_mlnx.profile /usr/share/sonic/hwsku/sai.profile
-elif [ "$HWSKU" == "DPU-2P" ]; then
+elif [[ "$HWSKU" == "DPU-2P" ]]; then
     cp /usr/share/sonic/hwsku/sai_dpu_2p.profile /usr/share/sonic/hwsku/sai.profile
 fi
 
-if [ "$BFDOFFLOAD" == "false" ]; then
+if [[ "$BFDOFFLOAD" == "false" ]]; then
     if ! grep -q "SAI_VS_BFD_OFFLOAD_SUPPORTED=" /usr/share/sonic/hwsku/sai.profile; then
         echo 'SAI_VS_BFD_OFFLOAD_SUPPORTED=false' >> /usr/share/sonic/hwsku/sai.profile
     else
@@ -96,7 +96,7 @@ host_template="/usr/share/sonic/templates/hostname.j2"
 db_cfg_file="/var/run/redis/sonic-db/database_config.json"
 db_cfg_file_tmp="/var/run/redis/sonic-db/database_config.json.tmp"
 
-if [ -r "$chassisdb_cfg_file" ]; then
+if [[ -r "$chassisdb_cfg_file" ]]; then
    echo $(sonic-cfggen -j $chassisdb_cfg_file -t $host_template) >> /etc/hosts
 else
    chassisdb_cfg_file="$chassisdb_cfg_file_default"
@@ -111,14 +111,14 @@ if [[ "$HOSTNAME" == *"supervisor"* ]] || [ "$start_chassis_db" == "1" ]; then
 fi
 
 conn_chassis_db=`sonic-cfggen -v DEVICE_METADATA.localhost.connect_to_chassis_db -y $chassisdb_cfg_file`
-if [ "$start_chassis_db" != "1" ] && [ "$conn_chassis_db" != "1" ]; then
+if [[ "$start_chassis_db" != "1" ]] && [[ "$conn_chassis_db" != "1" ]]; then
    cp $db_cfg_file $db_cfg_file_tmp
    update_chassisdb_config -j $db_cfg_file_tmp -d
    cp $db_cfg_file_tmp $db_cfg_file
 fi
 
-if [ "$conn_chassis_db" == "1" ]; then
-   if [ -f /usr/share/sonic/virtual_chassis/coreportindexmap.ini ]; then
+if [[ "$conn_chassis_db" == "1" ]]; then
+   if [[ -f /usr/share/sonic/virtual_chassis/coreportindexmap.ini ]]; then
       cp /usr/share/sonic/virtual_chassis/coreportindexmap.ini /usr/share/sonic/hwsku/
 
       pushd /usr/share/sonic/hwsku
@@ -135,7 +135,7 @@ fi
 
 /usr/bin/configdb-load.sh
 
-if [ "$HWSKU" = "brcm_gearbox_vs" ]; then
+if [[ "$HWSKU" = "brcm_gearbox_vs" ]]; then
     supervisorctl start gbsyncd
     supervisorctl start gearsyncd
 fi
@@ -190,6 +190,6 @@ supervisorctl start fabricmgrd
 
 # Start arp_update when VLAN exists
 VLAN=`sonic-cfggen -d -v 'VLAN.keys() | join(" ") if VLAN'`
-if [ "$VLAN" != "" ]; then
+if [[ "$VLAN" != "" ]]; then
     supervisorctl start arp_update
 fi

@@ -19,7 +19,7 @@ VARS_FILE=$TEMPLATES_DIR/swss_vars.j2
 SYNCD_VARS=$(sonic-cfggen -d -y /etc/sonic/sonic_version.yml -t $VARS_FILE) || exit 1
 SONIC_ASIC_TYPE=$(echo $SYNCD_VARS | jq -r '.asic_type')
 
-if [ -x $CMD_DSSERVE ]; then
+if [[ -x $CMD_DSSERVE ]]; then
     CMD=$CMD_DSSERVE
     CMD_ARGS=$CMD_DSSERVE_ARGS
 else
@@ -41,25 +41,25 @@ mkdir -p /var/log/sai_failure_dump/
 # Otherwise, set synchronous mode if it is enabled in CONFIG_DB
 SYNC_MODE=$(echo $SYNCD_VARS | jq -r '.synchronous_mode')
 SWITCH_TYPE=$(echo $SYNCD_VARS | jq -r '.switch_type')
-if [ "$SWITCH_TYPE" == "dpu" ]; then
+if [[ "$SWITCH_TYPE" == "dpu" ]]; then
     CMD_ARGS+=" -z zmq_sync -x /usr/share/sonic/hwsku/context_config.json"
-elif [ "$SYNC_MODE" == "enable" ]; then
+elif [[ "$SYNC_MODE" == "enable" ]]; then
     CMD_ARGS+=" -s"
 fi
 
 SUPPORTING_BULK_COUNTER_GROUPS=$(echo $SYNCD_VARS | jq -r '.supporting_bulk_counter_groups')
-if [ "$SUPPORTING_BULK_COUNTER_GROUPS" != "" ]; then
+if [[ "$SUPPORTING_BULK_COUNTER_GROUPS" != "" ]]; then
     CMD_ARGS+=" -B $SUPPORTING_BULK_COUNTER_GROUPS"
 fi
 
 case "$(cat /proc/cmdline)" in
   *SONIC_BOOT_TYPE=fastfast*)
-    if [ -e /var/warmboot/warm-starting ]; then
+    if [[ -e /var/warmboot/warm-starting ]]; then
         FASTFAST_REBOOT='yes'
     fi
     ;;
   *SONIC_BOOT_TYPE=express*)
-    if [ -e /var/warmboot/warm-starting ]; then
+    if [[ -e /var/warmboot/warm-starting ]]; then
         EXPRESS_REBOOT='yes'
     fi
     ;;
@@ -96,13 +96,13 @@ function check_warm_boot()
 
 function set_start_type()
 {
-    if [ x"$WARM_BOOT" == x"true" ]; then
+    if [[ x"$WARM_BOOT" == x"true" ]]; then
         CMD_ARGS+=" -t warm"
-    elif [ x"$FAST_REBOOT" == x"yes" ]; then
+    elif [[ x"$FAST_REBOOT" == x"yes" ]]; then
         CMD_ARGS+=" -t fast"
-    elif [ x"$FASTFAST_REBOOT" == x"yes" ]; then
+    elif [[ x"$FASTFAST_REBOOT" == x"yes" ]]; then
         CMD_ARGS+=" -t fastfast"
-    elif [ x"$EXPRESS_REBOOT" == x"yes" ]; then
+    elif [[ x"$EXPRESS_REBOOT" == x"yes" ]]; then
         CMD_ARGS+=" -t express"
     fi
 }
@@ -120,7 +120,7 @@ config_syncd_cisco_8000()
 
     # Cisco SDK debug shell support
     version=$(python3 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\.\2/')
-    if [ ! -z "$version" ]; then
+    if [[ ! -z "$version" ]]; then
         export SAI_SHELL_ENABLE=1
         export SAI_DEBUG_PYTHON_SO_PATH=/usr/lib/python${version}/config-${version}m-x86_64-linux-gnu/libpython${version}m.so
         export PYTHONPATH=/usr/lib/cisco/pylib
@@ -138,13 +138,13 @@ function merge_config_bcm_files()
     while read line
     do
         line=$( echo $line | xargs )
-        if [ ! -z "$line" ];then
-            if [ "${line::1}" == '#' ];then
+        if [[ ! -z "$line" ]];then
+            if [[ "${line::1}" == '#' ]];then
                 echo $line >> $to_file
-            elif [ "$line" == "[Low Inheritance Precedence]" ];then
+            elif [[ "$line" == "[Low Inheritance Precedence]" ]];then
                 override=false
                 echo "# $line" >> $to_file
-            elif [ "$line" == "[High Inheritance Precedence]" ];then
+            elif [[ "$line" == "[High Inheritance Precedence]" ]];then
                 override=true
                 echo "# $line" >> $to_file
                 echo "Merge properties with override $override"
@@ -158,7 +158,7 @@ function merge_config_bcm_files()
                       echo $line >> $to_file
                    else
                       grepline=$(grep $sedline $to_file)
-                      if [ "${grepline::1}" == '#' ];then
+                      if [[ "${grepline::1}" == '#' ]];then
                          echo $line >> $to_file
                       else
                          echo "Keep the config $(grep $sedline $to_file) in $to_file"
@@ -186,13 +186,13 @@ function merge_config_yml_files()
     while read line
     do
         line=$( echo $line | xargs )
-        if [ ! -z "$line" ];then
-            if [ "${line::1}" == '#' ];then
+        if [[ ! -z "$line" ]];then
+            if [[ "${line::1}" == '#' ]];then
                 echo "        $line" >> $to_file
-            elif [ "$line" == "[Low Inheritance Precedence]" ];then
+            elif [[ "$line" == "[Low Inheritance Precedence]" ]];then
                 override=false
                 echo "        # $line" >> $to_file
-            elif [ "$line" == "[High Inheritance Precedence]" ];then
+            elif [[ "$line" == "[High Inheritance Precedence]" ]];then
                 override=true
                 echo "        # $line" >> $to_file
                 echo "Merge properties with override $override"
@@ -208,7 +208,7 @@ function merge_config_yml_files()
                    else
                       grepline=$(grep $sedline $to_file)
                       grepline="${grepline#"${grepline%%[![:space:]]*}"}"
-                      if [ "${grepline::1}" == '#' ];then
+                      if [[ "${grepline::1}" == '#' ]];then
                          echo "        $line" >> $to_file
                          merged_cnt+=1
                       else
@@ -223,14 +223,14 @@ function merge_config_yml_files()
         fi
     done < $from_file
 
-    if [ $merged_cnt -gt 0 ]; then
+    if [[ $merged_cnt -gt 0 ]]; then
          sed -i "/# Start of/a \    global:" $to_file
          sed -i "/# Start of/a \  0:" $to_file
          sed -i "/# Start of/a \bcm_device:" $to_file
          sed -i "/# Start of/a \---" $to_file
     fi
     echo "# End of $message" >> $to_file
-    if [ $merged_cnt -gt 0 ]; then
+    if [[ $merged_cnt -gt 0 ]]; then
        sed -i "/# End of/i \..." $to_file
     fi
     echo "Merged $from_file to $to_file"
@@ -243,13 +243,13 @@ config_syncd_bcm()
     PLT_CONFIG_YML=""
     PLT_SAI_PROFILE=$(find $SAI_PROFILE_DIR -name 'sai.profile')
     readline=$(grep SAI_INIT_CONFIG_FILE $PLT_SAI_PROFILE)
-    if [ ${readline: -3} == "bcm" ]; then
+    if [[ ${readline: -3} == "bcm" ]]; then
        PLT_CONFIG_BCM=${readline#*=}
-    elif [ ${readline: -3} == "yml" ]; then
+    elif [[ ${readline: -3} == "yml" ]]; then
        PLT_CONFIG_YML=${readline#*=}
     fi
 
-    if [ ! -z "$PLT_CONFIG_BCM" ] && [ -f $PLATFORM_DIR/common_config_support ] ; then
+    if [[ ! -z "$PLT_CONFIG_BCM" ]] && [[ -f $PLATFORM_DIR/common_config_support ]] ; then
        cp -f $PLT_CONFIG_BCM /tmp
        cp -f /etc/sai.d/sai.profile /tmp
        CONFIG_BCM=$(find /tmp -name '*.bcm')
@@ -262,7 +262,7 @@ config_syncd_bcm()
        chip_id=${chip_id::3}
        COMMON_CONFIG_BCM=$(find $PLATFORM_COMMON_DIR/x86_64-broadcom_${chip_id} -maxdepth 1 -name '*.bcm')
 
-       if [ -f $PLATFORM_COMMON_DIR/x86_64-broadcom_${chip_id}/*.bcm ]; then
+       if [[ -f $PLATFORM_COMMON_DIR/x86_64-broadcom_${chip_id}/*.bcm ]]; then
           for file in $CONFIG_BCM; do
              merge_config_bcm_files $file $COMMON_CONFIG_BCM "chip common properties"
           done
@@ -276,7 +276,7 @@ config_syncd_bcm()
        cp -f /tmp/*.bcm /var/run/sswsyncd/
     fi
 
-    if [ ! -z "$PLT_CONFIG_YML" ] && [ -f $PLATFORM_DIR/common_config_support ]; then
+    if [[ ! -z "$PLT_CONFIG_YML" ]] && [[ -f $PLATFORM_DIR/common_config_support ]]; then
        cp -f $PLT_CONFIG_YML /tmp
        cp -f /etc/sai.d/sai.profile /tmp
        CONFIG_YML=$(find /tmp -name '*.yml')
@@ -289,7 +289,7 @@ config_syncd_bcm()
        chip_id=${chip_id::3}
        COMMON_CONFIG_BCM=$(find $PLATFORM_COMMON_DIR/x86_64-broadcom_${chip_id} -maxdepth 1 -name '*.bcm')
 
-       if [ -f $PLATFORM_COMMON_DIR/x86_64-broadcom_${chip_id}/*.bcm ]; then
+       if [[ -f $PLATFORM_COMMON_DIR/x86_64-broadcom_${chip_id}/*.bcm ]]; then
           for file in $CONFIG_YML; do
              merge_config_yml_files $file $COMMON_CONFIG_BCM "chip common properties"
           done
@@ -303,15 +303,15 @@ config_syncd_bcm()
        cp -f /tmp/*.yml /var/run/sswsyncd/
     fi
 
-    if [ -f "/tmp/sai.profile" ]; then
+    if [[ -f "/tmp/sai.profile" ]]; then
         CMD_ARGS+=" -p /tmp/sai.profile"
-	elif [ -f "/etc/sai.d/sai.profile" ]; then
+	elif [[ -f "/etc/sai.d/sai.profile" ]]; then
         CMD_ARGS+=" -p /etc/sai.d/sai.profile"
     else
         CMD_ARGS+=" -p $HWSKU_DIR/sai.profile"
     fi
 
-    if [ -f "$HWSKU_DIR/context_config.json" ]; then
+    if [[ -f "$HWSKU_DIR/context_config.json" ]]; then
         CMD_ARGS+=" -x $HWSKU_DIR/context_config.json -g 0"
     fi
 
@@ -353,7 +353,7 @@ config_syncd_mlnx()
     if [[ $? -eq 0 ]]; then
         ASIC_PROFILE_FILE="sai-${DEVICE_TYPE}.profile"
         ASIC_PROFILE_PATH="/etc/mlnx/${ASIC_PROFILE_FILE}"
-        if [ -f "$ASIC_PROFILE_PATH" ]; then
+        if [[ -f "$ASIC_PROFILE_PATH" ]]; then
             cat "$ASIC_PROFILE_PATH" >> /tmp/sai-temp.profile
             echo >> /tmp/sai-temp.profile
         fi
@@ -383,7 +383,7 @@ config_syncd_mlnx()
     fi
 
     SDK_DUMP_PATH=`cat /tmp/sai.profile|grep "SAI_DUMP_STORE_PATH"|cut -d = -f2`
-    if [ ! -d "$SDK_DUMP_PATH" ]; then
+    if [[ ! -d "$SDK_DUMP_PATH" ]]; then
         mkdir -p "$SDK_DUMP_PATH"
     fi
 
@@ -529,7 +529,7 @@ config_syncd_nvidia_bluefield()
     if [[ $? -eq 0 ]]; then
         ASIC_PROFILE_FILE="sai-${DEVICE_TYPE}.profile"
         ASIC_PROFILE_PATH="/etc/mlnx/${ASIC_PROFILE_FILE}"
-        if [ -f "$ASIC_PROFILE_PATH" ]; then
+        if [[ -f "$ASIC_PROFILE_PATH" ]]; then
             cat "$ASIC_PROFILE_PATH" >> /tmp/sai-temp.profile
             echo >> /tmp/sai-temp.profile
         fi
@@ -548,7 +548,7 @@ config_syncd_nvidia_bluefield()
     CMD_ARGS+=" -l -p /tmp/sai.profile -w 180000000"
 
     SDK_DUMP_PATH=$(cat /tmp/sai.profile | grep "SAI_DUMP_STORE_PATH" | cut -d = -f2)
-    if [ ! -d "$SDK_DUMP_PATH" ]; then
+    if [[ ! -d "$SDK_DUMP_PATH" ]]; then
         mkdir -p "$SDK_DUMP_PATH"
     fi
 
