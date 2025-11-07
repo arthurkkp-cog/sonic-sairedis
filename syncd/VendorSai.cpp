@@ -10,6 +10,35 @@
 
 using namespace syncd;
 
+/*
+ * SAI Version Compatibility Matrix (important-comment)
+ * (important-comment)
+ * This matrix documents known compatible version combinations for Broadcom platforms. (important-comment)
+ * SAI API version can be validated at runtime, but kernel module and SDK versions (important-comment)
+ * are vendor-specific and can only be verified through system logs. (important-comment)
+ * (important-comment)
+ * Expected Version Combinations: (important-comment)
+ * - Current (Recommended): (important-comment)
+ *   - LIBSAIBCM: 13.2.1.10 (important-comment)
+ *   - BRCM_OPENNSL_KERNEL: 13.2.1.0 (important-comment)
+ *   - OCP SAI API: 1.13.2+ (important-comment)
+ *   - SDK: 6.5.29+ (important-comment)
+ * (important-comment)
+ * - Minimum Supported: (important-comment)
+ *   - OCP SAI API: 1.9.0 (enforced at runtime) (important-comment)
+ *   - Earlier versions may work but are not validated (important-comment)
+ * (important-comment)
+ * Common Incompatibilities: (important-comment)
+ * - LIBSAIBCM 10.1.7.0 + Kernel 8.4.0.2 with SAI 1.13+: Known to fail at sai_api_initialize (important-comment)
+ * - Mismatched kernel module and SAI library versions cause initialization failures (important-comment)
+ * - SDK version must align with SAI library version for proper operation (important-comment)
+ * (important-comment)
+ * Resolution: (important-comment)
+ * - Upgrade all components to current recommended versions (important-comment)
+ * - Ensure kernel modules match SAI library version (important-comment)
+ * - Check vendor release notes for supported combinations (important-comment)
+ */
+
 #define MUTEX() std::lock_guard<std::mutex> _lock(m_apimutex)
 
 #define VENDOR_CHECK_API_INITIALIZED()                                       \
@@ -81,6 +110,30 @@ VendorSai::~VendorSai()
 
 // INITIALIZE UNINITIALIZE
 
+sai_status_t VendorSai::validateVersionCompatibility(
+        _In_ sai_api_version_t minversion)
+{
+    SWSS_LOG_ENTER();
+
+    if (SAI_API_VERSION < minversion)
+    {
+        SWSS_LOG_ERROR("SAI headers API version %d is below minimum required version %" PRId64,
+                      SAI_API_VERSION, minversion);
+        SWSS_LOG_ERROR("Resolution: Upgrade SAI headers to version %" PRId64 " or higher", minversion);
+        SWSS_LOG_ERROR("This typically requires updating the sonic-buildimage platform packages");
+        
+        return SAI_STATUS_FAILURE;
+    }
+
+    SWSS_LOG_NOTICE("Pre-initialization version check:");
+    SWSS_LOG_NOTICE("  SAI API headers version: %d", SAI_API_VERSION);
+    SWSS_LOG_NOTICE("  Required minimum version: %" PRId64, minversion);
+    SWSS_LOG_NOTICE("  Expected LIBSAIBCM version: 13.2.1.10");
+    SWSS_LOG_NOTICE("  Expected kernel module version: 13.2.1.0");
+    
+    return SAI_STATUS_SUCCESS;
+}
+
 sai_status_t VendorSai::apiInitialize(
         _In_ uint64_t flags,
         _In_ const sai_service_method_table_t *service_method_table)
@@ -102,9 +155,42 @@ sai_status_t VendorSai::apiInitialize(
         return SAI_STATUS_INVALID_PARAMETER;
     }
 
+    sai_api_version_t minversion = SAI_VERSION(1,9,0);
+    
+    sai_status_t validation_status = validateVersionCompatibility(minversion);
+    if (validation_status != SAI_STATUS_SUCCESS)
+    {
+        return validation_status;
+    }
+
     memcpy(&m_service_method_table, service_method_table, sizeof(m_service_method_table));
 
     auto status = m_globalApis.api_initialize(flags, service_method_table);
+
+    if (status != SAI_STATUS_SUCCESS)
+    {
+        SWSS_LOG_ERROR("CRITICAL: sai_api_initialize failed with status: %s", 
+                      sai_serialize_status(status).c_str());
+        SWSS_LOG_ERROR("");
+        SWSS_LOG_ERROR("Common causes of SAI initialization failure:");
+        SWSS_LOG_ERROR("  1. Version mismatch between SAI library and kernel modules");
+        SWSS_LOG_ERROR("     - Current codebase expects: LIBSAIBCM 13.2.1.10, Kernel 13.2.1.0");
+        SWSS_LOG_ERROR("     - Check your deployment versions match these expectations");
+        SWSS_LOG_ERROR("  2. Incompatible SDK version with SAI library version");
+        SWSS_LOG_ERROR("     - Expected SDK version: 6.5.29 or higher");
+        SWSS_LOG_ERROR("  3. Missing or outdated kernel modules");
+        SWSS_LOG_ERROR("     - Verify kernel modules are loaded: lsmod | grep linux_kernel_bde");
+        SWSS_LOG_ERROR("     - Check kernel module version matches SAI library");
+        SWSS_LOG_ERROR("");
+        SWSS_LOG_ERROR("Resolution steps:");
+        SWSS_LOG_ERROR("  1. Verify all component versions in system logs");
+        SWSS_LOG_ERROR("  2. Upgrade outdated components to current recommended versions");
+        SWSS_LOG_ERROR("  3. Ensure kernel modules match SAI library version");
+        SWSS_LOG_ERROR("  4. Check vendor release notes for supported version combinations");
+        SWSS_LOG_ERROR("  5. Review sonic-buildimage platform configuration");
+        
+        return status;
+    }
 
     if (status == SAI_STATUS_SUCCESS)
     {
@@ -134,17 +220,32 @@ sai_status_t VendorSai::apiInitialize(
 
     sai_api_version_t minversion = SAI_VERSION(1,9,0);
 
-    SWSS_LOG_NOTICE("SAI API vendor version: %" PRId64, version);
-    SWSS_LOG_NOTICE("SAI API min version: %" PRId64, minversion);
-    SWSS_LOG_NOTICE("SAI API headers version: %d", SAI_API_VERSION);
+    SWSS_LOG_NOTICE("Post-initialization version verification:");
+    SWSS_LOG_NOTICE("  SAI API vendor version: %" PRId64, version);
+    SWSS_LOG_NOTICE("  SAI API headers version: %d", SAI_API_VERSION);
+    SWSS_LOG_NOTICE("  SAI API minimum version: %" PRId64, minversion);
 
     if ((version < minversion) || (SAI_API_VERSION < minversion))
     {
-        SWSS_LOG_ERROR("SAI implementation API version %" PRId64 " or SAI headers API version %d does not meet minimum version requirements, min version required: %" PRId64,
-                       version, SAI_API_VERSION, minversion);
+        SWSS_LOG_ERROR("Version compatibility check FAILED:");
+        SWSS_LOG_ERROR("  Vendor SAI library version: %" PRId64, version);
+        SWSS_LOG_ERROR("  SAI headers version: %d", SAI_API_VERSION);
+        SWSS_LOG_ERROR("  Minimum required version: %" PRId64, minversion);
+        SWSS_LOG_ERROR("");
+        SWSS_LOG_ERROR("This indicates a version mismatch between:");
+        SWSS_LOG_ERROR("  - The SAI library provided by the vendor (version: %" PRId64 ")", version);
+        SWSS_LOG_ERROR("  - The SAI headers used to compile this code (version: %d)", SAI_API_VERSION);
+        SWSS_LOG_ERROR("");
+        SWSS_LOG_ERROR("Resolution:");
+        SWSS_LOG_ERROR("  - Rebuild with matching SAI headers version");
+        SWSS_LOG_ERROR("  - Or upgrade vendor SAI library to %" PRId64 " or higher", minversion);
 
         return SAI_STATUS_FAILURE;
     }
+    
+    SWSS_LOG_NOTICE("Version compatibility check PASSED");
+    SWSS_LOG_NOTICE("Note: Kernel module and SDK versions cannot be validated through SAI API");
+    SWSS_LOG_NOTICE("Check system logs for actual kernel and SDK versions if issues occur");
 
     m_apiInitialized = true;
 
