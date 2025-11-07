@@ -14,6 +14,8 @@
 #include <errno.h>
 
 using json = nlohmann::json;
+using namespace sairedis;
+
 
 static const std::unordered_map<sai_redis_link_event_damping_algorithm_t, std::string> sai_redis_link_event_damping_algorithm_to_name_map = {
         {SAI_REDIS_LINK_EVENT_DAMPING_ALGORITHM_DISABLED, "SAI_REDIS_LINK_EVENT_DAMPING_ALGORITHM_DISABLED"},
