@@ -79,9 +79,9 @@ sai_status_t Sai::apiInitialize(
         return SAI_STATUS_INVALID_PARAMETER;
     }
 
-    if ((service_method_table == NULL) ||
-            (service_method_table->profile_get_next_value == NULL) ||
-            (service_method_table->profile_get_value == NULL))
+    if ((service_method_table == nullptr) ||
+            (service_method_table->profile_get_next_value == nullptr) ||
+            (service_method_table->profile_get_value == nullptr))
     {
         SWSS_LOG_ERROR("invalid service_method_table handle passed to SAI API initialize");
 
@@ -92,7 +92,7 @@ sai_status_t Sai::apiInitialize(
 
     auto switch_type = service_method_table->profile_get_value(0, SAI_KEY_VS_SWITCH_TYPE);
 
-    if (switch_type == NULL)
+    if (switch_type == nullptr)
     {
         SWSS_LOG_ERROR("failed to obtain service method table value: %s", SAI_KEY_VS_SWITCH_TYPE);
 
@@ -102,7 +102,7 @@ sai_status_t Sai::apiInitialize(
     auto sai_switch_type = service_method_table->profile_get_value(0, SAI_KEY_VS_SAI_SWITCH_TYPE);
     sai_switch_type_t saiSwitchType;
 
-    if (sai_switch_type == NULL)
+    if (sai_switch_type == nullptr)
     {
         SWSS_LOG_NOTICE("failed to obtain service method table value: %s", SAI_KEY_VS_SAI_SWITCH_TYPE);
         saiSwitchType = SAI_SWITCH_TYPE_NPU;

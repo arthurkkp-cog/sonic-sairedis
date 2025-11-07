@@ -8,7 +8,7 @@ static const char* profile_get_value(
 {
     SWSS_LOG_ENTER();
 
-    return NULL;
+    return nullptr;
 }
 
 static int profile_get_next_value(
@@ -18,13 +18,13 @@ static int profile_get_next_value(
 {
     SWSS_LOG_ENTER();
 
-    if (value == NULL)
+    if (value == nullptr)
     {
         SWSS_LOG_INFO("resetting profile map iterator");
         return 0;
     }
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
         return -1;

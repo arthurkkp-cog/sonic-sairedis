@@ -4,7 +4,7 @@
 extern "C" {
 #endif
 
-#define MAX_ACL_ATTRS 12
+constexpr int MAX_ACL_ATTRS = 12;
 
 typedef struct _acl_tbl_entries_ {
     uint32_t priority;

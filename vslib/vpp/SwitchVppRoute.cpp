@@ -118,13 +118,13 @@ sai_status_t SwitchVpp::IpRouteAddRemove(
     next_hop_oid = attr.value.oid;
 
     sai_route_entry_t route_entry;
-    const char *hwif_name = NULL;
+    const char *hwif_name = nullptr;
     vpp_nexthop_type_e nexthop_type = VPP_NEXTHOP_NORMAL;
     bool config_ip_route = false;
 
     sai_deserialize_route_entry(serializedObjectId, route_entry);
 
-    nexthop_grp_config_t *nxthop_group = NULL;
+    nexthop_grp_config_t *nxthop_group = nullptr;
 
     if (SAI_OBJECT_TYPE_ROUTER_INTERFACE == RealObjectIdManager::objectTypeQuery(next_hop_oid))
     {

@@ -59,7 +59,7 @@ static sai_object_id_t create_hash(
 
     sai_object_id_t hash;
 
-    auto status = g_meta->create(SAI_OBJECT_TYPE_HASH, &hash, switch_id, 0, NULL);
+    auto status = g_meta->create(SAI_OBJECT_TYPE_HASH, &hash, switch_id, 0, nullptr);
     EXPECT_EQ(SAI_STATUS_SUCCESS, status);
 
     return hash;
@@ -95,11 +95,11 @@ TEST(LegacyNeighborEntry, neighbor_entry_create)
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("attr is null");
-    status = g_meta->create(&neighbor_entry, 1, NULL);
+    status = g_meta->create(&neighbor_entry, 1, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("neighbor entry is null");
-    status = g_meta->create((sai_neighbor_entry_t*)NULL, 1, &attr);
+    status = g_meta->create((sai_neighbor_entry_t*)nullptr, 1, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     sai_attribute_t list[3] = { };
@@ -198,7 +198,7 @@ TEST(LegacyNeighborEntry, neighbor_entry_remove)
     SWSS_LOG_NOTICE("remove tests");
 
     SWSS_LOG_NOTICE("neighbor_entry is null");
-    status = g_meta->remove((sai_neighbor_entry_t*)NULL);
+    status = g_meta->remove((sai_neighbor_entry_t*)nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     neighbor_entry.rif_id = SAI_NULL_OBJECT_ID;
@@ -284,11 +284,11 @@ TEST(LegacyNeighborEntry, neighbor_entry_set)
     SWSS_LOG_NOTICE("set tests");
 
     SWSS_LOG_NOTICE("attr is null");
-    status = g_meta->set(&neighbor_entry, NULL);
+    status = g_meta->set(&neighbor_entry, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("neighbor entry is null");
-    status = g_meta->set((sai_neighbor_entry_t*)NULL, &attr);
+    status = g_meta->set((sai_neighbor_entry_t*)nullptr, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("setting invalid attrib id");
@@ -366,11 +366,11 @@ TEST(LegacyNeighborEntry, neighbor_entry_get)
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("attr is null");
-    status = g_meta->get(&neighbor_entry, 1, NULL);
+    status = g_meta->get(&neighbor_entry, 1, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("neighbor entry is null");
-    status = g_meta->get((sai_neighbor_entry_t*)NULL, 1, &attr);
+    status = g_meta->get((sai_neighbor_entry_t*)nullptr, 1, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("attr id out of range");

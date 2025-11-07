@@ -43,11 +43,11 @@ TEST(LegacyRouteEntry, route_entry_create)
     // EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("attr is null");
-    status = g_meta->create(&route_entry, 1, NULL);
+    status = g_meta->create(&route_entry, 1, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("route entry is null");
-    status = g_meta->create((sai_route_entry_t*)NULL, 1, &attr);
+    status = g_meta->create((sai_route_entry_t*)nullptr, 1, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     sai_attribute_t list[3] = { };
@@ -185,7 +185,7 @@ TEST(LegacyRouteEntry, route_entry_remove)
     SWSS_LOG_NOTICE("remove tests");
 
     SWSS_LOG_NOTICE("route_entry is null");
-    status = g_meta->remove((sai_route_entry_t*)NULL);
+    status = g_meta->remove((sai_route_entry_t*)nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     route_entry.vr_id = SAI_NULL_OBJECT_ID;
@@ -284,11 +284,11 @@ TEST(LegacyRouteEntry, route_entry_set)
     SWSS_LOG_NOTICE("set tests");
 
     SWSS_LOG_NOTICE("attr is null");
-    status = g_meta->set(&route_entry, NULL);
+    status = g_meta->set(&route_entry, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("route entry is null");
-    status = g_meta->set((sai_route_entry_t*)NULL, &attr);
+    status = g_meta->set((sai_route_entry_t*)nullptr, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("setting invalid attrib id");
@@ -381,11 +381,11 @@ TEST(LegacyRouteEntry, route_entry_get)
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("attr is null");
-    status = g_meta->get(&route_entry, 1, NULL);
+    status = g_meta->get(&route_entry, 1, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("route entry is null");
-    status = g_meta->get((sai_route_entry_t*)NULL, 1, &attr);
+    status = g_meta->get((sai_route_entry_t*)nullptr, 1, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("attr id out of range");

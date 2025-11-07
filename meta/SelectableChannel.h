@@ -14,7 +14,7 @@ namespace sairedis
     {
         public:
 
-            SelectableChannel(
+            explicit SelectableChannel(
                     _In_ int pri = 0);
 
             virtual ~SelectableChannel() = default;

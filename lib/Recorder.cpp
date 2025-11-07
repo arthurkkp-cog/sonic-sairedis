@@ -21,7 +21,11 @@ std::vector<swss::FieldValueTuple> serialize_counter_id_list(
         _In_ const sai_stat_id_t *counter_id_list);
 
 #define MUTEX() std::lock_guard<std::mutex> _lock(m_mutex)
-#define DEFAULT_RECORDING_FILE_NAME "sairedis.rec"
+
+namespace {
+    constexpr const char* DEFAULT_RECORDING_FILE_NAME = "sairedis.rec";
+}
+
 Recorder::Recorder()
 {
     SWSS_LOG_ENTER();
@@ -60,7 +64,7 @@ bool Recorder::setRecordingOutputDirectory(
         return true;
     }
 
-    if (attr.value.s8list.list == NULL)
+    if (attr.value.s8list.list == nullptr)
     {
         SWSS_LOG_ERROR("list pointer is NULL");
 
@@ -112,7 +116,7 @@ bool Recorder::setRecordingFilename(
         return true;
     }
 
-    if (attr.value.s8list.list == NULL)
+    if (attr.value.s8list.list == nullptr)
     {
         SWSS_LOG_ERROR("list pointer is NULL");
 
@@ -262,7 +266,7 @@ std::string Recorder::getTimestamp()
     char buffer[64];
     struct timeval tv;
 
-    gettimeofday(&tv, NULL);
+    gettimeofday(&tv, nullptr);
 
     struct tm now;
     localtime_r(&tv.tv_sec, &now);
@@ -1038,7 +1042,7 @@ void Recorder::recordQueryAttributeCapability(
 
     auto meta = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find attribute metadata: object type %s, attr id %d",
                 sai_serialize_object_type(objectType).c_str(), attrId);
@@ -1073,7 +1077,7 @@ void Recorder::recordQueryAttributeCapabilityResponse(
 
     auto meta = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find attribute metadata: object type %s, attr id %d",
                 sai_serialize_object_type(objectType).c_str(), attrId);
@@ -1109,7 +1113,7 @@ void Recorder::recordQueryAttributeEnumValuesCapability(
 
     auto meta = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find attribute metadata: object type %s, attr id %d",
                 sai_serialize_object_type(objectType).c_str(), attrId);
@@ -1146,7 +1150,7 @@ void Recorder::recordQueryAttributeEnumValuesCapabilityResponse(
 
     auto meta = sai_metadata_get_attr_metadata(objectType, attrId);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find attribute metadata: object type %s, attr id %d",
                 sai_serialize_object_type(objectType).c_str(),
@@ -1210,7 +1214,7 @@ void Recorder::recordQueryStatsCapabilityResponse(
 
     auto meta = sai_metadata_get_object_type_info(objectType);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find object metadata: object type %s",
                 sai_serialize_object_type(objectType).c_str());
@@ -1218,7 +1222,7 @@ void Recorder::recordQueryStatsCapabilityResponse(
         return;
     }
 
-    if (meta->statenum == NULL)
+    if (meta->statenum == nullptr)
     {
         SWSS_LOG_ERROR("%s does not support stats", meta->objecttypename);
 
@@ -1270,7 +1274,7 @@ void Recorder::recordQueryStatsStCapabilityResponse(
 
     auto meta = sai_metadata_get_object_type_info(objectType);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_ERROR("Failed to find object metadata: object type %s",
                        sai_serialize_object_type(objectType).c_str());
@@ -1278,7 +1282,7 @@ void Recorder::recordQueryStatsStCapabilityResponse(
         return;
     }
 
-    if (meta->statenum == NULL)
+    if (meta->statenum == nullptr)
     {
         SWSS_LOG_ERROR("%s does not support stats", meta->objecttypename);
 

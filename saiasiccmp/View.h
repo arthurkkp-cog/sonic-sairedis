@@ -23,7 +23,7 @@ namespace saiasiccmp
 
             // TODO support multiple switches
 
-            View(
+            explicit View(
                     _In_ const std::string& filename);
 
         public:

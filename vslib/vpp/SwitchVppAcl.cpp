@@ -362,7 +362,7 @@ sai_status_t acl_rule_field_update(
 
     sai_status_t status;
 
-    assert(NULL != value);
+    assert(nullptr != value);
     status = SAI_STATUS_SUCCESS;
 
     switch (attr_id) {
@@ -513,7 +513,7 @@ sai_status_t SwitchVpp::tunterm_acl_rule_field_update(
     sai_status_t status;
     char         dst_ip_str[INET6_ADDRSTRLEN];
 
-    assert(NULL != value);
+    assert(nullptr != value);
     status = SAI_STATUS_SUCCESS;
 
     switch (attr_id) {
@@ -651,7 +651,7 @@ sai_status_t SwitchVpp::get_sorted_aces(
     }
 
     std::list<sai_object_id_t> &acl_entries = it->second;
-    acl_tbl_entries_t          *p_ace = NULL;
+    acl_tbl_entries_t          *p_ace = nullptr;
     aces = (acl_tbl_entries_t *) calloc(n_total_entries, sizeof(acl_tbl_entries_t));
     if (!aces) {
         SWSS_LOG_ERROR("Failed to allocate memory for aces.");
@@ -715,8 +715,8 @@ void SwitchVpp::count_tunterm_acl_rules(
 {
     SWSS_LOG_ENTER();
 
-    acl_tbl_entries_t     *p_ace = NULL;
-    const sai_attribute_t *attr = NULL;
+    acl_tbl_entries_t     *p_ace = nullptr;
+    const sai_attribute_t *attr = nullptr;
     bool                   tunterm_flag_set = false;
 
     for (auto &ace: ordered_aces) {
@@ -801,14 +801,14 @@ sai_status_t SwitchVpp::fill_acl_rules(
     SWSS_LOG_ENTER();
 
     sai_status_t       status = SAI_STATUS_SUCCESS;
-    acl_tbl_entries_t  *p_ace = NULL;
-    vpp_acl_rule_t     *rule = NULL;
-    vpp_tunterm_acl_rule_t *tunterm_rule = NULL;
+    acl_tbl_entries_t  *p_ace = nullptr;
+    vpp_acl_rule_t     *rule = nullptr;
+    vpp_tunterm_acl_rule_t *tunterm_rule = nullptr;
 
-    if(acl != NULL) {
+    if(acl != nullptr) {
         rule = &acl->rules[0];
     }
-    if(tunterm_acl != NULL) {
+    if(tunterm_acl != nullptr) {
         tunterm_rule = &tunterm_acl->rules[0];
     }
 
@@ -820,7 +820,7 @@ sai_status_t SwitchVpp::fill_acl_rules(
             attr = &p_ace->attrs[i];
             auto meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_ACL_ENTRY, attr->id);
 
-            if (meta != NULL) {
+            if (meta != nullptr) {
                 SWSS_LOG_INFO("Type %s attrib id %s",
                     sai_serialize_object_type(SAI_OBJECT_TYPE_ACL_ENTRY).c_str(),
                     meta->attridname);
@@ -859,17 +859,17 @@ void SwitchVpp::cleanup_acl_tbl_config(
 {
     SWSS_LOG_ENTER();
 
-    if(aces != NULL) {
+    if(aces != nullptr) {
         free(aces);
-        aces = NULL;
+        aces = nullptr;
     }
-    if(acl != NULL) {
+    if(acl != nullptr) {
         free(acl);
-        acl = NULL;
+        acl = nullptr;
     }
-    if(tunterm_acl != NULL) {
+    if(tunterm_acl != nullptr) {
         free(tunterm_acl);
-        tunterm_acl = NULL;
+        tunterm_acl = nullptr;
     }
     ordered_aces.clear();
 }
@@ -886,13 +886,13 @@ sai_status_t SwitchVpp::acl_add_replace(
     bool                acl_replace;
     uint32_t            acl_swindex;
     uint32_t            index = 0;
-    acl_tbl_entries_t  *p_ace = NULL;
+    acl_tbl_entries_t  *p_ace = nullptr;
     auto                tbl_sid = sai_serialize_object_id(tbl_oid);
     auto                vpp_idx_it = m_acl_swindex_map.find(tbl_oid);
     if (vpp_idx_it == m_acl_swindex_map.end()) {
         acl_swindex = 0;
         acl_replace = false;
-    } else if (acl == NULL) {
+    } else if (acl == nullptr) {
         status = aclDefaultAllowConfigure(tbl_oid);
         return status;
     } else {
@@ -960,11 +960,11 @@ sai_status_t SwitchVpp::tunterm_acl_add_replace(vpp_tunterm_acl_t *acl, sai_obje
     auto         tbl_sid = sai_serialize_object_id(tbl_oid);
 
     auto tunterm_idx_it = m_tunterm_acl_swindex_map.find(tbl_oid);
-    if ((tunterm_idx_it == m_tunterm_acl_swindex_map.end()) && (acl != NULL)) {
+    if ((tunterm_idx_it == m_tunterm_acl_swindex_map.end()) && (acl != nullptr)) {
         // ADD new tunterm acl
         tunterm_acl_swindex = ~tunterm_acl_swindex;
         do_port_bind = true;
-    } else if (tunterm_idx_it != m_tunterm_acl_swindex_map.end() && (acl == NULL)) {
+    } else if (tunterm_idx_it != m_tunterm_acl_swindex_map.end() && (acl == nullptr)) {
         // REPLACE with empty ACL (delete tunterm acl)
         return tunterm_acl_delete(tbl_oid, false);
     } else if (tunterm_idx_it != m_tunterm_acl_swindex_map.end()) {
@@ -1077,9 +1077,9 @@ sai_status_t SwitchVpp::AclTblConfig(
     size_t                              n_entries = 0;
     size_t                              n_tunterm_entries = 0;
     size_t                              n_total_entries = 0;
-    acl_tbl_entries_t                  *aces = NULL;
-    vpp_acl_t                          *acl = NULL;
-    vpp_tunterm_acl_t                  *tunterm_acl = NULL;
+    acl_tbl_entries_t                  *aces = nullptr;
+    vpp_acl_t                          *acl = nullptr;
+    vpp_tunterm_acl_t                  *tunterm_acl = nullptr;
     char                                aclname[64];
     char                                tunterm_aclname[64];
     std::map<sai_object_id_t, uint32_t> acl_aces_index_map;

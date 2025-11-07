@@ -245,7 +245,7 @@ namespace saivs
          *
          * @param switch_db A pointer to the switch database (`SwitchVpp`).
          */
-        SaiObjectDB(SwitchVpp* switch_db) : m_switch_db(switch_db) {};
+        explicit SaiObjectDB(SwitchVpp* switch_db) : m_switch_db(switch_db) {};
 
         /**
          * @brief Destructs the SaiObjectDB object.

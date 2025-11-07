@@ -19,7 +19,7 @@ namespace saivs
 
             } MACsecFilterState;
 
-            MACsecFilter(
+            explicit MACsecFilter(
                     _In_ const std::string &macsecInterfaceName);
 
             virtual ~MACsecFilter() = default;

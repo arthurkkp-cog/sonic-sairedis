@@ -35,7 +35,7 @@ namespace syncd
                 return static_cast<Flags>(static_cast<std::underlying_type_t<Flags>>(a) | static_cast<std::underlying_type_t<Flags>>(b));
             }
 
-            SaiDiscovery(
+            explicit SaiDiscovery(
                     _In_ std::shared_ptr<sairedis::SaiInterface> sai,
                     _In_ Flags flags = Flags::None);
 

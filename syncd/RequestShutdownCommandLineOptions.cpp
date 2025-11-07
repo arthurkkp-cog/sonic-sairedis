@@ -34,12 +34,14 @@ void RequestShutdownCommandLineOptions::setRestartType(
     m_restartType = restartType;
 }
 
-#define STRING_RESTART_COLD         "COLD"
-#define STRING_RESTART_WARM         "WARM"
-#define STRING_RESTART_FAST         "FAST"
-#define STRING_RESTART_EXPRESS      "EXPRESS"
-#define STRING_RESTART_PRE_SHUTDOWN "PRE-SHUTDOWN"
-#define STRING_RESTART_PRE_EXPRESS_SHUTDOWN "PRE-EXPRESS-SHUTDOWN"
+namespace {
+    constexpr const char* STRING_RESTART_COLD = "COLD";
+    constexpr const char* STRING_RESTART_WARM = "WARM";
+    constexpr const char* STRING_RESTART_FAST = "FAST";
+    constexpr const char* STRING_RESTART_EXPRESS = "EXPRESS";
+    constexpr const char* STRING_RESTART_PRE_SHUTDOWN = "PRE-SHUTDOWN";
+    constexpr const char* STRING_RESTART_PRE_EXPRESS_SHUTDOWN = "PRE-EXPRESS-SHUTDOWN";
+}
 
 syncd_restart_type_t RequestShutdownCommandLineOptions::stringToRestartType(
         _In_ const std::string& restartType)

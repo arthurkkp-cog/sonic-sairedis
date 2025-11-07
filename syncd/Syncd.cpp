@@ -38,8 +38,10 @@
 #include <iterator>
 #include <algorithm>
 
-#define DEF_SAI_WARM_BOOT_DATA_FILE "/var/warmboot/sai-warmboot.bin"
-#define SAI_FAILURE_DUMP_SCRIPT "/usr/bin/sai_failure_dump.sh"
+namespace {
+    constexpr const char* DEF_SAI_WARM_BOOT_DATA_FILE = "/var/warmboot/sai-warmboot.bin";
+    constexpr const char* SAI_FAILURE_DUMP_SCRIPT = "/usr/bin/sai_failure_dump.sh";
+}
 
 using namespace syncd;
 using namespace saimeta;
@@ -268,7 +270,7 @@ void Syncd::performStartupLogic()
 
         SWSS_LOG_NOTICE("using warmBootReadFile: '%s'", warmBootReadFile);
 
-        if (warmBootReadFile == NULL || access(warmBootReadFile, F_OK) == -1)
+        if (warmBootReadFile == nullptr || access(warmBootReadFile, F_OK) == -1)
         {
             SWSS_LOG_WARN("user requested warmStart but warmBootReadFile is not specified or not accessible, forcing cold start");
 
@@ -3844,10 +3846,10 @@ const char* Syncd::profileGetValue(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
-        return NULL;
+        return nullptr;
     }
 
     auto it = m_profileMap.find(variable);
@@ -3855,7 +3857,7 @@ const char* Syncd::profileGetValue(
     if (it == m_profileMap.end())
     {
         SWSS_LOG_NOTICE("%s: NULL", variable);
-        return NULL;
+        return nullptr;
     }
 
     SWSS_LOG_NOTICE("%s: %s", variable, it->second.c_str());
@@ -3870,7 +3872,7 @@ int Syncd::profileGetNextValue(
 {
     SWSS_LOG_ENTER();
 
-    if (value == NULL)
+    if (value == nullptr)
     {
         SWSS_LOG_INFO("resetting profile map iterator");
 
@@ -3878,7 +3880,7 @@ int Syncd::profileGetNextValue(
         return 0;
     }
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
         return -1;
@@ -4130,7 +4132,7 @@ void Syncd::snoopGetResponse(
 
         auto meta = sai_metadata_get_attr_metadata(object_type, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %d, attribute %d", object_type, attr.id);
         }
@@ -4392,7 +4394,7 @@ void Syncd::inspectAsic()
 
             auto meta = sai_metadata_get_attr_metadata(metaKey.objecttype, attr.id);
 
-            if (meta == NULL)
+            if (meta == nullptr)
             {
                 SWSS_LOG_ERROR("FATAL: failed to find metadata for object type %s and attr id %d",
                         sai_serialize_object_type(metaKey.objecttype).c_str(),
@@ -5143,7 +5145,7 @@ void Syncd::onSwitchCreateInInitViewMode(
 
         auto attr = sai_metadata_get_attr_by_id(SAI_SWITCH_ATTR_SWITCH_HARDWARE_INFO, attr_count, attr_list);
 
-        if (attr == NULL)
+        if (attr == nullptr)
         {
             // this is ok, attribute doesn't exist, so assumption is empty string
         }
@@ -5776,7 +5778,7 @@ void Syncd::run()
     {
         try
         {
-            swss::Selectable *sel = NULL;
+            swss::Selectable *sel = nullptr;
 
             int result = s->select(&sel);
 
@@ -5914,7 +5916,7 @@ void Syncd::run()
 
         SWSS_LOG_NOTICE("using warmBootWriteFile: '%s'", warmBootWriteFile);
 
-        if (warmBootWriteFile == NULL)
+        if (warmBootWriteFile == nullptr)
         {
             SWSS_LOG_WARN("user requested warm shutdown but warmBootWriteFile is not specified, forcing cold shutdown");
 

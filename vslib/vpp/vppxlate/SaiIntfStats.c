@@ -142,7 +142,9 @@ int vpp_intf_stats_query (const char *intf_name, vpp_interface_stats_t *stats)
 }
 
 #ifdef MAIN
-void classify_get_trace_chain(void){};
+void classify_get_trace_chain(void){
+    /* Stub implementation - required for linking but not used */
+};
 
 void
 os_exit (int code)

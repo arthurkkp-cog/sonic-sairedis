@@ -35,11 +35,11 @@ using namespace saivs;
 // XXX set must also be supported when we change operational status up/down and
 // probably also generate notification then
 
-#define ETH_FRAME_BUFFER_SIZE (0x4000)
-
-#define MAX_INTERFACE_NAME_LEN (IFNAMSIZ-1)
-
-#define SAI_VS_VETH_PREFIX   "v"
+namespace {
+    constexpr size_t ETH_FRAME_BUFFER_SIZE = 0x4000;
+    constexpr size_t MAX_INTERFACE_NAME_LEN = IFNAMSIZ - 1;
+    constexpr const char* SAI_VS_VETH_PREFIX = "v";
+}
 
 int SwitchVpp::vs_create_tap_device(
         _In_ const char *dev,
@@ -228,7 +228,7 @@ sai_status_t SwitchVpp::vs_create_hostif_tap_interface(
 
     auto attr_type = sai_metadata_get_attr_by_id(SAI_HOSTIF_ATTR_TYPE, attr_count, attr_list);
 
-    if (attr_type == NULL)
+    if (attr_type == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_HOSTIF_ATTR_TYPE was not passed");
 
@@ -256,7 +256,7 @@ sai_status_t SwitchVpp::vs_create_hostif_tap_interface(
 
     auto attr_obj_id = sai_metadata_get_attr_by_id(SAI_HOSTIF_ATTR_OBJ_ID, attr_count, attr_list);
 
-    if (attr_obj_id == NULL)
+    if (attr_obj_id == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_HOSTIF_ATTR_OBJ_ID was not passed");
 
@@ -286,7 +286,7 @@ sai_status_t SwitchVpp::vs_create_hostif_tap_interface(
 
     auto attr_name = sai_metadata_get_attr_by_id(SAI_HOSTIF_ATTR_NAME, attr_count, attr_list);
 
-    if (attr_name == NULL)
+    if (attr_name == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_HOSTIF_ATTR_NAME was not passed");
 

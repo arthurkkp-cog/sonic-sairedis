@@ -35,7 +35,7 @@ static int syncd_mdio_ipc_command(char *cmd, char *resp)
     static char path[128] = { 0 };
     static time_t timeout = 0;
 
-    if (timeout < time(NULL))
+    if (timeout < time(nullptr))
     {
         /* It might already be timed out at the server side, reconnect ... */
         if (sock > 0)
@@ -115,8 +115,8 @@ static int syncd_mdio_ipc_command(char *cmd, char *resp)
         return -EIO;
     }
 
-    timeout = time(NULL) + MDIO_CLIENT_TIMEOUT;
-    return (int)strtol(resp, NULL, 0);
+    timeout = time(nullptr) + MDIO_CLIENT_TIMEOUT;
+    return (int)strtol(resp, nullptr, 0);
 }
 
 
@@ -141,7 +141,7 @@ sai_status_t mdio_read(uint64_t platform_context, uint32_t mdio_addr, uint32_t r
     rc = syncd_mdio_ipc_command(cmd, resp);
     if (rc == 0)
     {
-        *data = (uint32_t)strtoul(strchrnul(resp, ' ') + 1, NULL, 0);
+        *data = (uint32_t)strtoul(strchrnul(resp, ' ') + 1, nullptr, 0);
         rc = SAI_STATUS_SUCCESS;
     }
     else
@@ -206,7 +206,7 @@ sai_status_t mdio_read_cl22(uint64_t platform_context, uint32_t mdio_addr, uint3
     rc = syncd_mdio_ipc_command(cmd, resp);
     if (rc == 0)
     {
-        *data = (uint32_t)strtoul(strchrnul(resp, ' ') + 1, NULL, 0);
+        *data = (uint32_t)strtoul(strchrnul(resp, ' ') + 1, nullptr, 0);
         rc = SAI_STATUS_SUCCESS;
     }
     else

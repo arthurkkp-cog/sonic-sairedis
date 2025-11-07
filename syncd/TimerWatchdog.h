@@ -14,7 +14,7 @@ namespace syncd
     {
         public:
 
-            TimerWatchdog(
+            explicit TimerWatchdog(
                     _In_ int64_t warnTimespan);
 
             virtual ~TimerWatchdog();

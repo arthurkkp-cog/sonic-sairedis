@@ -16,6 +16,8 @@ extern "C" {
 }
 
 #include "saivs.h"
+using namespace saivs;
+
 
 const char* profile_get_value(
         _In_ sai_switch_profile_id_t profile_id,

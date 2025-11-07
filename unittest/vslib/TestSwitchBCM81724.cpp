@@ -120,7 +120,9 @@ TEST(SwitchBCM81724, refresh_read_only)
     char fakeinfo_buffer[sizeof(HostInterfaceInfo)] = { 0 };
     HostInterfaceInfo *fakeinfo = reinterpret_cast<HostInterfaceInfo *>(reinterpret_cast<void *>(fakeinfo_buffer));
     fakeinfo->m_portId = portId;
-    sw.m_hostif_info_map[""] = std::shared_ptr<HostInterfaceInfo>(fakeinfo, [](HostInterfaceInfo *){});
+    sw.m_hostif_info_map[""] = std::shared_ptr<HostInterfaceInfo>(fakeinfo, [](HostInterfaceInfo *){
+        /* Empty deleter - memory managed elsewhere */
+    });
     sw.m_switchConfig->m_laneMap->m_lane_to_ifname[1] = "eth0";
 
     attr.id = SAI_PORT_ATTR_OPER_STATUS;

@@ -9,7 +9,7 @@ namespace saimeta
 
             using sairedis::SaiInterface::set; // name hiding
 
-            MockMeta(
+            explicit MockMeta(
                     _In_ std::shared_ptr<SaiInterface> impl);
 
             virtual ~MockMeta() = default;

@@ -49,7 +49,7 @@ sai_status_t SwitchVpp::vpp_create_vlan_member(
     //find sw_if_index for given l2 interface
     auto attr_type = sai_metadata_get_attr_by_id(SAI_VLAN_MEMBER_ATTR_BRIDGE_PORT_ID, attr_count, attr_list);
 
-    if (attr_type == NULL)
+    if (attr_type == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_VLAN_MEMBER_ATTR_BRIDGE_PORT_ID was not passed");
 
@@ -103,7 +103,7 @@ sai_status_t SwitchVpp::vpp_create_vlan_member(
         SWSS_LOG_NOTICE("lag swif idx :%d",lag_swif_idx);
 	    hwifname =  vpp_get_swif_name(lag_swif_idx);
         SWSS_LOG_NOTICE("lag swif idx :%d swif_name:%s",lag_swif_idx, hwifname);
-	    if (hwifname == NULL) {
+	    if (hwifname == nullptr) {
             SWSS_LOG_NOTICE("LAG is not found for bridge port id :%s",sai_serialize_object_id(br_port_id).c_str());
             return SAI_STATUS_FAILURE;
 	    }
@@ -113,7 +113,7 @@ sai_status_t SwitchVpp::vpp_create_vlan_member(
 
     sai_object_id_t vlan_oid;
 
-    if (attr_vlan_member == NULL)
+    if (attr_vlan_member == nullptr)
     {
 	    SWSS_LOG_NOTICE("attr SAI_VLAN_MEMBER_ATTR_VLAN_ID was not passed");
 	    return SAI_STATUS_FAILURE;
@@ -136,7 +136,7 @@ sai_status_t SwitchVpp::vpp_create_vlan_member(
     const char *hw_ifname;
     char host_subifname[32];
 
-    if (attr_tag_mode == NULL)
+    if (attr_tag_mode == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_VLAN_MEMBER_ATTR_VLAN_ID was not passed");
         return SAI_STATUS_FAILURE;
@@ -295,7 +295,7 @@ sai_status_t SwitchVpp::vpp_remove_vlan_member(
         SWSS_LOG_NOTICE("lag swif idx :%d",lag_swif_idx);
 	    hw_ifname =  vpp_get_swif_name(lag_swif_idx);
         SWSS_LOG_NOTICE("lag swif idx :%d swif_name:%s",lag_swif_idx, hw_ifname);
-	    if (hw_ifname == NULL) {
+	    if (hw_ifname == nullptr) {
             SWSS_LOG_NOTICE("LAG port is not found for bridge port id :%s",sai_serialize_object_id(port_id).c_str());
             return SAI_STATUS_FAILURE;
 	    }
@@ -366,7 +366,7 @@ sai_status_t SwitchVpp::vpp_create_bvi_interface(
 
     auto attr_vlan_oid = sai_metadata_get_attr_by_id(SAI_ROUTER_INTERFACE_ATTR_VLAN_ID, attr_count, attr_list);
 
-    if (attr_vlan_oid == NULL)
+    if (attr_vlan_oid == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_ROUTER_INTERFACE_ATTR_VLAN_ID was not passed");
         return SAI_STATUS_SUCCESS;
@@ -392,7 +392,7 @@ sai_status_t SwitchVpp::vpp_create_bvi_interface(
     }
 
     auto attr_mac_addr = sai_metadata_get_attr_by_id(SAI_ROUTER_INTERFACE_ATTR_SRC_MAC_ADDRESS, attr_count, attr_list);
-    if (attr_mac_addr == NULL)
+    if (attr_mac_addr == nullptr)
     {
 	    SWSS_LOG_NOTICE("attr ROUTER INTERFACE MAC Address is not found");
 	    return SAI_STATUS_FAILURE;
@@ -678,7 +678,7 @@ sai_status_t SwitchVpp::vpp_remove_lag(
     uint32_t lag_swif_idx = bond_info.sw_if_index;
     auto lag_ifname =  vpp_get_swif_name(lag_swif_idx);
     SWSS_LOG_NOTICE("lag swif idx :%d swif_name:%s",lag_swif_idx, lag_ifname);
-    if (lag_ifname == NULL)
+    if (lag_ifname == nullptr)
     {
         SWSS_LOG_NOTICE("LAG interface name is not found for LAG PORT :%s",sai_serialize_object_id(lag_oid).c_str());
         return SAI_STATUS_FAILURE;
@@ -727,7 +727,7 @@ sai_status_t SwitchVpp::vpp_create_lag_member(
 
     //Get the bond interface index from attr SAI_LAG_MEMBER_ATTR_LAG_ID
     auto attr_type = sai_metadata_get_attr_by_id(SAI_LAG_MEMBER_ATTR_LAG_ID, attr_count, attr_list);
-    if (attr_type == NULL)
+    if (attr_type == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_LAG_MEMBER_ATTR_LAG_ID was not passed");
         return SAI_STATUS_FAILURE;
@@ -750,7 +750,7 @@ sai_status_t SwitchVpp::vpp_create_lag_member(
 
     attr_type = sai_metadata_get_attr_by_id(SAI_LAG_MEMBER_ATTR_PORT_ID, attr_count, attr_list);
 
-    if (attr_type == NULL)
+    if (attr_type == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_LAG_MEMBER_ATTR_PORT_ID was not present\n");
         return SAI_STATUS_FAILURE;
@@ -939,7 +939,7 @@ sai_status_t SwitchVpp::vpp_fdbentry_add(
     /* Attribute#1 */
     auto attr_type = sai_metadata_get_attr_by_id(SAI_FDB_ENTRY_ATTR_TYPE, attr_count, attr_list);
 
-    if (attr_type == NULL)
+    if (attr_type == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_FDB_ENTRY_ATTR_TYPE was not passed");
 
@@ -955,7 +955,7 @@ sai_status_t SwitchVpp::vpp_fdbentry_add(
 
     attr_type = sai_metadata_get_attr_by_id(SAI_FDB_ENTRY_ATTR_BRIDGE_PORT_ID, attr_count, attr_list);
 
-    if (attr_type == NULL)
+    if (attr_type == nullptr)
     {
         SWSS_LOG_ERROR("attr SAI_FDB_ENTRY_ATTR_BRIDGE_PORT_ID was not passed");
 

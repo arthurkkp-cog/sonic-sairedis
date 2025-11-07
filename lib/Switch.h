@@ -12,7 +12,7 @@ namespace sairedis
     {
         public:
 
-            Switch(
+            explicit Switch(
                     _In_ sai_object_id_t switchId);
 
             Switch(

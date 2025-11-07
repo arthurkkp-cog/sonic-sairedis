@@ -12,7 +12,7 @@ namespace sairedis
     {
         public:
 
-            Context(
+            explicit Context(
                     _In_ std::shared_ptr<ContextConfig> contextConfig,
                     _In_ std::shared_ptr<Recorder> recorder,
                     _In_ std::function<sai_switch_notifications_t(std::shared_ptr<Notification>, Context*)> notificationCallback);

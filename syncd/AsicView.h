@@ -37,7 +37,7 @@ namespace syncd
 
             AsicView();
 
-            AsicView(
+            explicit AsicView(
                     _In_ const swss::TableDump &dump);
 
             virtual ~AsicView();

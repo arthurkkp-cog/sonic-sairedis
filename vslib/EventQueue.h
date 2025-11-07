@@ -12,7 +12,7 @@ namespace saivs
     {
         public:
 
-            EventQueue(
+            explicit EventQueue(
                     _In_ std::shared_ptr<Signal> signal);
 
             virtual ~EventQueue() = default;

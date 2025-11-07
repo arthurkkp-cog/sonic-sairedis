@@ -12,7 +12,7 @@ namespace saiasiccmp
     {
         public:
 
-            AsicCmp(
+            explicit AsicCmp(
                     _In_ std::shared_ptr<CommandLineOptions> options);
 
         public:

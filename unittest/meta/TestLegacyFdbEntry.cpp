@@ -85,11 +85,11 @@ TEST(LegacyFdbEntry, fdb_entry_create)
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("attr is null");
-    status = g_meta->create(&fdb_entry, 1, NULL);
+    status = g_meta->create(&fdb_entry, 1, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("fdb entry is null");
-    status = g_meta->create((const sai_fdb_entry_t*)NULL, 1, &attr);
+    status = g_meta->create((const sai_fdb_entry_t*)nullptr, 1, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     sai_attribute_t list1[4] = { };
@@ -198,7 +198,7 @@ TEST(LegacyFdbEntry, fdb_entry_remove)
     SWSS_LOG_NOTICE("remove tests");
 
     SWSS_LOG_NOTICE("fdb_entry is null");
-    status = g_meta->remove((const sai_fdb_entry_t*)NULL);
+    status = g_meta->remove((const sai_fdb_entry_t*)nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     //SWSS_LOG_NOTICE("invalid vlan");
@@ -241,11 +241,11 @@ TEST(LegacyFdbEntry, fdb_entry_set)
     //EXPECT_EQ(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("attr is null");
-    status = g_meta->set(&fdb_entry, NULL);
+    status = g_meta->set(&fdb_entry, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("fdb entry is null");
-    status = g_meta->set((const sai_fdb_entry_t*)NULL, &attr);
+    status = g_meta->set((const sai_fdb_entry_t*)nullptr, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("setting read only object");
@@ -307,11 +307,11 @@ TEST(LegacyFdbEntry, fdb_entry_get)
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     // attr is null
-    status = g_meta->get(&fdb_entry, 1, NULL);
+    status = g_meta->get(&fdb_entry, 1, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     // fdb entry is null
-    status = g_meta->get((sai_fdb_entry_t*)NULL, 1, &attr);
+    status = g_meta->get((sai_fdb_entry_t*)nullptr, 1, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     // attr id out of range

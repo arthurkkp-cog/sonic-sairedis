@@ -11,7 +11,9 @@
 
 #include <memory>
 
-#define VLAN_ID 2
+namespace {
+    constexpr int VLAN_ID = 2;
+}
 
 using namespace saimeta;
 

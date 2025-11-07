@@ -70,9 +70,9 @@ sai_status_t Sai::apiInitialize(
         return SAI_STATUS_INVALID_PARAMETER;
     }
 
-    if ((service_method_table == NULL) ||
-            (service_method_table->profile_get_next_value == NULL) ||
-            (service_method_table->profile_get_value == NULL))
+    if ((service_method_table == nullptr) ||
+            (service_method_table->profile_get_next_value == nullptr) ||
+            (service_method_table->profile_get_value == nullptr))
     {
         SWSS_LOG_ERROR("invalid service_method_table handle passed to SAI API initialize");
 
@@ -859,7 +859,7 @@ std::vector<swss::FieldValueTuple> serialize_counter_id_list(
     {
         const char *name = sai_metadata_get_enum_value_name(stats_enum, counter_id_list[i]);
 
-        if (name == NULL)
+        if (name == nullptr)
         {
             SWSS_LOG_THROW("failed to find enum %d in %s", counter_id_list[i], stats_enum->name);
         }

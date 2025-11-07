@@ -16,7 +16,7 @@ TEST(DummySaiInterface, queryApiVersion)
 
     sai_api_version_t version;
 
-    EXPECT_EQ(sai.queryApiVersion(NULL), SAI_STATUS_SUCCESS);
+    EXPECT_EQ(sai.queryApiVersion(nullptr), SAI_STATUS_SUCCESS);
     EXPECT_EQ(sai.queryApiVersion(&version), SAI_STATUS_SUCCESS);
 }
 
@@ -65,7 +65,7 @@ TEST(DummySaiInterface, updateNotificationPointers)
         sai_attribute_t attr;
 
         attr.id = sai_metadata_switch_notify_attr[idx]->attrid;
-        attr.value.ptr = NULL;
+        attr.value.ptr = nullptr;
 
         auto status = sai.set(SAI_OBJECT_TYPE_SWITCH, 0x0, &attr);
 

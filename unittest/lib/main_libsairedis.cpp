@@ -15,10 +15,10 @@ static const char* profile_get_value(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
-        return NULL;
+        return nullptr;
     }
 
     auto it = g_profileMap.find(variable);
@@ -26,7 +26,7 @@ static const char* profile_get_value(
     if (it == g_profileMap.end())
     {
         SWSS_LOG_NOTICE("%s: NULL", variable);
-        return NULL;
+        return nullptr;
     }
 
     SWSS_LOG_NOTICE("%s: %s", variable, it->second.c_str());
@@ -41,7 +41,7 @@ static int profile_get_next_value(
 {
     SWSS_LOG_ENTER();
 
-    if (value == NULL)
+    if (value == nullptr)
     {
         SWSS_LOG_INFO("resetting profile map iterator");
 
@@ -49,7 +49,7 @@ static int profile_get_next_value(
         return 0;
     }
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
         return -1;

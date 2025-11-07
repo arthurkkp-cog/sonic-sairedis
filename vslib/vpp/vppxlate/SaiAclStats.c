@@ -46,7 +46,9 @@ int vpp_acl_ace_stats_query (uint32_t acl_index, uint32_t ace_index, vpp_ace_sta
 }
 
 #ifdef MAIN
-void classify_get_trace_chain(void){};
+void classify_get_trace_chain(void){
+    /* Stub implementation - required for linking but not used */
+};
 
 void
 os_exit (int code)

@@ -327,8 +327,12 @@
 #undef vl_api_version
 
 
-void classify_get_trace_chain(void ){}
-void os_exit(int code) {}
+void classify_get_trace_chain(void ){
+    /* Stub implementation - required for linking but not used */
+}
+void os_exit(int code) {
+    /* Stub implementation - required for linking but not used */
+}
 
 #define SAIVPP_DEBUG(format,args...) {}
 #define SAIVPP_WARN clib_warning
@@ -464,6 +468,7 @@ static uint32_t store_ptr (void *ptr)
 
 static void release_index (uint32_t idx)
 {
+    /* Empty implementation - index release not needed in current design */
 }
 
 static uintptr_t get_index_ptr (uint32_t idx)
@@ -593,6 +598,7 @@ static bool vpp_to_vl_api_ip6_address(vl_api_ip6_address_t *vpp_addr, vpp_ip_add
 void
 vl_noop_handler (void *mp)
 {
+    /* No-op handler - intentionally does nothing */
 }
 
 static void set_reply_status (int retval)

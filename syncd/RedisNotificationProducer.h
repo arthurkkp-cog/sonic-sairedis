@@ -12,7 +12,7 @@ namespace syncd
     {
         public:
 
-            RedisNotificationProducer(
+            explicit RedisNotificationProducer(
                     _In_ const std::string& dbName);
 
             virtual ~RedisNotificationProducer() = default;

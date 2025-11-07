@@ -19,7 +19,7 @@ namespace syncd
             {
                 public:
 
-                    SlotBase(
+                    explicit SlotBase(
                             _In_ sai_service_method_table_t smt);
 
                     virtual ~SlotBase();

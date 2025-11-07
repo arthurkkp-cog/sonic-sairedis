@@ -6,7 +6,9 @@
 
 using namespace saivs;
 
-#define VS_IF_PREFIX   "eth"
+namespace {
+    constexpr const char* VS_IF_PREFIX = "eth";
+}
 
 CorePortIndexMap::CorePortIndexMap(
         _In_ uint32_t switchIndex):

@@ -26,7 +26,7 @@ namespace saivs
 
     class TunnelManager {
     public:
-        TunnelManager(SwitchVpp* switch_db);
+        explicit TunnelManager(SwitchVpp* switch_db);
 
         // sai_status_t create_tunnel_map_entry(
         //                 _In_ const std::string &serializedObjectId,
@@ -127,7 +127,7 @@ namespace saivs
 
     class TunnelManagerSRv6 {
     public:
-        TunnelManagerSRv6(SwitchVpp* switch_db);
+        explicit TunnelManagerSRv6(SwitchVpp* switch_db);
         /**
          * @brief Creates a new MySID (Segment Identifier) entry.
          *

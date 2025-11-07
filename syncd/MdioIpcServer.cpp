@@ -121,8 +121,8 @@ sai_status_t MdioIpcServer::syncd_ipc_cmd_mdio_common(char *resp, int argc, char
         return SAI_STATUS_INVALID_PARAMETER;
     }
 
-    mdio_addr = (uint32_t)strtoul(argv[1], NULL, 0);
-    reg_addr = (uint32_t)strtoul(argv[2], NULL, 0);
+    mdio_addr = (uint32_t)strtoul(argv[1], nullptr, 0);
+    reg_addr = (uint32_t)strtoul(argv[2], nullptr, 0);
 
     if (m_switchRid == SAI_NULL_OBJECT_ID)
     {
@@ -132,7 +132,7 @@ sai_status_t MdioIpcServer::syncd_ipc_cmd_mdio_common(char *resp, int argc, char
 
     if (argc > 3)
     {
-        val = (uint32_t)strtoul(argv[3], NULL, 0);
+        val = (uint32_t)strtoul(argv[3], nullptr, 0);
         ret = m_vendorSai->switchMdioWrite(m_switchRid, mdio_addr, reg_addr, 1, &val);
         sprintf(resp, "%d\n", ret);
     }
@@ -156,8 +156,8 @@ sai_status_t MdioIpcServer::syncd_ipc_cmd_mdio_common_cl22(char *resp, int argc,
         return SAI_STATUS_INVALID_PARAMETER;
     }
 
-    mdio_addr = (uint32_t)strtoul(argv[1], NULL, 0);
-    reg_addr = (uint32_t)strtoul(argv[2], NULL, 0);
+    mdio_addr = (uint32_t)strtoul(argv[1], nullptr, 0);
+    reg_addr = (uint32_t)strtoul(argv[2], nullptr, 0);
 
     if (m_switchRid == SAI_NULL_OBJECT_ID)
     {
@@ -167,7 +167,7 @@ sai_status_t MdioIpcServer::syncd_ipc_cmd_mdio_common_cl22(char *resp, int argc,
 
     if (argc > 3)
     {
-        val = (uint32_t)strtoul(argv[3], NULL, 0);
+        val = (uint32_t)strtoul(argv[3], nullptr, 0);
         ret = m_vendorSai->switchMdioCl22Write(m_switchRid, mdio_addr, reg_addr, 1, &val);
         sprintf(resp, "%d\n", ret);
     }
@@ -266,7 +266,7 @@ int MdioIpcServer::syncd_ipc_task_main()
         struct timeval timeout;
 
         /* garbage collection */
-        now = time(NULL);
+        now = time(nullptr);
         for (i = 0; i < MDIO_CONN_MAX; ++i)
         {
             if ((conn[i].fd > 0) && (conn[i].timeout < now))
@@ -298,7 +298,7 @@ int MdioIpcServer::syncd_ipc_task_main()
         /* monitor the socket descriptors */
         timeout.tv_sec = 1;
         timeout.tv_usec = 0;
-        ret = select(sock_max + 1, &rfds, NULL, NULL, &timeout);
+        ret = select(sock_max + 1, &rfds, nullptr, nullptr, &timeout);
         if (ret == 0)
         {
             continue;
@@ -317,10 +317,10 @@ int MdioIpcServer::syncd_ipc_task_main()
         }
 
         /* Accept the new connection */
-        now = time(NULL);
+        now = time(nullptr);
         if (FD_ISSET(sock_srv, &rfds))
         {
-            sock_cli = accept(sock_srv, NULL, NULL);
+            sock_cli = accept(sock_srv, nullptr, nullptr);
             if (sock_cli <= 0)
             {
                 SWSS_LOG_ERROR("accept() returns %d", errno);
@@ -378,8 +378,8 @@ int MdioIpcServer::syncd_ipc_task_main()
             argv[argc++] = strtok_r(v.data(), " \t\r\n", &save);
             while (argc < COUNTOF(argv))
             {
-                argv[argc] = strtok_r(NULL, " \t\r\n", &save);
-                if (argv[argc] == NULL)
+                argv[argc] = strtok_r(nullptr, " \t\r\n", &save);
+                if (argv[argc] == nullptr)
                     break;
                 ++argc;
             }
@@ -387,7 +387,7 @@ int MdioIpcServer::syncd_ipc_task_main()
             /* command dispatch */
             resp[0] = 0;
             rc = SAI_STATUS_NOT_SUPPORTED;
-            if (argv[0] == NULL)
+            if (argv[0] == nullptr)
             {
                 rc = SAI_STATUS_NOT_SUPPORTED;
             }
@@ -422,7 +422,7 @@ int MdioIpcServer::syncd_ipc_task_main()
             }
 
             /* update the connection timeout counter */
-            conn[i].timeout = time(NULL) + MDIO_SERVER_TIMEOUT;
+            conn[i].timeout = time(nullptr) + MDIO_SERVER_TIMEOUT;
         }
     }
 

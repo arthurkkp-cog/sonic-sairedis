@@ -1963,6 +1963,7 @@ TEST(FlexCounter, noSupportedDashMeterCounter)
     };
     auto counterVerifyFunc = [] (swss::Table &countersTable, sai_object_id_t eni_id, const std::vector<std::string>& counterIdNames, const dash_meter_expected_val_t& expectedValues)
     {
+        /* Empty test lambda - verification not needed for this test case */
     };
     dash_meter_expected_val_t expectedValues;
 
@@ -2008,6 +2009,7 @@ TEST(FlexCounter, noEniDashMeterCounter)
 
     auto counterVerifyFunc = [] (swss::Table &countersTable, sai_object_id_t eni_id, const std::vector<std::string>& counterIdNames, const dash_meter_expected_val_t& expectedValues)
     {
+        /* Empty test lambda - verification not needed for this test case */
     };
     dash_meter_expected_val_t expectedValues;
 

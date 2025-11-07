@@ -15,7 +15,7 @@ namespace saivs
 
         public:
 
-            SelectableFd(
+            explicit SelectableFd(
                     _In_ int fd);
 
             virtual ~SelectableFd() = default;

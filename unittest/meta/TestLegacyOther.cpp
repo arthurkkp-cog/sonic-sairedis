@@ -201,7 +201,7 @@ TEST(Legacy, switch_set)
 
     sai_object_id_t switch_id = create_switch();
 
-    status = g_meta->set(SAI_OBJECT_TYPE_SWITCH, switch_id, NULL);
+    status = g_meta->set(SAI_OBJECT_TYPE_SWITCH, switch_id, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     status = g_meta->set(SAI_OBJECT_TYPE_SWITCH, switch_id, &attr);
@@ -289,7 +289,7 @@ TEST(Legacy, switch_set)
 
     // wrong object
     attr.id = SAI_SWITCH_ATTR_QOS_DOT1P_TO_TC_MAP;
-    status = g_meta->create(SAI_OBJECT_TYPE_LAG, &attr.value.oid, switch_id, 0, NULL);
+    status = g_meta->create(SAI_OBJECT_TYPE_LAG, &attr.value.oid, switch_id, 0, nullptr);
     EXPECT_EQ(SAI_STATUS_SUCCESS, status);
 
     status = g_meta->set(SAI_OBJECT_TYPE_SWITCH, switch_id, &attr);
@@ -343,10 +343,10 @@ TEST(Legacy, switch_get)
     status = g_meta->get(SAI_OBJECT_TYPE_SWITCH, switch_id, 1000, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
-    status = g_meta->get(SAI_OBJECT_TYPE_SWITCH, switch_id, 1, NULL);
+    status = g_meta->get(SAI_OBJECT_TYPE_SWITCH, switch_id, 1, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
-    status = g_meta->get(SAI_OBJECT_TYPE_SWITCH, switch_id, 1, NULL);
+    status = g_meta->get(SAI_OBJECT_TYPE_SWITCH, switch_id, 1, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     status = g_meta->get(SAI_OBJECT_TYPE_SWITCH, switch_id, 1, &attr);
@@ -932,7 +932,7 @@ TEST(Legacy, null_list)
     status = g_meta->create(SAI_OBJECT_TYPE_HASH, &hash, switch_id, 1, &attr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
-    attr.value.s32list.list = NULL;
+    attr.value.s32list.list = nullptr;
 
     SWSS_LOG_NOTICE("0 count, null list");
     status = g_meta->create(SAI_OBJECT_TYPE_HASH, &hash, switch_id, 1, &attr);

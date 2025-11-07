@@ -178,7 +178,7 @@ TEST(LegacyVlan, vlan_set)
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("attr is null");
-    status = g_meta->set(SAI_OBJECT_TYPE_VLAN, vlan_id, NULL);
+    status = g_meta->set(SAI_OBJECT_TYPE_VLAN, vlan_id, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     attr.id = -1;
@@ -287,7 +287,7 @@ TEST(LegacyVlan, vlan_get)
 //    EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("attr is null");
-    status = g_meta->get(SAI_OBJECT_TYPE_VLAN, vlan_id, 1, NULL);
+    status = g_meta->get(SAI_OBJECT_TYPE_VLAN, vlan_id, 1, nullptr);
     EXPECT_NE(SAI_STATUS_SUCCESS, status);
 
     SWSS_LOG_NOTICE("zero attributes");
@@ -302,7 +302,7 @@ TEST(LegacyVlan, vlan_get)
 
     attr.id = SAI_VLAN_ATTR_MEMBER_LIST;
     attr.value.objlist.count = 1;
-    attr.value.objlist.list = NULL;
+    attr.value.objlist.list = nullptr;
 
     SWSS_LOG_NOTICE("read only null list");
     status = g_meta->get(SAI_OBJECT_TYPE_VLAN, vlan_id, 1, &attr);
@@ -329,7 +329,7 @@ TEST(LegacyVlan, vlan_get)
     EXPECT_EQ(SAI_STATUS_SUCCESS, status);
 
     attr.value.objlist.count = 0;
-    attr.value.objlist.list = NULL;
+    attr.value.objlist.list = nullptr;
 
     SWSS_LOG_NOTICE("readonly count 0 and null");
     status = g_meta->get(SAI_OBJECT_TYPE_VLAN, vlan_id, 1, &attr);
@@ -438,7 +438,7 @@ TEST(LegacyVlan, vlan_flow)
     EXPECT_EQ(SAI_STATUS_SUCCESS, status);
 
     attr.value.objlist.count = 0;
-    attr.value.objlist.list = NULL;
+    attr.value.objlist.list = nullptr;
 
     SWSS_LOG_NOTICE("readonly count 0 and null");
     status = g_meta->get(SAI_OBJECT_TYPE_VLAN, vlan_id, 1, &attr);

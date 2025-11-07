@@ -11,7 +11,7 @@ static const char* profile_get_value(
         _In_ const char* variable)
 {
     SWSS_LOG_ENTER();
-    return NULL;
+    return nullptr;
 }
 
 static int profile_get_next_value(
@@ -36,7 +36,7 @@ TEST(Sai, queryApiVersion)
 
     sai.apiInitialize(0,&test_services);
 
-    EXPECT_EQ(sai.queryApiVersion(NULL), SAI_STATUS_INVALID_PARAMETER);
+    EXPECT_EQ(sai.queryApiVersion(nullptr), SAI_STATUS_INVALID_PARAMETER);
     EXPECT_EQ(sai.queryApiVersion(&version), SAI_STATUS_SUCCESS);
 }
 

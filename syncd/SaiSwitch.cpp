@@ -10,15 +10,17 @@
 
 using namespace syncd;
 
-#define MAX_OBJLIST_LEN 128
+namespace {
+    constexpr size_t MAX_OBJLIST_LEN = 128;
 
-#define MAX_LANES_PER_PORT 8
+    constexpr size_t MAX_LANES_PER_PORT = 8;
 
-/*
- * NOTE: If real ID will change during hard restarts, then we need to remap all
- * VID/RID, but we can only do that if we will save entire tree with all
- * dependencies.
- */
+    /*
+     * NOTE: If real ID will change during hard restarts, then we need to remap all
+     * VID/RID, but we can only do that if we will save entire tree with all
+     * dependencies.
+     */
+}
 
 SaiSwitch::SaiSwitch(
         _In_ sai_object_id_t switch_vid,
@@ -189,7 +191,9 @@ sai_switch_type_t SaiSwitch::getSwitchType() const
     return (sai_switch_type_t) attr.value.s32;
 }
 
-#define MAX_HARDWARE_INFO_LENGTH 0x1000
+namespace {
+    constexpr size_t MAX_HARDWARE_INFO_LENGTH = 0x1000;
+}
 
 std::string SaiSwitch::saiGetHardwareInfo() const
 {
@@ -499,7 +503,7 @@ sai_object_id_t SaiSwitch::helperGetSwitchAttrOid(
 
     auto meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_SWITCH, attr_id);
 
-    if (meta == NULL)
+    if (meta == nullptr)
     {
         SWSS_LOG_THROW("can't get switch attribute %d metadata", attr_id);
     }
@@ -541,7 +545,7 @@ sai_object_id_t SaiSwitch::helperGetSwitchAttrOid(
 
     auto ptr_redis_rid_str = m_client->getSwitchHiddenAttribute(m_switch_vid, meta->attridname);
 
-    if (ptr_redis_rid_str == NULL)
+    if (ptr_redis_rid_str == nullptr)
     {
         /*
          * Redis value of this attribute is not present yet, save it!

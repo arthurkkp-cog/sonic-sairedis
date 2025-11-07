@@ -24,7 +24,7 @@ namespace saivs
     {
         public:
 
-            VirtualSwitchSaiInterface(
+            explicit VirtualSwitchSaiInterface(
                     _In_ std::shared_ptr<ContextConfig> contextConfig);
 
             virtual ~VirtualSwitchSaiInterface();

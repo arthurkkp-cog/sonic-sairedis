@@ -142,7 +142,9 @@ struct CounterIds
             _In_ sai_object_id_t id,
             _In_ const std::vector<StatType> &ids
     ): rid(id), counter_ids(ids) {}
-    void setStatsMode(sai_stats_mode_t statsMode) {}
+    void setStatsMode(sai_stats_mode_t statsMode) {
+        /* Empty implementation - this counter type does not support stats mode */
+    }
     sai_stats_mode_t getStatsMode() const
     {
         SWSS_LOG_ENTER();

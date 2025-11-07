@@ -12,7 +12,7 @@ namespace saimeta
     {
         public:
 
-            SaiAttrWrapper(
+            explicit SaiAttrWrapper(
                     _In_ const sai_attr_metadata_t* meta,
                     _In_ const sai_attribute_t& attr);
 
