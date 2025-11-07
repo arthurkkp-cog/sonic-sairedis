@@ -104,7 +104,7 @@ bool SwitchConfig::parseSwitchType(
                 SAI_VALUE_VS_SWITCH_TYPE_BCM56971B0,
                 SAI_VALUE_VS_SWITCH_TYPE_MLNX2700,
                 SAI_VALUE_VS_SWITCH_TYPE_NVDA_MBF2H536C,
-                SAI_VALUE_VS_SWITCH_TYPE_DPU_SIMU_2P
+                SAI_VALUE_VS_SWITCH_TYPE_DPU_SIMU_2P,
                 SAI_VALUE_VS_SWITCH_TYPE_VPP,
         };
 
