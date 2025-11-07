@@ -6,7 +6,9 @@ class SwsscommonEnvironment:
     public ::testing::Environment
 {
     public:
-        void SetUp() override { }
+        void SetUp() override {
+            /* Empty test setup - no initialization required */
+        }
 };
 
 int main(int argc, char* argv[])

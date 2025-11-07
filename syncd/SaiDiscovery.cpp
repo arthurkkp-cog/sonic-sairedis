@@ -7,17 +7,17 @@
 
 using namespace syncd;
 
-/**
- * @def SAI_DISCOVERY_LIST_MAX_ELEMENTS
- *
- * Defines maximum elements that can be obtained from the OID list when
- * performing list attribute query (discovery) on the switch.
- *
- * This value will be used to allocate memory on the stack for obtaining object
- * list, and should be big enough to obtain list for all ports on the switch
- * and vlan members.
- */
-#define SAI_DISCOVERY_LIST_MAX_ELEMENTS 1024
+namespace {
+    /**
+     * Defines maximum elements that can be obtained from the OID list when
+     * performing list attribute query (discovery) on the switch.
+     *
+     * This value will be used to allocate memory on the stack for obtaining object
+     * list, and should be big enough to obtain list for all ports on the switch
+     * and vlan members.
+     */
+    constexpr size_t SAI_DISCOVERY_LIST_MAX_ELEMENTS = 1024;
+}
 
 SaiDiscovery::SaiDiscovery(
         _In_ std::shared_ptr<sairedis::SaiInterface> sai,
@@ -124,7 +124,7 @@ void SaiDiscovery::discover(
 
     sai_object_meta_key_t mk = { .objecttype = ot, .objectkey = { .key = { .object_id = rid } } };
 
-    for (int idx = 0; info->attrmetadata[idx] != NULL; ++idx)
+    for (int idx = 0; info->attrmetadata[idx] != nullptr; ++idx)
     {
         const sai_attr_metadata_t *md = info->attrmetadata[idx];
 

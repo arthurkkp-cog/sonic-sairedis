@@ -22,7 +22,7 @@ namespace saiproxy
     {
         public:
 
-            Proxy(
+            explicit Proxy(
                     _In_ std::shared_ptr<sairedis::SaiInterface> vendorSai);
 
             Proxy(

@@ -9,7 +9,7 @@ namespace saivs
     {
         public:
 
-            MACsecIngressFilter(
+            explicit MACsecIngressFilter(
                     _In_ const std::string &macsecInterfaceName);
 
             virtual ~MACsecIngressFilter() = default;

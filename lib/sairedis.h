@@ -4,46 +4,48 @@ extern "C" {
 #include "sai.h"
 }
 
-/**
- * @brief Redis key context config.
- *
- * Optional. Should point to a context_config.json which will contain how many
- * contexts (syncd) we have in the system globally and each context how many
- * switches it manages.
- */
-#define SAI_REDIS_KEY_CONTEXT_CONFIG              "SAI_REDIS_CONTEXT_CONFIG"
+namespace sairedis {
+    /**
+     * @brief Redis key context config.
+     *
+     * Optional. Should point to a context_config.json which will contain how many
+     * contexts (syncd) we have in the system globally and each context how many
+     * switches it manages.
+     */
+    constexpr const char* SAI_REDIS_KEY_CONTEXT_CONFIG = "SAI_REDIS_CONTEXT_CONFIG";
 
-/**
- * @brief Redis enable client.
- *
- * Optional. By default sairedis act as sairedis server, which means it
- * directly talks to syncd. If this key is set to "true", then this instance of
- * sairedis will act as a client, and it will connect and talk to sairedis
- * server instance only.  There can be multiple clients active. Default value
- * is "false".
- */
-#define SAI_REDIS_KEY_ENABLE_CLIENT               "SAI_REDIS_ENABLE_CLIENT"
+    /**
+     * @brief Redis enable client.
+     *
+     * Optional. By default sairedis act as sairedis server, which means it
+     * directly talks to syncd. If this key is set to "true", then this instance of
+     * sairedis will act as a client, and it will connect and talk to sairedis
+     * server instance only.  There can be multiple clients active. Default value
+     * is "false".
+     */
+    constexpr const char* SAI_REDIS_KEY_ENABLE_CLIENT = "SAI_REDIS_ENABLE_CLIENT";
 
-/**
- * @brief Redis client config.
- *
- * Optional. Should point to client_config.json file which contains
- * client/server channel configuration for client side.
- */
-#define SAI_REDIS_KEY_CLIENT_CONFIG               "SAI_REDIS_CLIENT_CONFIG"
+    /**
+     * @brief Redis client config.
+     *
+     * Optional. Should point to client_config.json file which contains
+     * client/server channel configuration for client side.
+     */
+    constexpr const char* SAI_REDIS_KEY_CLIENT_CONFIG = "SAI_REDIS_CLIENT_CONFIG";
 
-/**
- * @brief Redis server config.
- *
- * Optional. Should point to server_config.json file which contains
- * client/server channel configuration for server side.
- */
-#define SAI_REDIS_KEY_SERVER_CONFIG               "SAI_REDIS_SERVER_CONFIG"
+    /**
+     * @brief Redis server config.
+     *
+     * Optional. Should point to server_config.json file which contains
+     * client/server channel configuration for server side.
+     */
+    constexpr const char* SAI_REDIS_KEY_SERVER_CONFIG = "SAI_REDIS_SERVER_CONFIG";
 
-/**
- * @brief Default synchronous operation response timeout in milliseconds.
- */
-#define SAI_REDIS_DEFAULT_SYNC_OPERATION_RESPONSE_TIMEOUT (60*1000)
+    /**
+     * @brief Default synchronous operation response timeout in milliseconds.
+     */
+    constexpr int SAI_REDIS_DEFAULT_SYNC_OPERATION_RESPONSE_TIMEOUT = 60*1000;
+}
 
 typedef enum _sai_redis_notify_syncd_t
 {

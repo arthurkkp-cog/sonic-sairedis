@@ -23,7 +23,7 @@ namespace sairedis
 
         public:
 
-            Channel(
+            explicit Channel(
                     _In_ Callback callback);
 
             virtual ~Channel();

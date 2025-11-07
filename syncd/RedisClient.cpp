@@ -10,14 +10,16 @@
 
 using namespace syncd;
 
-// vid and rid maps contains objects from all switches
-#define VIDTORID                    "VIDTORID"
-#define RIDTOVID                    "RIDTOVID"
+namespace {
+    // vid and rid maps contains objects from all switches
+    constexpr const char* VIDTORID = "VIDTORID";
+    constexpr const char* RIDTOVID = "RIDTOVID";
 
-// those here are per switch
-#define LANES                       "LANES"
-#define HIDDEN                      "HIDDEN"
-#define COLDVIDS                    "COLDVIDS"
+    // those here are per switch
+    constexpr const char* LANES = "LANES";
+    constexpr const char* HIDDEN = "HIDDEN";
+    constexpr const char* COLDVIDS = "COLDVIDS";
+}
 
 RedisClient::RedisClient(
         _In_ std::shared_ptr<swss::DBConnector> dbAsic):

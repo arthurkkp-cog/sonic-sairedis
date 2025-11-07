@@ -18,7 +18,7 @@ namespace syncd
     {
         public:
 
-            RedisClient(
+            explicit RedisClient(
                     _In_ std::shared_ptr<swss::DBConnector> dbAsic);
 
             virtual ~RedisClient();

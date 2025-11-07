@@ -55,7 +55,7 @@ sai_status_t SwitchVpp::create_qos_queues_per_port(
     {
         sai_object_id_t queue_id;
 
-        CHECK_STATUS(create(SAI_OBJECT_TYPE_QUEUE, &queue_id, m_switch_id, 0, NULL));
+        CHECK_STATUS(create(SAI_OBJECT_TYPE_QUEUE, &queue_id, m_switch_id, 0, nullptr));
 
         queues.push_back(queue_id);
 
@@ -105,7 +105,7 @@ sai_status_t SwitchVpp::create_cpu_qos_queues(
     {
         sai_object_id_t queue_id;
 
-        CHECK_STATUS(create(SAI_OBJECT_TYPE_QUEUE, &queue_id, m_switch_id, 0, NULL));
+        CHECK_STATUS(create(SAI_OBJECT_TYPE_QUEUE, &queue_id, m_switch_id, 0, nullptr));
 
         queues.push_back(queue_id);
 
@@ -411,7 +411,7 @@ sai_status_t SwitchVpp::create_scheduler_groups_per_port(
     {
         sai_object_id_t sg_id;
 
-        CHECK_STATUS(create(SAI_OBJECT_TYPE_SCHEDULER_GROUP, &sg_id, m_switch_id, 0, NULL));
+        CHECK_STATUS(create(SAI_OBJECT_TYPE_SCHEDULER_GROUP, &sg_id, m_switch_id, 0, nullptr));
 
         sgs.push_back(sg_id);
     }

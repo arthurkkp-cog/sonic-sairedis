@@ -9,11 +9,11 @@ extern "C" {
 
 #include "vppxlate/SaiVppXlate.h"
 
-#define IP_CMD "/sbin/ip"
-
-#define PORTCHANNEL_PREFIX "PortChannel"
-
-#define BONDETHERNET_PREFIX "BondEthernet"
+namespace {
+    constexpr const char* IP_CMD = "/sbin/ip";
+    constexpr const char* PORTCHANNEL_PREFIX = "PortChannel";
+    constexpr const char* BONDETHERNET_PREFIX = "BondEthernet";
+}
 
 #define CHECK_STATUS_W_MSG(status, msg, ...) {                                  \
     sai_status_t _status = (status);                            \

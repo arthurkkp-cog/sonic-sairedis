@@ -21,7 +21,7 @@ namespace saivs
 
         public:
 
-            LaneMap(
+            explicit LaneMap(
                     _In_ uint32_t switchIndex);
 
             virtual ~LaneMap() = default;

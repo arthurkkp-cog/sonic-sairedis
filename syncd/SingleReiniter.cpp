@@ -596,7 +596,7 @@ void SingleReiniter::trapGroupWorkaround(
 
     const sai_attribute_t* queue_attr = sai_metadata_get_attr_by_id(SAI_HOSTIF_TRAP_GROUP_ATTR_QUEUE, attrCount, attrList);
 
-    if (queue_attr == NULL)
+    if (queue_attr == nullptr)
     {
         SWSS_LOG_THROW("missing QUEUE attribute on TRAP_GROUP creation even if it's not MANDATORY");
     }
@@ -628,7 +628,7 @@ void SingleReiniter::listFailedAttributes(
 
         auto meta = sai_metadata_get_attr_metadata(objectType, attr->id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_ERROR("failed to get attribute metadata %s %d",
                     sai_serialize_object_type(objectType).c_str(),
@@ -789,7 +789,7 @@ sai_object_id_t SingleReiniter::processSingleVid(
 
             auto meta = sai_metadata_get_attr_metadata(objectType, attr->id);
 
-            if (meta == NULL)
+            if (meta == nullptr)
             {
                 SWSS_LOG_THROW("failed to get attribute metadata %s: %d",
                         sai_serialize_object_type(objectType).c_str(),
@@ -877,7 +877,7 @@ void SingleReiniter::processAttributesForOids(
 
         auto meta = sai_metadata_get_attr_metadata(objectType, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(objectType).c_str(),

@@ -16,12 +16,12 @@ namespace saimeta
     {
         public:
 
-            SaiAttributeList(
+            explicit SaiAttributeList(
                     _In_ const sai_object_type_t object_type,
                     _In_ const std::vector<swss::FieldValueTuple> &values,
                     _In_ bool countOnly);
 
-            SaiAttributeList(
+            explicit SaiAttributeList(
                     _In_ const sai_object_type_t object_type,
                     _In_ const std::unordered_map<std::string, std::string>& hash,
                     _In_ bool countOnly);

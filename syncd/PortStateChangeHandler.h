@@ -22,7 +22,7 @@ namespace syncd
     {
         public:
 
-            PortStateChangeHandler(
+            explicit PortStateChangeHandler(
                     _In_ std::shared_ptr<swss::SelectableEvent> portStateChangeEvent);
 
             virtual ~PortStateChangeHandler() = default;

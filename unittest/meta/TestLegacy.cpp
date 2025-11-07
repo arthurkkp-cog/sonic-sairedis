@@ -137,7 +137,7 @@ namespace TestLegacy
 
         sai_object_id_t oid;
 
-        auto status = g_sai->create(object_type, &oid, switch_id, 0, NULL);
+        auto status = g_sai->create(object_type, &oid, switch_id, 0, nullptr);
 
         if (status != SAI_STATUS_SUCCESS)
         {
@@ -156,7 +156,7 @@ namespace TestLegacy
 
         sai_object_id_t vr;
 
-        auto status = g_meta->create(SAI_OBJECT_TYPE_VIRTUAL_ROUTER, &vr, switch_id, 0, NULL);
+        auto status = g_meta->create(SAI_OBJECT_TYPE_VIRTUAL_ROUTER, &vr, switch_id, 0, nullptr);
         EXPECT_EQ(SAI_STATUS_SUCCESS, status);
 
         return vr;
@@ -197,7 +197,7 @@ namespace TestLegacy
 
         sai_object_id_t stp;
 
-        auto status = g_meta->create(SAI_OBJECT_TYPE_STP, &stp, switch_id, 0, NULL);
+        auto status = g_meta->create(SAI_OBJECT_TYPE_STP, &stp, switch_id, 0, nullptr);
         EXPECT_EQ(SAI_STATUS_SUCCESS, status);
 
         return stp;

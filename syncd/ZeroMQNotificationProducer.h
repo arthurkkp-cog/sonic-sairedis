@@ -12,7 +12,7 @@ namespace syncd
     {
         public:
 
-            ZeroMQNotificationProducer(
+            explicit ZeroMQNotificationProducer(
                     _In_ const std::string& ntfEndpoint);
 
             virtual ~ZeroMQNotificationProducer();

@@ -40,7 +40,7 @@ TEST(NotificationHandler, NotificationHandlerTest)
 
     notificationHandler->updateNotificationsPointers(1, attrs.data());
     uint32_t count;
-    sai_nat_event_notification_data_t *natevent = NULL;
+    sai_nat_event_notification_data_t *natevent = nullptr;
 
     sai_deserialize_nat_event_ntf(natData, count, &natevent);
     notificationHandler->onNatEvent(count, natevent);
@@ -53,7 +53,7 @@ TEST(NotificationHandler, NotificationHandlerTest)
     attrs.push_back(icmp_echo_attr);
     notificationHandler->updateNotificationsPointers(1, attrs.data());
 
-    sai_icmp_echo_session_state_notification_t *icmp_echo_session_state_ntf = NULL;
+    sai_icmp_echo_session_state_notification_t *icmp_echo_session_state_ntf = nullptr;
     sai_deserialize_icmp_echo_session_state_ntf(icmp_echo_sesion_state_str, count, &icmp_echo_session_state_ntf);
     notificationHandler->onIcmpEchoSessionStateChange(count, icmp_echo_session_state_ntf);
 

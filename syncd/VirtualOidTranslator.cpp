@@ -283,7 +283,7 @@ void VirtualOidTranslator::translateRidToVid(
 
         auto meta = sai_metadata_get_attr_metadata(objectType, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %x, attribute %d", objectType, attr.id);
         }
@@ -518,7 +518,7 @@ void VirtualOidTranslator::translateVidToRid(
 
         auto meta = sai_metadata_get_attr_metadata(objectType, attr.id);
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %x, attribute %d", objectType, attr.id);
         }

@@ -22,7 +22,9 @@ TEST(NotificationProcessor, NotificationProcessorTest)
     auto producer = std::make_shared<syncd::RedisNotificationProducer>("ASIC_DB");
 
     auto notificationProcessor = std::make_shared<NotificationProcessor>(producer, client,
-                                                             [](const swss::KeyOpFieldsValuesTuple&){});
+                                                             [](const swss::KeyOpFieldsValuesTuple&){
+                                                                 /* Empty test callback - intentionally does nothing */
+                                                             });
     EXPECT_NE(notificationProcessor, nullptr);
 
     auto switchConfigContainer = std::make_shared<sairedis::SwitchConfigContainer>();

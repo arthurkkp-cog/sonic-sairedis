@@ -14,12 +14,11 @@
 #include <memory>
 #include <set>
 
-#define DEFAULT_VLAN_NUMBER 1
-#define MINIMUM_VLAN_NUMBER 1
-#define MAXIMUM_VLAN_NUMBER 4094
-
 namespace saimeta
 {
+    constexpr int DEFAULT_VLAN_NUMBER = 1;
+    constexpr int MINIMUM_VLAN_NUMBER = 1;
+    constexpr int MAXIMUM_VLAN_NUMBER = 4094;
     class Meta:
         public sairedis::SaiInterface
     {
@@ -27,7 +26,7 @@ namespace saimeta
 
             using sairedis::SaiInterface::set; // name hiding
 
-            Meta(
+            explicit Meta(
                     _In_ std::shared_ptr<SaiInterface> impl);
 
             virtual ~Meta() = default;

@@ -8,7 +8,7 @@ namespace saivs
     {
         public:
 
-            Context(
+            explicit Context(
                     _In_ std::shared_ptr<ContextConfig> contextConfig);
 
             virtual ~Context();

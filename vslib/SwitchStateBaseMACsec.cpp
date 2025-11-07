@@ -17,10 +17,12 @@
 
 using namespace saivs;
 
-#define SAI_VS_MACSEC_PREFIX "macsec_"
-#define MACSEC_SYSTEM_IDENTIFIER (12)
-#define MACSEC_PORT_IDENTIFIER (4)
-#define MACSEC_SCI_LENGTH (MACSEC_SYSTEM_IDENTIFIER + MACSEC_PORT_IDENTIFIER)
+namespace {
+    constexpr const char* SAI_VS_MACSEC_PREFIX = "macsec_";
+    constexpr int MACSEC_SYSTEM_IDENTIFIER = 12;
+    constexpr int MACSEC_PORT_IDENTIFIER = 4;
+    constexpr int MACSEC_SCI_LENGTH = MACSEC_SYSTEM_IDENTIFIER + MACSEC_PORT_IDENTIFIER;
+}
 
 #define SAI_METADATA_GET_ATTR_BY_ID(attr, attrId, attrCount, attrList) \
 { \

@@ -7,7 +7,7 @@ namespace sairedis
     class NotificationTamTelTypeConfigChange : public Notification
     {
         public:
-            NotificationTamTelTypeConfigChange(
+            explicit NotificationTamTelTypeConfigChange(
                 _In_ const std::string &serializedNotification);
 
             virtual ~NotificationTamTelTypeConfigChange() = default;

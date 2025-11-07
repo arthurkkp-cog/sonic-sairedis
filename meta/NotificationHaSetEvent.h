@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationHaSetEvent(
+            explicit NotificationHaSetEvent(
                     _In_ const std::string& serializedNotification);
 
             virtual ~NotificationHaSetEvent();

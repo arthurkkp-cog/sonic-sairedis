@@ -35,7 +35,7 @@ namespace syncd
     {
         public:
 
-            NotificationQueue(
+            explicit NotificationQueue(
                     _In_ size_t limit = DEFAULT_NOTIFICATION_QUEUE_SIZE_LIMIT,
                     _In_ size_t consecutiveThresholdLimit = DEFAULT_NOTIFICATION_CONSECUTIVE_THRESHOLD);
 

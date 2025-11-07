@@ -961,7 +961,7 @@ TEST(SaiSerialize, serialize_uint32_list)
     EXPECT_EQ(s, "0:null");
 
     attr.value.u32list.count = 0;
-    attr.value.u32list.list = NULL;
+    attr.value.u32list.list = nullptr;
 
     meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_PORT, attr.id);
 
@@ -996,7 +996,7 @@ TEST(SaiSerialize, serialize_enum_list)
     };
 
     attr.value.s32list.count = 4;
-    attr.value.s32list.list = NULL;
+    attr.value.s32list.list = nullptr;
 
     meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_HASH, attr.id);
 
@@ -1024,7 +1024,7 @@ TEST(SaiSerialize, serialize_enum_list)
     EXPECT_EQ(s, "0:null");
 
     attr.value.s32list.count = 0;
-    attr.value.s32list.list = NULL;
+    attr.value.s32list.list = nullptr;
 
     meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_HASH, attr.id);
 
@@ -1071,7 +1071,7 @@ TEST(SaiSerialize, serialize_oid_list)
     };
 
     attr.value.objlist.count = 3;
-    attr.value.objlist.list = NULL;
+    attr.value.objlist.list = nullptr;
 
     meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_SWITCH, attr.id);
 
@@ -1099,7 +1099,7 @@ TEST(SaiSerialize, serialize_oid_list)
     EXPECT_EQ(s, "0:null");
 
     attr.value.objlist.count = 0;
-    attr.value.objlist.list = NULL;
+    attr.value.objlist.list = nullptr;
 
     meta = sai_metadata_get_attr_metadata(SAI_OBJECT_TYPE_SWITCH, attr.id);
 
@@ -1275,7 +1275,7 @@ static void deserialize_number(
 
     errno = 0;
 
-    char *endptr = NULL;
+    char *endptr = nullptr;
 
     number = (T)strtoull(s.c_str(), &endptr, hex ? 16 : 10);
 
@@ -1409,7 +1409,7 @@ TEST(SaiSerialize, serialize_stat_capability_list)
     stats_capability.list = stat_cap_list.data();
 
     // deserialize
-    EXPECT_THROW(sai_deserialize_stats_capability_list(NULL, strCapEnum, strCapModes), std::runtime_error);
+    EXPECT_THROW(sai_deserialize_stats_capability_list(nullptr, strCapEnum, strCapModes), std::runtime_error);
 
     sai_deserialize_stats_capability_list(&stats_capability, strCapEnum, strCapModes);
 
@@ -1488,7 +1488,7 @@ TEST(SaiSerialize, serialize_stat_st_capability_list)
     stats_capability.list = stat_cap_list.data();
 
     // deserialize
-    EXPECT_THROW(sai_deserialize_stats_st_capability_list(NULL, strCapEnum, strCapModes, strCapMinPollInt), std::runtime_error);
+    EXPECT_THROW(sai_deserialize_stats_st_capability_list(nullptr, strCapEnum, strCapModes, strCapMinPollInt), std::runtime_error);
 
     sai_deserialize_stats_st_capability_list(&stats_capability, strCapEnum, strCapModes, strCapMinPollInt);
 

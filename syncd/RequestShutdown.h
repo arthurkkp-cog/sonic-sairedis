@@ -7,7 +7,9 @@
 
 #include <memory>
 
-#define SYNCD_NOTIFICATION_CHANNEL_RESTARTQUERY     "RESTARTQUERY"
+namespace syncd {
+    constexpr const char* SYNCD_NOTIFICATION_CHANNEL_RESTARTQUERY = "RESTARTQUERY";
+}
 
 /**
  * @brief Notification channel 'restartQuery' per DB scope
@@ -27,7 +29,7 @@ namespace syncd
     {
         public:
 
-            RequestShutdown(
+            explicit RequestShutdown(
                     _In_ std::shared_ptr<RequestShutdownCommandLineOptions> options);
 
             virtual ~RequestShutdown();

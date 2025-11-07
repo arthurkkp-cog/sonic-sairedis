@@ -19,7 +19,7 @@ namespace syncd
     {
         public:
 
-            NotificationHandler(
+            explicit NotificationHandler(
                     _In_ std::shared_ptr<NotificationProcessor> processor,
                     _In_ sai_api_version_t apiVersion = SAI_VERSION(0,0,0));
 

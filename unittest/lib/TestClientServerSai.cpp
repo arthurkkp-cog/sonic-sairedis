@@ -16,8 +16,8 @@ static const char* profile_get_value(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == NULL)
-        return NULL;
+    if (variable == nullptr)
+        return nullptr;
 
     return nullptr;
 }
@@ -43,10 +43,10 @@ static const char* client_profile_get_value(
 {
     SWSS_LOG_ENTER();
 
-    if (variable != NULL && strcmp(variable, SAI_REDIS_KEY_ENABLE_CLIENT) == 0 )
+    if (variable != nullptr && strcmp(variable, SAI_REDIS_KEY_ENABLE_CLIENT) == 0 )
         return "true";
     else
-        return NULL;
+        return nullptr;
 
     return nullptr;
 }

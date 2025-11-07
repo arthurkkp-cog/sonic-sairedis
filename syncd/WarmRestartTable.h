@@ -13,7 +13,7 @@ namespace syncd
     {
         public:
 
-            WarmRestartTable(
+            explicit WarmRestartTable(
                     _In_ const std::string& dbName);
 
             virtual ~WarmRestartTable();

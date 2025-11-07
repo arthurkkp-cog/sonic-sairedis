@@ -45,10 +45,10 @@ static const char* profileGetValue(
 {
     SWSS_LOG_ENTER();
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
-        return NULL;
+        return nullptr;
     }
 
     auto it = profileMap.find(variable);
@@ -56,7 +56,7 @@ static const char* profileGetValue(
     if (it == profileMap.end())
     {
         SWSS_LOG_NOTICE("%s: NULL", variable);
-        return NULL;
+        return nullptr;
     }
 
     SWSS_LOG_NOTICE("%s: %s", variable, it->second.c_str());
@@ -71,7 +71,7 @@ static int profileGetNextValue(
 {
     SWSS_LOG_ENTER();
 
-    if (value == NULL)
+    if (value == nullptr)
     {
         SWSS_LOG_INFO("resetting profile map iterator");
 
@@ -79,7 +79,7 @@ static int profileGetNextValue(
         return 0;
     }
 
-    if (variable == NULL)
+    if (variable == nullptr)
     {
         SWSS_LOG_WARN("variable is null");
         return -1;
@@ -448,14 +448,17 @@ TEST_F(SyncdTest, BulkCreateTest)
     m_syncd->m_switches[switchVid] = mockSwitch;
     EXPECT_CALL(*mockSwitch, postPortRemove(testing::_))
         .WillRepeatedly(testing::Invoke([](sai_object_id_t rid) {
+            /* Empty test mock - intentionally does nothing */
         }));
 
     EXPECT_CALL(*mockSwitch, removeExistingObjectReference(testing::_))
         .WillRepeatedly(testing::Invoke([](sai_object_id_t rid) {
+            /* Empty test mock - intentionally does nothing */
         }));
 
     EXPECT_CALL(*mockSwitch, eraseRidAndVid(testing::_, testing::_))
         .WillRepeatedly(testing::Invoke([](sai_object_id_t rid, sai_object_id_t vid) {
+            /* Empty test mock - intentionally does nothing */
         }));
 
     swss::KeyOpFieldsValuesTuple kco;
@@ -632,14 +635,17 @@ TEST_F(SyncdTest, BulkRemoveTest)
     m_syncd->m_switches[switchVid] = mockSwitch;
     EXPECT_CALL(*mockSwitch, postPortRemove(testing::_))
         .WillRepeatedly(testing::Invoke([](sai_object_id_t rid) {
+            /* Empty test mock - intentionally does nothing */
         }));
 
     EXPECT_CALL(*mockSwitch, removeExistingObjectReference(testing::_))
         .WillRepeatedly(testing::Invoke([](sai_object_id_t rid) {
+            /* Empty test mock - intentionally does nothing */
         }));
 
     EXPECT_CALL(*mockSwitch, eraseRidAndVid(testing::_, testing::_))
         .WillRepeatedly(testing::Invoke([](sai_object_id_t rid, sai_object_id_t vid) {
+            /* Empty test mock - intentionally does nothing */
         }));
 
     swss::KeyOpFieldsValuesTuple kco;

@@ -727,7 +727,7 @@ std::shared_ptr<SaiAttr> ComparisonLogic::translateTemporaryVidsToCurrentVids(
 
     uint32_t count = 0;
 
-    sai_object_id_t *objectIdList = NULL;
+    sai_object_id_t *objectIdList = nullptr;
 
     auto &at = *attr->getRWSaiAttr();
 
@@ -2627,10 +2627,10 @@ bool ComparisonLogic::checkAsicVsDatabaseConsistency(
 
                 if (meta->attrvaluetype == SAI_ATTR_VALUE_TYPE_POINTER)
                 {
-                    if (attr.value.ptr == NULL && saiAttr->getSaiAttr()->value.ptr == NULL)
+                    if (attr.value.ptr == nullptr && saiAttr->getSaiAttr()->value.ptr == nullptr)
                         continue;
 
-                    if (attr.value.ptr != NULL && saiAttr->getSaiAttr()->value.ptr != NULL)
+                    if (attr.value.ptr != nullptr && saiAttr->getSaiAttr()->value.ptr != nullptr)
                         continue;
                 }
 
@@ -2806,7 +2806,9 @@ void ComparisonLogic::cretePreMatchForLagMembers(
     }
 }
 
-#define PFC_ACL_RULE_PRIORITY "999"
+namespace {
+    constexpr const char* PFC_ACL_RULE_PRIORITY = "999";
+}
 
 void ComparisonLogic::cretePreMatchForAclEntries(
         _In_ const AsicView& cur,
@@ -3412,7 +3414,7 @@ void ComparisonLogic::asic_translate_vid_to_rid_list(
 
         // this should not happen we should get list right away from SaiAttr
 
-        if (meta == NULL)
+        if (meta == nullptr)
         {
             SWSS_LOG_THROW("unable to get metadata for object type %s, attribute %d",
                     sai_serialize_object_type(object_type).c_str(),

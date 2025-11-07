@@ -11,8 +11,10 @@
 
 #include <gtest/gtest.h>
 
-#define MDIO_MISSING_DEV_ADDR 0x1F
-#define MDIO_MISSING_REG_ADDR 0xFFFF
+namespace {
+    constexpr uint32_t MDIO_MISSING_DEV_ADDR = 0x1F;
+    constexpr uint32_t MDIO_MISSING_REG_ADDR = 0xFFFF;
+}
 
 using namespace syncd;
 using namespace std;

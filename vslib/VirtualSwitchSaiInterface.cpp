@@ -21,12 +21,14 @@
 
 #include <inttypes.h>
 
-/*
- * Max number of counters used in 1 api call
- */
-#define VS_MAX_COUNTERS 128
+namespace {
+    /*
+     * Max number of counters used in 1 api call
+     */
+    constexpr size_t VS_MAX_COUNTERS = 128;
 
-#define MAX_HARDWARE_INFO_LENGTH 0x1000
+    constexpr size_t MAX_HARDWARE_INFO_LENGTH = 0x1000;
+}
 
 using namespace saivs;
 using namespace saimeta;

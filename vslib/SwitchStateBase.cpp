@@ -13,7 +13,9 @@
 #include <algorithm>
 #include <random>
 
-#define SAI_VS_MAX_PORTS 1024
+namespace {
+    constexpr size_t SAI_VS_MAX_PORTS = 1024;
+}
 
 using namespace saivs;
 

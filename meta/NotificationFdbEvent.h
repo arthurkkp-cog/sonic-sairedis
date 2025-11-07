@@ -9,7 +9,7 @@ namespace sairedis
     {
         public:
 
-            NotificationFdbEvent(
+            explicit NotificationFdbEvent(
                     _In_ const std::string& serializedNotification);
 
             virtual ~NotificationFdbEvent();

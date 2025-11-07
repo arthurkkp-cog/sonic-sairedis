@@ -19,7 +19,7 @@ namespace saivs
 
         public:
 
-            CorePortIndexMap(
+            explicit CorePortIndexMap(
                     _In_ uint32_t switchIndex);
 
             virtual ~CorePortIndexMap() = default;

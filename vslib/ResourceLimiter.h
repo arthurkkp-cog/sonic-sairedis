@@ -16,7 +16,7 @@ namespace saivs
 
         public:
 
-            ResourceLimiter(
+            explicit ResourceLimiter(
                     _In_ uint32_t switchIndex);
 
             virtual ~ResourceLimiter() = default;

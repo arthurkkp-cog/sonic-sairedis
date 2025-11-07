@@ -12,8 +12,10 @@
 
 using namespace sairedis;
 
-#define ZMQ_RESPONSE_BUFFER_SIZE (64*1024*1024)
-#define ZMQ_MAX_RETRY 10
+namespace {
+    constexpr size_t ZMQ_RESPONSE_BUFFER_SIZE = 64*1024*1024;
+    constexpr int ZMQ_MAX_RETRY = 10;
+}
 
 ZeroMQChannel::ZeroMQChannel(
         _In_ const std::string& endpoint,
