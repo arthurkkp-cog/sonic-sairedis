@@ -2059,7 +2059,34 @@ void ComparisonLogic::removeCurrentObjectDependencyTree(
 
             if (revgraph->structmember)
             {
-                SWSS_LOG_THROW("struct fields not supported yet, FIXME");
+                // Get objects of the dependent type that might contain struct member references
+                auto objs = currentView.getObjectsByObjectType(revgraph->depobjecttype);
+                
+                for (auto& obj : objs) 
+                {
+                    auto status = obj->getObjectStatus();
+                    if (status != SAI_OBJECT_STATUS_NOT_PROCESSED && 
+                        status != SAI_OBJECT_STATUS_MATCHED) 
+                    {
+                        continue;
+                    }
+                    
+                    // Iterate through struct members looking for object ID references
+                    for (size_t j = 0; j < obj->m_info->structmemberscount; ++j) 
+                    {
+                        const sai_struct_member_info_t *m = obj->m_info->structmembers[j];
+                        
+                        if (m->membervaluetype == SAI_ATTR_VALUE_TYPE_OBJECT_ID) 
+                        {
+                            sai_object_id_t vid = m->getoid(&obj->m_meta_key);
+                            if (vid == currentObj->getVid()) 
+                            {
+                                // remove the entire object
+                                removeCurrentObjectDependencyTree(currentView, temporaryView, obj);
+                            }
+                        }
+                    }
+                }
             }
 
             SWSS_LOG_INFO("used on %s:%s",
