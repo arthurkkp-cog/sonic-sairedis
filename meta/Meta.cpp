@@ -3469,11 +3469,11 @@ sai_status_t Meta::meta_generic_validation_create(
                 {
                     const char* chardata = value.chardata;
 
-                    size_t len = strnlen(chardata, SAI_HOSTIF_NAME_SIZE);
+                    size_t len = strnlen(chardata, sizeof(sai_attribute_value_t::chardata)/sizeof(char));
 
-                    if (len == SAI_HOSTIF_NAME_SIZE)
+                    if (len == sizeof(sai_attribute_value_t::chardata)/sizeof(char))
                     {
-                        META_LOG_ERROR(md, "host interface name is too long");
+                        META_LOG_ERROR(md, "chardata attribute is too long");
 
                         return SAI_STATUS_INVALID_PARAMETER;
                     }
