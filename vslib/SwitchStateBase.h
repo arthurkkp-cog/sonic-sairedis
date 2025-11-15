@@ -434,9 +434,6 @@ namespace saivs
                     _In_ sai_object_id_t port_id,
                     _Out_ std::vector<sai_object_id_t>& dep);
 
-            bool check_port_reference_count(
-                    _In_ sai_object_id_t port_id);
-
             bool get_object_list(
                     _In_ sai_object_id_t object_id,
                     _In_ sai_attr_id_t attr_id,
