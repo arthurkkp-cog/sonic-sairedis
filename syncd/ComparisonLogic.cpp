@@ -2125,9 +2125,17 @@ void ComparisonLogic::removeCurrentObjectDependencyTree(
                 {
                     if (revgraph->attrmetadata->allownullobjectid)
                     {
-                        // we can also remove entire object here too
+                        sai_attribute_t nullAttr;
+                        nullAttr.id = revgraph->attrmetadata->attrid;
+                        nullAttr.value.oid = SAI_NULL_OBJECT_ID;
 
-                        SWSS_LOG_THROW("break the link is not implemented yet, FIXME");
+                        std::string str_attr_value = sai_serialize_attr_value(
+                            *revgraph->attrmetadata, nullAttr, false);
+
+                        auto breakLinkAttr = std::make_shared<SaiAttr>(
+                            revgraph->attrmetadata->attridname, str_attr_value);
+
+                        setAttributeOnCurrentObject(currentView, temporaryView, obj, breakLinkAttr);
                     }
                     else
                     {
@@ -2140,7 +2148,17 @@ void ComparisonLogic::removeCurrentObjectDependencyTree(
                 }
                 else if (revgraph->attrmetadata->iscreateandset && status == SAI_OBJECT_STATUS_MATCHED)
                 {
-                    SWSS_LOG_THROW("matched break the link is not implemented yet, FIXME");
+                    sai_attribute_t nullAttr;
+                    nullAttr.id = revgraph->attrmetadata->attrid;
+                    nullAttr.value.oid = SAI_NULL_OBJECT_ID;
+
+                    std::string str_attr_value = sai_serialize_attr_value(
+                        *revgraph->attrmetadata, nullAttr, false);
+
+                    auto breakLinkAttr = std::make_shared<SaiAttr>(
+                        revgraph->attrmetadata->attridname, str_attr_value);
+
+                    setAttributeOnCurrentObject(currentView, temporaryView, obj, breakLinkAttr);
                 }
                 else
                 {
