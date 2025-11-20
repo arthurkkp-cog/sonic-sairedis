@@ -12,6 +12,7 @@
 #include "meta/SaiAttributeList.h"
 
 #include <inttypes.h>
+#include <random>
 
 using namespace syncd;
 using namespace saimeta;
@@ -66,9 +67,9 @@ ComparisonLogic::ComparisonLogic(
 
     auto seed = (unsigned int)std::time(0);
 
-    SWSS_LOG_NOTICE("srand seed for switch %s: %u", sai_serialize_object_id(m_switch->getVid()).c_str(), seed);
+    SWSS_LOG_NOTICE("random seed for switch %s: %u", sai_serialize_object_id(m_switch->getVid()).c_str(), seed);
 
-    std::srand(seed);
+    m_randomEngine.seed(seed);
 }
 
 ComparisonLogic::~ComparisonLogic()
@@ -1813,7 +1814,7 @@ void ComparisonLogic::processObjectForViewTransition(
      * can try to find current best match.
      */
 
-    auto bcf = std::make_shared<BestCandidateFinder>(currentView, temporaryView, m_switch);
+    auto bcf = std::make_shared<BestCandidateFinder>(currentView, temporaryView, m_switch, m_randomEngine);
 
     std::shared_ptr<SaiObj> currentBestMatch = bcf->findCurrentBestMatch(temporaryObj);
 
@@ -2193,7 +2194,7 @@ void ComparisonLogic::breakBeforeMake(
         // since maybe only one read only attribute has been changed, and this
         // will automatically result in null best match
 
-        auto bcf = std::make_shared<BestCandidateFinder>(currentView, temporaryView, m_switch);
+        auto bcf = std::make_shared<BestCandidateFinder>(currentView, temporaryView, m_switch, m_randomEngine);
 
         std::shared_ptr<SaiObj> similarBestMatch = bcf->findSimilarBestMatch(temporaryObj);
 
