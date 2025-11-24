@@ -392,9 +392,15 @@ bool MACsecManager::create_macsec_egress_sc(
         << shellquote(attr.m_vethName)
         << " name "
         << shellquote(attr.m_macsecName)
-        << " type macsec "
-        << " sci " << attr.m_sci
-        << " encrypt " << (attr.m_encryptionEnable ? " on " : " off ")
+        << " type macsec ";
+
+    // Conditionally include SCI only when send_sci is true
+    if (attr.m_sendSci)
+    {
+        ostream << " sci " << attr.m_sci;
+    }
+
+    ostream << " encrypt " << (attr.m_encryptionEnable ? " on " : " off ")
         << " cipher " << attr.m_cipher
         << " send_sci " << (attr.m_sendSci ? " on " : " off ")
         << " && ip link set dev "

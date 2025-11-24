@@ -118,3 +118,71 @@ TEST(MACsecManager, cleanup_macsec_device)
 
     EXPECT_EQ(manager.m_rest_devices.size(), 0);
 }
+
+class MockMACsecManager_CreateEgressSC : public MACsecManager
+{
+public:
+    mutable std::string m_last_command;
+protected:
+    virtual bool exec(
+        _In_ const std::string &command,
+        _Out_ std::string &output) const
+    {
+        SWSS_LOG_ENTER();
+
+        m_last_command = command;
+        // Simulate successful execution
+        return true;
+    }
+    virtual bool exec(
+        _In_ const std::string &command) const
+    {
+        SWSS_LOG_ENTER();
+
+        m_last_command = command;
+        // Simulate successful execution
+        return true;
+    }
+};
+
+TEST(MACsecManager, create_macsec_egress_sc_with_send_sci_true)
+{
+    // Test that SCI parameter is included when send_sci is true
+    MockMACsecManager_CreateEgressSC manager;
+
+    MACsecAttr attr;
+    attr.m_vethName = "eth0";
+    attr.m_macsecName = "macsec_eth1";
+    attr.m_sci = "226b54b065000001";
+    attr.m_encryptionEnable = true;
+    attr.m_cipher = MACsecAttr::CIPHER_NAME_GCM_AES_128;
+    attr.m_sendSci = true;
+
+    // This will fail to add forwarder/filter but we only care about the command generation
+    manager.create_macsec_egress_sc(attr);
+
+    // Verify that the command includes the SCI parameter
+    EXPECT_NE(manager.m_last_command.find("sci 226b54b065000001"), std::string::npos);
+    EXPECT_NE(manager.m_last_command.find("send_sci  on"), std::string::npos);
+}
+
+TEST(MACsecManager, create_macsec_egress_sc_with_send_sci_false)
+{
+    // Test that SCI parameter is excluded when send_sci is false
+    MockMACsecManager_CreateEgressSC manager;
+
+    MACsecAttr attr;
+    attr.m_vethName = "eth0";
+    attr.m_macsecName = "macsec_eth1";
+    attr.m_sci = "226b54b065000001";
+    attr.m_encryptionEnable = true;
+    attr.m_cipher = MACsecAttr::CIPHER_NAME_GCM_AES_128;
+    attr.m_sendSci = false;
+
+    // This will fail to add forwarder/filter but we only care about the command generation
+    manager.create_macsec_egress_sc(attr);
+
+    // Verify that the command does NOT include the SCI parameter
+    EXPECT_EQ(manager.m_last_command.find("sci 226b54b065000001"), std::string::npos);
+    EXPECT_NE(manager.m_last_command.find("send_sci  off"), std::string::npos);
+}
