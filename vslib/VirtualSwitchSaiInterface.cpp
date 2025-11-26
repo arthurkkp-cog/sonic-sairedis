@@ -647,6 +647,8 @@ std::shared_ptr<SwitchStateBase> VirtualSwitchSaiInterface::init_switch(
             SWSS_LOG_THROW("unable to init switch %s", sai_serialize_status(status).c_str());
         }
 
+        update_local_metadata(switch_id);
+
         SWSS_LOG_NOTICE("initialized switch %s", sai_serialize_object_id(switch_id).c_str());
     }
 
