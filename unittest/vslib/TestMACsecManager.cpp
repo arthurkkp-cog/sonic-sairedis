@@ -1,6 +1,8 @@
 #include "MACsecAttr.h"
 #include "MACsecManager.h"
 
+#include "saimacsec.h"
+
 #include <swss/logger.h>
 
 #include <gtest/gtest.h>
@@ -117,4 +119,70 @@ TEST(MACsecManager, cleanup_macsec_device)
     manager.cleanup_macsec_device();
 
     EXPECT_EQ(manager.m_rest_devices.size(), 0);
+}
+
+class MockMACsecManager_EgressSC : public MACsecManager
+{
+public:
+    mutable std::string m_last_command;
+    mutable bool m_command_executed;
+
+    MockMACsecManager_EgressSC() : m_command_executed(false) {}
+
+protected:
+    virtual bool exec(
+        _In_ const std::string &command,
+        _Out_ std::string &output) const
+    {
+        m_last_command = command;
+        m_command_executed = true;
+        return true;
+    }
+
+    bool exec(_In_ const std::string &command) const
+    {
+        m_last_command = command;
+        m_command_executed = true;
+        return true;
+    }
+};
+
+TEST(MACsecManager, create_macsec_egress_sc_with_send_sci_true)
+{
+    MockMACsecManager_EgressSC manager;
+
+    MACsecAttr attr;
+    attr.m_vethName = "eth0";
+    attr.m_macsecName = "macsec_eth1";
+    attr.m_sci = "226b54b065000001";
+    attr.m_cipher = "GCM-AES-128";
+    attr.m_encryptionEnable = true;
+    attr.m_sendSci = true;
+    attr.m_direction = SAI_MACSEC_DIRECTION_EGRESS;
+
+    manager.create_macsec_sc(attr);
+
+    EXPECT_TRUE(manager.m_command_executed);
+    EXPECT_NE(manager.m_last_command.find(" sci 226b54b065000001"), std::string::npos);
+    EXPECT_NE(manager.m_last_command.find(" send_sci  on "), std::string::npos);
+}
+
+TEST(MACsecManager, create_macsec_egress_sc_with_send_sci_false)
+{
+    MockMACsecManager_EgressSC manager;
+
+    MACsecAttr attr;
+    attr.m_vethName = "eth0";
+    attr.m_macsecName = "macsec_eth1";
+    attr.m_sci = "226b54b065000001";
+    attr.m_cipher = "GCM-AES-128";
+    attr.m_encryptionEnable = true;
+    attr.m_sendSci = false;
+    attr.m_direction = SAI_MACSEC_DIRECTION_EGRESS;
+
+    manager.create_macsec_sc(attr);
+
+    EXPECT_TRUE(manager.m_command_executed);
+    EXPECT_EQ(manager.m_last_command.find(" sci "), std::string::npos);
+    EXPECT_NE(manager.m_last_command.find(" send_sci  off "), std::string::npos);
 }
