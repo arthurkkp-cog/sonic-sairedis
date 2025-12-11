@@ -132,7 +132,7 @@ sai_status_t VendorSai::apiInitialize(
 
     // please refer to https://github.com/sonic-net/sonic-sairedis/pull/1246 or commit 606703e1
 
-    sai_api_version_t minversion = SAI_VERSION(1,9,0);
+    sai_api_version_t minversion = SAI_VERSION(1,12,0);
 
     SWSS_LOG_NOTICE("SAI API vendor version: %" PRId64, version);
     SWSS_LOG_NOTICE("SAI API min version: %" PRId64, minversion);
