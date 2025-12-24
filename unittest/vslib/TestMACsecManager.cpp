@@ -118,3 +118,58 @@ TEST(MACsecManager, cleanup_macsec_device)
 
     EXPECT_EQ(manager.m_rest_devices.size(), 0);
 }
+
+class MockMACsecManager_CreateEgressSC : public MACsecManager
+{
+public:
+    mutable std::string m_lastCommand;
+protected:
+    virtual bool exec(const std::string &command) const
+    {
+        m_lastCommand = command;
+        return true;
+    }
+    virtual bool exec(
+        _In_ const std::string &command,
+        _Out_ std::string &output) const
+    {
+        m_lastCommand = command;
+        return true;
+    }
+};
+
+TEST(MACsecManager, create_macsec_egress_sc_with_send_sci_true)
+{
+    MockMACsecManager_CreateEgressSC manager;
+
+    MACsecAttr attr;
+    attr.m_vethName = "eth0";
+    attr.m_macsecName = "macsec_eth1";
+    attr.m_sci = "226b54b065000001";
+    attr.m_sendSci = true;
+    attr.m_encryptionEnable = true;
+    attr.m_cipher = "GCM-AES-128";
+
+    manager.create_macsec_egress_sc(attr);
+
+    EXPECT_NE(manager.m_lastCommand.find(" sci 226b54b065000001"), std::string::npos);
+    EXPECT_NE(manager.m_lastCommand.find(" send_sci  on "), std::string::npos);
+}
+
+TEST(MACsecManager, create_macsec_egress_sc_with_send_sci_false)
+{
+    MockMACsecManager_CreateEgressSC manager;
+
+    MACsecAttr attr;
+    attr.m_vethName = "eth0";
+    attr.m_macsecName = "macsec_eth1";
+    attr.m_sci = "226b54b065000001";
+    attr.m_sendSci = false;
+    attr.m_encryptionEnable = true;
+    attr.m_cipher = "GCM-AES-128";
+
+    manager.create_macsec_egress_sc(attr);
+
+    EXPECT_EQ(manager.m_lastCommand.find(" sci "), std::string::npos);
+    EXPECT_NE(manager.m_lastCommand.find(" send_sci  off "), std::string::npos);
+}
